@@ -8,7 +8,7 @@ import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, profile, loading, signInWithGoogle, signOut } = useAuth();
+  const { user, loading, signInWithGoogle, signOut } = useAuth();
 
   const tNav = useTranslations('common.navigation');
   const tHeader = useTranslations('common.header');
@@ -164,9 +164,6 @@ export default function Header() {
             ) : user ? (
               <div className="relative group">
                 <div className="flex items-center gap-2 bg-panel border border-line px-3 py-2 hover:border-gold transition-colors cursor-pointer">
-                  {profile && (
-                    <span className="font-mono text-xs text-gold">{profile.credits}</span>
-                  )}
                   <div className="w-7 h-7 bg-gold flex items-center justify-center">
                     <span className="text-sm font-bold text-surface">
                       {(user.user_metadata?.full_name || user.email || 'U').charAt(0).toUpperCase()}
@@ -181,21 +178,9 @@ export default function Header() {
                   <div className="px-4 py-2 border-b border-line">
                     <p className="text-sm font-medium text-ink">{user.user_metadata?.full_name || 'User'}</p>
                     <p className="text-xs text-dim truncate">{user.email}</p>
-                    {profile && (
-                      <p className="font-mono text-xs text-gold mt-1">{profile.credits} credits</p>
-                    )}
                   </div>
-                  <Link href="/billing" prefetch={false} className="flex items-center px-4 py-2 text-sm text-dim hover:text-gold hover:bg-surface transition-colors">
-                    {safeT(tNav, 'billing', 'Billing')}
-                  </Link>
-                  <Link href="/assets" prefetch={false} className="flex items-center px-4 py-2 text-sm text-dim hover:text-gold hover:bg-surface transition-colors">
-                    {safeT(tNav, 'assets', 'Assets')}
-                  </Link>
-                  <Link href="/prompt-history" prefetch={false} className="flex items-center px-4 py-2 text-sm text-dim hover:text-gold hover:bg-surface transition-colors">
-                    {safeT(tNav, 'prompts', 'History')}
-                  </Link>
-                  <Link href="/settings/api-keys" prefetch={false} className="flex items-center px-4 py-2 text-sm text-dim hover:text-gold hover:bg-surface transition-colors">
-                    {safeT(tNav, 'apiKeys', 'API Keys')}
+                  <Link href="/tier-lists" prefetch={false} className="flex items-center px-4 py-2 text-sm text-dim hover:text-gold hover:bg-surface transition-colors">
+                    {safeT(tNav, 'myTierLists', 'Minhas tier lists')}
                   </Link>
                   <button
                     onClick={signOut}
@@ -334,23 +319,11 @@ export default function Header() {
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium text-ink normal-case truncate">{user.user_metadata?.full_name || 'User'}</p>
                           <p className="text-xs text-dim normal-case truncate">{user.email}</p>
-                          {profile && (
-                            <p className="font-mono text-xs text-gold mt-1">{profile.credits} credits</p>
-                          )}
                         </div>
                       </div>
                     </div>
-                    <Link href="/billing" prefetch={false} className="py-2 text-sm text-dim hover:text-gold transition-colors" onClick={() => setIsMenuOpen(false)}>
-                      {safeT(tNav, 'billing', 'Billing')}
-                    </Link>
-                    <Link href="/assets" prefetch={false} className="py-2 text-sm text-dim hover:text-gold transition-colors" onClick={() => setIsMenuOpen(false)}>
-                      {safeT(tNav, 'assets', 'Assets')}
-                    </Link>
-                    <Link href="/prompt-history" prefetch={false} className="py-2 text-sm text-dim hover:text-gold transition-colors" onClick={() => setIsMenuOpen(false)}>
-                      {safeT(tNav, 'prompts', 'History')}
-                    </Link>
-                    <Link href="/settings/api-keys" prefetch={false} className="py-2 text-sm text-dim hover:text-gold transition-colors" onClick={() => setIsMenuOpen(false)}>
-                      {safeT(tNav, 'apiKeys', 'API Keys')}
+                    <Link href="/tier-lists" prefetch={false} className="py-2 text-sm text-dim hover:text-gold transition-colors" onClick={() => setIsMenuOpen(false)}>
+                      {safeT(tNav, 'myTierLists', 'Minhas tier lists')}
                     </Link>
                     <button onClick={signOut} className="text-left py-2 text-sm text-dim hover:text-gold transition-colors">
                       {safeT(tBtn, 'signOut', 'Logout')}

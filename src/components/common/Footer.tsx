@@ -29,7 +29,6 @@ export default function Footer() {
               {tNav('docs')}
             </h3>
             <ul className="space-y-2.5">
-              <li><Link href="/blog" prefetch={false} className="text-sm text-white/60 hover:text-white transition-colors">{tNav('blog')}</Link></li>
               <li><Link href="/docs" prefetch={false} className="text-sm text-white/60 hover:text-white transition-colors">{tNav('docs')}</Link></li>
               <li><Link href="/faq" prefetch={false} className="text-sm text-white/60 hover:text-white transition-colors">{tNav('faq')}</Link></li>
               <li><Link href="/about" prefetch={false} className="text-sm text-white/60 hover:text-white transition-colors">{tNav('about')}</Link></li>

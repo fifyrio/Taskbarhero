@@ -1,7 +1,9 @@
 import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
-import HomePageClient from './HomePageClient';
+import WikiHome from '@/components/wiki-home/WikiHome';
 import { WebsiteSchema, BreadcrumbSchema } from '@/components/seo';
+
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({
   params: { locale }
@@ -44,13 +46,13 @@ export async function generateMetadata({
     title: t('title'),
     description: t('description'),
     keywords: [
-      'AI image generator',
-      'AI photo editor',
-      'background remover',
-      'anime converter',
-      'AI hairstyle',
-      'Taskbar Hero',
-      'AI art generator'
+      'Task Bar Hero',
+      'TBH wiki',
+      'TBH database',
+      'Task Bar Hero heroes',
+      'Task Bar Hero items',
+      'Task Bar Hero gear',
+      'Task Bar Hero tier list'
     ],
     openGraph: {
       title: t('ogTitle'),
@@ -126,7 +128,7 @@ export default async function HomePage({
       <BreadcrumbSchema
         items={[{ name: 'Home', url: `${baseUrl}${pathSegment}` }]}
       />
-      <HomePageClient />
+      <WikiHome locale={locale} />
     </>
   );
 }

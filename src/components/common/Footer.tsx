@@ -12,7 +12,7 @@ export default function Footer() {
   return (
     <footer className="bg-black border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-3">
           {/* Brand */}
           <div className="col-span-2 sm:col-span-3 lg:col-span-1">
             <div className="flex items-center space-x-2">
@@ -21,19 +21,6 @@ export default function Footer() {
               </div>
               <span className="text-sm font-semibold text-white">{t('brand')}</span>
             </div>
-          </div>
-
-          {/* Tools */}
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wide text-white/40 mb-3">
-              {tNav('toolbox')}
-            </h3>
-            <ul className="space-y-2.5">
-              <li><Link href="/remove-background" prefetch={false} className="text-sm text-white/60 hover:text-white transition-colors">{tNav('dropdown.backgroundRemoval')}</Link></li>
-              <li><Link href="/ai-prompt-assistant" prefetch={false} className="text-sm text-white/60 hover:text-white transition-colors">{tNav('dropdown.aiPromptAssistant')}</Link></li>
-              <li><Link href="/ai-infographic-generator" prefetch={false} className="text-sm text-white/60 hover:text-white transition-colors">{tNav('dropdown.aiInfographicGenerator')}</Link></li>
-              <li><Link href="/nano-banana-prompt-gallery" prefetch={false} className="text-sm text-white/60 hover:text-white transition-colors">{tNav('dropdown.nanoBananaPrompt')}</Link></li>
-            </ul>
           </div>
 
           {/* Resources */}

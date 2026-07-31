@@ -5,7 +5,6 @@ import { Link } from '@/i18n/routing';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTranslations } from 'next-intl';
 import LanguageSwitcher from './LanguageSwitcher';
-import { buildAiEffectGroups, buildVideoDropdown } from '@/lib/nav-data';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,8 +24,6 @@ export default function Header() {
     }
   };
 
-  const aiEffectGroups = buildAiEffectGroups(tNav);
-
   type DropdownItem = { label: string; href: string; icon: string };
   type DropdownGroup = { label: string; items: DropdownItem[] };
   type NavItem = {
@@ -38,19 +35,8 @@ export default function Header() {
   };
 
   const navItems: NavItem[] = [
-    {
-      label: safeT(tNav, 'aiImageEffects', 'Tier Lists'),
-      href: '/tier-lists',
-      groups: aiEffectGroups
-    },
-    {
-      label: safeT(tNav, 'aiVideo', 'Database'),
-      href: '/database',
-      dropdown: buildVideoDropdown(tNav)
-    },
-    { label: safeT(tNav, 'mcp', 'Market'), href: '/market' },
-    { label: safeT(tNav, 'pricing', 'Tools'), href: '/tools' },
-    { label: safeT(tNav, 'freeCredit', 'Community'), href: '/community', highlight: true }
+    { label: safeT(tNav, 'tierLists', 'Tier Lists'), href: '/tier-lists' },
+    { label: safeT(tNav, 'createTierList', 'Criar tier list'), href: '/tier-lists/new', highlight: true }
   ];
 
   const signInLabel = safeT(tBtn, 'signIn', 'Entrar');

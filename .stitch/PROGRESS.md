@@ -19,11 +19,29 @@ Next.js 14 tier-list 站，复用 easynanobanana 栈（已剔支付+AI）。沉�
 - **security advisor**：无 CRITICAL/缺 RLS；修了 2 函数 search_path；仅剩 leaked-password protection（Auth 后台开关，需手动）
 - **.env.example 重写**：只留 Supabase 三键 + 可选 app url/GA（原 Waffo/KIE 已删）
 
+## 部署修复（本会话续）
+- **Vercel build 修复**：Node 23→22.x（Vercel 不支持 23）、定死 `packageManager: pnpm@10.24.0`、删 package-lock.json（双 lockfile 歧义）
+- **字体修复**：`next/font/google` build 时 fetch 超时 → 改运行时 `<link>` 加载，CSS 变量入 globals `:root`
+- 已连 Vercel（fifyrio/Taskbarhero，team fifyrio's projects），import 后手选 preset Next.js
+
+## 大清理（本会话续，AI 遗留全清）
+- Header/Footer 去 AI 工具链接；用户菜单去 credits/死链，扁平化 tier-list nav
+- 删 src/data(74 preset)、hooks 全目录、AI UI 组件、/api/{assets,history,upload-image}、/settings、lib{api-keys,mcp-metadata,r2,rate-limiter,retry-utils,supabase/prompts}
+- 删 blog 特性、scripts/、cli/、data(旧)/、UI/、旧 supabase SQL、orphan public 图
+- config.ts 只留 supabase+app；CLAUDE.md 重写为 tier-list 项目文档
+- messages/*.json 只留 common+pages.home（7.3MB→170KB）；prune 25+ 无用 deps；移除 MDX
+- **保留核心**：/api/{profile,games,entities,tier-lists,vote}、auth、tier-home、tier-lists 组件
+
+## 新增（他人/外部）
+- `data/taskbarhero-database/`：真实 TBH 游戏数据（monsters/gear/grades/stat_mods 等 datasets）+ `scripts/download-taskbarhero-database.mjs`。可作为 entities 真数据源导入 DB。
+
 ## 待办
-1. Vercel 部署：填 3 个 Supabase env（URL/anon/service_role），域名 taskbarhero.wiki
-2. Supabase Auth 后台开 leaked-password protection（可选）
-3. 首页真数据（可选，等有 UGC 后把 mock 换真库 trending/recent）
-4. 移动端 tab bar 组件化（可选）
+1. **Vercel 部署验证**：确认最新 commit build 过；填 3 个 Supabase env（URL/anon/service_role）
+2. **登录链路**：Supabase Auth 后台开 Google provider + redirect URL（建 tier list 需登录）
+3. 导入真游戏数据：用 `data/taskbarhero-database/datasets/*` 填 games/entities
+4. Supabase Auth 开 leaked-password protection（可选）
+5. legal/content 页文案（docs/faq/about/terms/privacy/contact）改 Taskbar Hero
+6. 首页真数据（等 UGC）；移动端 tab bar（可选）
 
 ## 关键
 - Stitch project id: 9774036255620381813；设计档 .stitch/designs/home_v4.html + home_mobile.html

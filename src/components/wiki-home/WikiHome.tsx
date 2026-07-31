@@ -8,6 +8,7 @@ import {
   getRows,
   idField,
   rowName,
+  rowIconUrl,
 } from '@/lib/database';
 
 // Datasets surfaced as primary browse tiles on the homepage.
@@ -120,6 +121,7 @@ export default function WikiHome({ locale }: { locale: string }) {
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
               {heroes.map((h) => {
                 const key = String(h[idField(heroesMeta)]);
+                const icon = rowIconUrl(h);
                 return (
                   <Link
                     key={key}
@@ -127,8 +129,13 @@ export default function WikiHome({ locale }: { locale: string }) {
                     prefetch={false}
                     className="tbh-lift group border border-line bg-surface hover:border-gold p-4 text-center transition-colors"
                   >
-                    <div className="w-12 h-12 mx-auto mb-3 bg-panel border border-line flex items-center justify-center group-hover:border-gold transition-colors">
-                      <Icon name="person" className="text-gold text-[24px]" />
+                    <div className="w-12 h-12 mx-auto mb-3 bg-panel border border-line flex items-center justify-center group-hover:border-gold transition-colors overflow-hidden">
+                      {icon ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={icon} alt="" width={48} height={48} className="w-full h-full object-contain [image-rendering:pixelated]" />
+                      ) : (
+                        <Icon name="person" className="text-gold text-[24px]" />
+                      )}
                     </div>
                     <div className="font-display text-sm font-bold text-ink group-hover:text-gold transition-colors truncate">
                       {rowName(h, heroesMeta, locale)}

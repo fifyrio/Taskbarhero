@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Link } from '@/i18n/routing';
 import Header from '@/components/common/Header';
-import { getDatasetMeta, getRow, idField, rowName } from '@/lib/database';
+import { getDatasetMeta, getRow, idField, rowName, rowIconUrl } from '@/lib/database';
 
 export const dynamic = 'force-dynamic';
 
@@ -42,6 +42,7 @@ export default function DatasetDetailPage({
 
   const id = idField(meta);
   const name = rowName(row, meta, locale);
+  const icon = rowIconUrl(row);
 
   const scalarEntries = meta.columns
     .filter((c) => !c.endsWith('_i18n') && isScalar(row[c]) && row[c] !== null && row[c] !== '')
@@ -68,13 +69,21 @@ export default function DatasetDetailPage({
           <span className="text-gold">{name}</span>
         </nav>
 
-        <header className="mb-8 border-b border-line pb-4">
-          <p className="font-mono text-[11px] uppercase tracking-widest text-gold mb-1">
-            {meta.label} · {id} {String(row[id])}
-          </p>
-          <h1 className="font-display text-2xl md:text-4xl font-bold text-ink uppercase tracking-wide">
-            {name}
-          </h1>
+        <header className="mb-8 border-b border-line pb-4 flex items-center gap-4">
+          {icon && (
+            <div className="w-16 h-16 shrink-0 bg-panel border border-line flex items-center justify-center overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={icon} alt={name} width={64} height={64} className="w-full h-full object-contain [image-rendering:pixelated]" />
+            </div>
+          )}
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-widest text-gold mb-1">
+              {meta.label} · {id} {String(row[id])}
+            </p>
+            <h1 className="font-display text-2xl md:text-4xl font-bold text-ink uppercase tracking-wide">
+              {name}
+            </h1>
+          </div>
         </header>
 
         <section className="mb-8">

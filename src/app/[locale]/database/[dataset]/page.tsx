@@ -8,6 +8,7 @@ import {
   getRows,
   idField,
   rowName,
+  rowIconUrl,
   type DatasetMeta,
   type Row,
 } from '@/lib/database';
@@ -118,8 +119,15 @@ export default function DatasetListPage({
                       <Link
                         href={`/database/${dataset}/${encodeURIComponent(key)}`}
                         prefetch={false}
-                        className="text-sm text-ink hover:text-gold font-medium transition-colors"
+                        className="flex items-center gap-2.5 text-sm text-ink hover:text-gold font-medium transition-colors"
                       >
+                        {(() => {
+                          const icon = rowIconUrl(r);
+                          return icon ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img src={icon} alt="" width={24} height={24} className="w-6 h-6 shrink-0 object-contain [image-rendering:pixelated]" />
+                          ) : null;
+                        })()}
                         {rowName(r, meta, locale)}
                       </Link>
                     </td>

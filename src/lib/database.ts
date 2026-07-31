@@ -18,12 +18,18 @@ export interface DatasetMeta {
   file: string;
 }
 
+interface ManifestImage {
+  local_path: string;
+  error: string | null;
+}
+
 interface Manifest {
   source: string;
   downloaded_at: string;
   dataset_count: number;
   row_count: number;
   datasets: DatasetMeta[];
+  images?: ManifestImage[];
 }
 
 export type Row = Record<string, unknown>;
@@ -112,8 +118,23 @@ export function rowName(row: Row, meta: DatasetMeta, locale = 'en'): string {
   return String(row[idField(meta)] ?? '');
 }
 
-// Icon/portrait relative asset path if present (resolved against the source wiki host).
-export function rowIcon(row: Row): string | null {
+// Web paths of images that were downloaded locally (now served from public/game/*).
+// manifest local_path "images/game/x.png" -> public URL "/game/x.png".
+let availableImages: Set<string> | null = null;
+function getAvailableImages(): Set<string> {
+  if (!availableImages) {
+    availableImages = new Set(
+      (getManifest().images ?? [])
+        .filter((i) => !i.error)
+        .map((i) => '/' + i.local_path.replace(/^images\//, '')),
+    );
+  }
+  return availableImages;
+}
+
+// Public image URL for a row's icon/portrait, or null when the asset wasn't downloaded.
+export function rowIconUrl(row: Row): string | null {
   const raw = (row.icon ?? row.portrait ?? row.dead_icon) as string | undefined;
-  return raw ? String(raw) : null;
+  if (!raw) return null;
+  return getAvailableImages().has(raw) ? raw : null;
 }

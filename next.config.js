@@ -21,6 +21,11 @@ const nextConfig = {
   // Optimize package imports to reduce bundle size
   experimental: {
     optimizePackageImports: ['@supabase/supabase-js', 'react-hot-toast'],
+    // Bundle the game database JSON with the serverless functions (read via fs at
+    // runtime, so not auto-traced). Required for /database routes on Vercel.
+    outputFileTracingIncludes: {
+      '/[locale]/database/**': ['./data/taskbarhero-database/**'],
+    },
   },
 }
 

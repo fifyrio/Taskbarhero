@@ -35,6 +35,7 @@ export default function Header() {
   };
 
   const navItems: NavItem[] = [
+    { label: safeT(tNav, 'database', 'Database'), href: '/database' },
     { label: safeT(tNav, 'tierLists', 'Tier Lists'), href: '/tier-lists' },
     { label: safeT(tNav, 'createTierList', 'Criar tier list'), href: '/tier-lists/new', highlight: true }
   ];

@@ -141,7 +141,8 @@
       "apiKeys": "API 키",
       "tierLists": "Tier Lists",
       "createTierList": "Criar tier list",
-      "myTierLists": "Minhas tier lists"
+      "myTierLists": "Minhas tier lists",
+      "database": "Database"
     },
     "header": {
       "banner": {

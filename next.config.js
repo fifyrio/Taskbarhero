@@ -25,6 +25,8 @@ const nextConfig = {
     // runtime, so not auto-traced). Required for /database routes on Vercel.
     outputFileTracingIncludes: {
       '/[locale]/database/**': ['./data/taskbarhero-database/**'],
+      '/[locale]/page': ['./data/taskbarhero-database/**'],
+      '/api/search': ['./data/taskbarhero-database/**'],
     },
   },
 }

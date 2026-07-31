@@ -1,6 +1,7 @@
 import { Link } from '@/i18n/routing';
 import Header from '@/components/common/Header';
 import { SectionHeader, Icon } from '@/components/tier-home/primitives';
+import SearchBox from './SearchBox';
 import {
   getManifest,
   getGroupedDatasets,
@@ -63,6 +64,9 @@ export default function WikiHome({ locale }: { locale: string }) {
               {manifest.row_count.toLocaleString()} entries across {manifest.dataset_count} datasets,
               in 16 languages.
             </p>
+            <div className="mb-8">
+              <SearchBox />
+            </div>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/database"

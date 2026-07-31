@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ember &amp; Steel | Domine o Meta</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#282a2f",
+                    "primary-container": "#ff5b3d",
+                    "surface-container-lowest": "#0c0e13",
+                    "on-surface": "#e2e2e9",
+                    "outline": "#aa8983",
+                    "surface-tint": "#ffb4a5",
+                    "inverse-primary": "#b5260d",
+                    "on-primary-container": "#5c0900",
+                    "primary": "#ffb4a5",
+                    "on-secondary-fixed": "#251a00",
+                    "error": "#ffb4ab",
+                    "on-primary-fixed-variant": "#8e1300",
+                    "surface-container-highest": "#33353a",
+                    "primary-fixed-dim": "#ffb4a5",
+                    "tertiary-fixed-dim": "#d0bcff",
+                    "secondary": "#f0c03e",
+                    "on-primary": "#650a00",
+                    "on-surface-variant": "#e3beb7",
+                    "secondary-fixed": "#ffdf95",
+                    "on-primary-fixed": "#3e0400",
+                    "outline-variant": "#5b403b",
+                    "on-secondary": "#3e2e00",
+                    "inverse-on-surface": "#2e3036",
+                    "surface-bright": "#37393f",
+                    "on-background": "#e2e2e9",
+                    "tertiary": "#d0bcff",
+                    "secondary-container": "#ba9000",
+                    "tertiary-fixed": "#e9ddff",
+                    "primary-fixed": "#ffdad3",
+                    "surface-variant": "#33353a",
+                    "inverse-surface": "#e2e2e9",
+                    "error-container": "#93000a",
+                    "surface": "#111318",
+                    "on-tertiary-container": "#360085",
+                    "on-tertiary": "#3c0091",
+                    "secondary-fixed-dim": "#f0c03e",
+                    "surface-dim": "#111318",
+                    "tertiary-container": "#a27bff",
+                    "on-secondary-fixed-variant": "#594400",
+                    "on-secondary-container": "#3c2c00",
+                    "background": "#111318",
+                    "on-error": "#690005",
+                    "on-tertiary-fixed": "#23005c",
+                    "on-tertiary-fixed-variant": "#5516be",
+                    "surface-container": "#1e1f25",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-low": "#1a1b21",
+                    "tier-s": "#f5c542",
+                    "tier-a": "#8b5cf6",
+                    "tier-b": "#2dd4bf",
+                    "tier-c": "#64748b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "16px",
+                    "xl": "16px",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "48px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "unit": "4px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "display-lg": ["Archivo Narrow"],
+                    "headline-md": ["Archivo Narrow"],
+                    "headline-sm": ["Archivo Narrow"],
+                    "display-lg-mobile": ["Archivo Narrow"],
+                    "label-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0d0f14;
+            color: #e2e2e9;
+            overflow-x: hidden;
+        }
+
+        .noise-bg {
+            position: relative;
+        }
+        .noise-bg::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.04;
+            z-index: 50;
+        }
+
+        .bento-card {
+            background-color: #161a22;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+        .bento-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .ember-glow:hover {
+            box-shadow: 0 0 20px rgba(255, 91, 61, 0.3);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 0px;
+        }
+
+        .glass-nav {
+            backdrop-filter: blur(12px);
+        }
+
+        .tier-strip-item {
+            position: relative;
+        }
+        .tier-strip-item::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: currentColor;
+        }
+    </style>
+</head>
+<body class="noise-bg font-body-md text-body-md antialiased">
+<!-- TopNavBar -->
+<nav class="docked full-width top-0 sticky z-40 bg-surface/80 dark:bg-surface/80 backdrop-blur-md border-b border-white/5 shadow-2xl shadow-black/40">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<span class="font-display-lg text-display-lg-mobile tracking-tighter text-primary dark:text-primary uppercase cursor-pointer">Ember &amp; Steel</span>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md transition-all duration-200" href="#">Ferramentas</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-all duration-200 font-label-md text-label-md" href="#">Explorar</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="hidden md:block text-on-surface-variant font-medium font-label-md text-label-md hover:text-primary cursor-pointer transition-all">PT-BR</span>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-label-md text-label-md font-bold active:scale-95 transition-transform hover:opacity-90">Login</button>
+</div>
+</div>
+</nav>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop space-y-12 pb-24">
+<!-- Hero Section -->
+<section class="pt-16 pb-8 text-center space-y-8">
+<div class="space-y-4 max-w-4xl mx-auto">
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg leading-tight tracking-tight uppercase">
+                    DOMINE O META COM A <span class="text-primary-container">COMUNIDADE</span>
+</h1>
+<p class="text-on-surface-variant font-body-lg text-body-lg max-w-2xl mx-auto">
+                    Crie, compartilhe e descubra as melhores tier lists criadas por jogadores de elite. Eleve o conteúdo UGC ao status de crítica especializada.
+                </p>
+</div>
+<div class="flex flex-col md:flex-row items-center justify-center gap-4 pt-4">
+<div class="relative w-full max-w-md group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50 group-focus-within:text-primary-container transition-colors">search</span>
+<input class="w-full bg-[#0d0f14] border border-outline-variant/30 focus:border-primary-container focus:ring-0 rounded-xl pl-12 pr-4 py-4 text-on-surface placeholder:text-on-surface-variant/40 transition-all" placeholder="Buscar tier lists, jogos ou heróis..." type="text"/>
+</div>
+<div class="flex gap-4 w-full md:w-auto">
+<button class="flex-1 md:flex-none bg-primary-container text-on-primary-container px-8 py-4 rounded-xl font-bold uppercase tracking-wider ember-glow transition-all active:scale-95">Criar tier list</button>
+<button class="flex-1 md:flex-none border border-outline-variant/30 text-on-surface px-8 py-4 rounded-xl font-bold uppercase tracking-wider hover:bg-white/5 transition-all active:scale-95">Explorar</button>
+</div>
+</div>
+</section>
+<!-- Category Chips -->
+<section class="flex gap-3 overflow-x-auto pb-4 custom-scrollbar">
+<button class="whitespace-nowrap px-6 py-2 bg-primary-container/10 border border-primary-container/30 text-primary-container rounded-full font-label-md text-label-md hover:bg-primary-container/20 transition-colors">Tudo</button>
+<button class="whitespace-nowrap px-6 py-2 bg-white/5 border border-white/10 text-on-surface-variant rounded-full font-label-md text-label-md hover:border-primary-container/40 transition-colors">Personagens</button>
+<button class="whitespace-nowrap px-6 py-2 bg-white/5 border border-white/10 text-on-surface-variant rounded-full font-label-md text-label-md hover:border-primary-container/40 transition-colors">Armas</button>
+<button class="whitespace-nowrap px-6 py-2 bg-white/5 border border-white/10 text-on-surface-variant rounded-full font-label-md text-label-md hover:border-primary-container/40 transition-colors">Patch 9.0</button>
+<button class="whitespace-nowrap px-6 py-2 bg-white/5 border border-white/10 text-on-surface-variant rounded-full font-label-md text-label-md hover:border-primary-container/40 transition-colors">Classe</button>
+<button class="whitespace-nowrap px-6 py-2 bg-white/5 border border-white/10 text-on-surface-variant rounded-full font-label-md text-label-md hover:border-primary-container/40 transition-colors">Meta</button>
+<button class="whitespace-nowrap px-6 py-2 bg-white/5 border border-white/10 text-on-surface-variant rounded-full font-label-md text-label-md hover:border-primary-container/40 transition-colors">Equipamentos</button>
+</section>
+<!-- Trending Bento Grid -->
+<section class="space-y-6">
+<div class="flex items-end justify-between">
+<h2 class="font-headline-md text-headline-md uppercase tracking-tight">Em Tendência <span class="text-primary-container">Hoje</span></h2>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary-container transition-colors flex items-center gap-1" href="#">Ver tudo <span class="material-symbols-outlined text-[18px]">arrow_forward</span></a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- XL Featured Card -->
+<div class="md:col-span-8 bento-card p-6 flex flex-col justify-between min-h-[440px] group cursor-pointer relative">
+<div class="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity">
+<div class="w-full h-full bg-cover bg-center" data-alt="A high-intensity cinematic shot of Valorant agents in a dramatic, dark environment illuminated by ember-red and cool-cyan neon lights. The aesthetic is sharp, luxury gaming style with high-end digital textures and motion blur. Deep shadows and vibrant highlights create an atmosphere of elite competition and critical excellence." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDQHNKwnHVY6JIkO7W2iolsqhUWEBZoP-cZobdDjD72KJkfPCJUX7Eogt7G9giZvo00HPJ1q6g1skwt5NfJI7BwSgyWjxKGeIp_WJgKe1um6dm5JPQAXvd6ITtJDLrjxg9BQqdLhm9SMFMjRg4X0FcJOrq3L9rA0sK76QA_jB-ya_iucxRZuXjNO0gz8XFZpifji5XK_y-DDXjk9ZIQQcfvvqz9i31bre8qkm9ZxWSgttY6aOUJNGdkYVsjzVvUycQl7u1B26XehQM')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-[#0d0f14] via-[#0d0f14]/40 to-transparent"></div>
+</div>
+<div class="relative z-10 flex justify-between items-start">
+<span class="bg-primary-container text-on-primary-container text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Destaque da Semana</span>
+<div class="flex items-center gap-2 bg-black/40 backdrop-blur-md p-2 rounded-xl">
+<span class="material-symbols-outlined text-primary-container text-lg">bolt</span>
+<span class="font-label-md text-label-md font-bold">META ATUALIZADO</span>
+</div>
+</div>
+<div class="relative z-10 space-y-6">
+<div class="space-y-2">
+<h3 class="font-headline-md text-headline-md group-hover:text-primary-container transition-colors">Valorant: Melhores Agentes Patch 9.0</h3>
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full border border-primary-container/50" data-alt="Close up portrait of a professional e-sports player with serious expression, soft dramatic lighting from the side, dark background with subtle ember dust particles. High resolution digital photography style, cinematic character depth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARUEUkeJeVcJUb_213qXXcmO7yRUiUNTIAmZfDdRB21B4JIevwlwOElpokihhwp9zZ_Ks6CcUe3uU9sE1jflf0g0dydmk8AEuycgXmke8nLyAZ1-oTP4M5liJfMo4aBHG2Fy2ylZhCYE81P7Ugtu5eF4v_C1ceizC1lRAzm_mHtk1oH-q19zmOgqLozmZJrRQK1l3WZZREQjYkc1nqsu8wLLzcWuAxK5DSMUzZpnzzUjAB1dP7BDMgUTGyrVtzzgg0-vdVfg38PQ4"/>
+<span class="text-on-surface-variant font-label-md text-label-md">por <span class="text-on-surface font-bold">ViperMain_BR</span></span>
+</div>
+</div>
+<!-- Tier Strip -->
+<div class="grid grid-cols-4 gap-2">
+<div class="tier-strip-item text-tier-s bg-tier-s/10 p-3 rounded-lg flex flex-col items-center gap-2">
+<span class="font-display-lg text-2xl font-bold">S</span>
+<div class="flex -space-x-2">
+<div class="w-10 h-10 rounded border-2 border-[#161a22] bg-surface" data-alt="Minimalist game character icon headshot, stylized digital art." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDRVglNwa2FJQGsnB2IJcGs34LVxJa5ewb2XReVd12KwMx6QI1r03oip--cPaxVWtCwCyt9jashopsW4yq1S3S2fkH4jFMU6kbHdFVZoBBpHVs6grl_tXXRbjDgto14FR5s9AF5gYVTfH0fVx4frZv7LxWKJV2RYnoaHpXaRX6mBTrq16kcDvCSIEnWsK6Cv9LD67xwQIX3gvaesqMQL98BMd1f_3vRL798Bs0ySC5I7bSXw-mL9JVNYWzFsjcF6-62cr3cFlWuBz8')"></div>
+<div class="w-10 h-10 rounded border-2 border-[#161a22] bg-surface" data-alt="Minimalist game character icon headshot, stylized digital art." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuArb46-OWdzNPKAmdBLztZsyIYFSUq5Ntjb1uFFhJnyOZFQPBvgPEPmyn04rSEDs3IHBmqQG9PSKMnK-Qb9zZTOYDTQagXt-M46_fDuWzzbtv-jPpvilQ-SPRYn8pwein5jr_ABvpo_k4zfuraedwarawm_wnkLNBzOc53S_ufyLfC2AYsRglWZjlMfgC8wVkVWU1O4BYX3XNQkpCcO6x2LK5YDWjbr9B76Imm2ehpVp25GLKQYzBXm43XB0F2J6TUTVzOu4B2jews')"></div>
+</div>
+</div>
+<div class="tier-strip-item text-tier-a bg-tier-a/10 p-3 rounded-lg flex flex-col items-center gap-2">
+<span class="font-display-lg text-2xl font-bold">A</span>
+<div class="flex -space-x-2">
+<div class="w-10 h-10 rounded border-2 border-[#161a22] bg-surface" data-alt="Minimalist game character icon headshot, stylized digital art." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD_Aanm-F8JQMFmeUASH-Ha9uXU5q8RSBpipG8groRvIWDYMVi4yBOvXou5QK3wFv3b4JEGiVeTZ_C8ymDtCUiyrwUMnsSncwDajBOv8M6HIEXZ3AHIb-HxiuwKB82zxfuPhCkrb9QHHkBJNz6oHg1pdjcpUabLs5T74eXTMrSIiRJ8wMA_9T-R8ZZFiNkhJpjojuhaj2ka_Xuo0sp85Sejj1C-zek94XCTBqF3cXtQeaymX3MsPnAq7sUEkhtUja2C4pYtEHQyqJw')"></div>
+<div class="w-10 h-10 rounded border-2 border-[#161a22] bg-surface" data-alt="Minimalist game character icon headshot, stylized digital art." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCsVM-sfWij23Sdsn98Zq4euvl-TiLV6k9G_N2NK_sqw6gWkYYSXYiZXnTe21Db2ZCK6Fse99AcMYuju2ISRVjEd-BldiK8a-yneMSVKTT4FAP8mQ3Yv5p9OXywKfow_nsYz2g0p2XicZ1uPXcvSlIc-1wE8Syw8f-PwXlENfUTMSQsiKXqzy-SsSMKI87MEiTlqeUuWE5nl5PrKrDxU0rC65y6XDbMvWXpdSn88afhLKFTElHQjDrtXNwPLLYngozR73GRWfuRmIA')"></div>
+</div>
+</div>
+<div class="tier-strip-item text-tier-b bg-tier-b/10 p-3 rounded-lg flex flex-col items-center gap-2">
+<span class="font-display-lg text-2xl font-bold">B</span>
+<div class="flex -space-x-2">
+<div class="w-10 h-10 rounded border-2 border-[#161a22] bg-surface" data-alt="Minimalist game character icon headshot, stylized digital art." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCnJNcSG1DT_tbxUx3SiCHL1YkyDwOkJ1QKltFDpN6MJbfOJfW-AbIFISzzKDKsXfy45E6JxiDsyTY5OkZuPuZmhcS7I83cmcyvgyJjXo8BP2p3u8u-NjONSp9DFT0VtnCnQEnUZW3uiHc0ONJZX5JO06y9sta-BEQYQpjNs3YNUP_-77FvGWWckhz6nyMyriuhgtvbp-U7WLH_e1wy4tbzxNjVAR2nxLQC0DDiGMzZtfVJGyxJVEyulQ0gGa0MBAxrKsj-wL16mdE')"></div>
+</div>
+</div>
+<div class="tier-strip-item text-tier-c bg-tier-c/10 p-3 rounded-lg flex flex-col items-center gap-2">
+<span class="font-display-lg text-2xl font-bold">C</span>
+<div class="flex -space-x-2">
+<div class="w-10 h-10 rounded border-2 border-[#161a22] bg-surface" data-alt="Minimalist game character icon headshot, stylized digital art." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD91rxw_5IehyOKY1eKEFiZCKizZMSi62IYzAVknopnMb2QnCCI_ogGFLHn3S3PY8WO8QC3vNuWpqX_YfherfKxqPOctSynW1Ht4sJZf4bshQlZpGA61msGRGsybomoxQbAgFbl7EQhRCzSI2d0azvY4878VI_tNqhGVSIStlECZ6G2WA3OqavKPM6NJGAfn6Ea36dzPMEVSwF_SeXWuuXTXd3yt5eYDKz46bQcn4IjZfXnqvtzNODeORA5u_QWBgVgxGNsFS7DxeE')"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-6 pt-2 border-t border-white/5">
+<div class="flex items-center gap-2 text-on-surface-variant font-label-md">
+<span class="material-symbols-outlined text-[18px]">thumb_up</span> 1.2k
+                            </div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-md">
+<span class="material-symbols-outlined text-[18px]">chat_bubble</span> 84
+                            </div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-md">
+<span class="material-symbols-outlined text-[18px]">visibility</span> 12.5k
+                            </div>
+</div>
+</div>
+</div>
+<!-- Secondary Bento Item 1 -->
+<div class="md:col-span-4 bento-card p-6 flex flex-col gap-6 cursor-pointer group">
+<div class="h-32 rounded-xl overflow-hidden relative">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Close up of futuristic fantasy weapons with glowing energy cores. Dark atmospheric lighting, high contrast textures of steel and energy, luxurious digital finish." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCeDwNV1WnUF6utvzIY2V9TrMZLeC1uR9PaaNLCDhAnXprphZdt-Dt9J_3q4Rexv1irfcPcTsB08HGQvcWoW37DCEGf9nDHEu2o1Bj7jhVIPeIirMRe3dfjy2vXUmHzL4yGBmUpGLErVNNubRISDU1mJ24KF9sW5aN1yJ5PlLPcuT22Fqwm58ZWLYiAMeG7fE5fzGGJ15yAU0YXyZ4__ScTnVtUnoLcEYh0DdOrjbHovfjSfYcOkZTJGH9lqPCDDmQRyYv3Ww3ETJU')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-[#161a22] to-transparent"></div>
+</div>
+<div class="space-y-4">
+<h3 class="font-headline-sm text-headline-sm leading-tight group-hover:text-primary-container transition-colors">Elden Ring: Melhores Armas de Destreza</h3>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<img class="w-6 h-6 rounded-full grayscale group-hover:grayscale-0 transition-all" data-alt="Avatar of a digital artist, soft lighting, gamer room background with purple glow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWv5rKSSy8sErafHTd-gpmLZ0IUMOtytcMr487g62N3hdVVlYnsfL-er1lSWDcnnFcXBh7XMmUM44JFZY_coYMUa5XcKkC5YWQogXKZGfVe05QTOHbkwr0cqc-Js0D_0uyPrlp9xCZ3u8xrL2whAejDIQh7prQ-_7eCk0rOnKto8Q7_Tya68CIuVJm05G-ZAZYzl8O9SZ5Ic8YQAFm4qosJROooI9sjHkucjOwD-CbnI5CaIQI4y5weqWHWdHc22QYrSBZ85jsGbI"/>
+<span class="text-on-surface-variant text-[12px]">por <span class="text-on-surface">Tarnished_One</span></span>
+</div>
+<span class="text-[12px] text-on-surface-variant/60">há 2h</span>
+</div>
+<div class="flex items-center gap-1">
+<div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden flex">
+<div class="w-[30%] h-full bg-tier-s"></div>
+<div class="w-[40%] h-full bg-tier-a"></div>
+<div class="w-[20%] h-full bg-tier-b"></div>
+<div class="w-[10%] h-full bg-tier-c"></div>
+</div>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant text-[12px] font-bold">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">thumb_up</span> 450</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">comment</span> 12</span>
+</div>
+</div>
+</div>
+<!-- Secondary Bento Item 2 -->
+<div class="md:col-span-4 bento-card p-6 flex flex-col gap-6 cursor-pointer group">
+<div class="flex items-start justify-between">
+<div class="w-12 h-12 rounded-xl bg-tier-s/10 flex items-center justify-center text-tier-s">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="bg-white/5 border border-white/10 px-3 py-1 rounded text-[10px] uppercase font-bold tracking-widest">Guia Meta</span>
+</div>
+<div class="space-y-4 flex-grow">
+<h3 class="font-headline-sm text-headline-sm leading-tight group-hover:text-primary-container transition-colors">League of Legends: Suportes para SoloQ</h3>
+<div class="flex items-center gap-2">
+<img class="w-6 h-6 rounded-full" data-alt="Stylized e-sports logo of a blue phoenix, sharp vector design on dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ2uPhUJlFH3gfMj120aw9f4lGfnj5GIfkwgoCqvbcdw0_pciFZr7NCwxMyo4UVKQKQYExofSrYA-Wd_-ZA0lfyIPPMc6ip4DGPbpdfwpVSBzwrmcxqDMAROhN4D5ChE1pDHW15kUNjZa70tR9NzUiRjeHiw2FES94_4GRiHic_E0WYK6fP2kRtsYqu1EYNsZlW_poLC2EP9ivV5uaik1yzioRe1B0CH10gDprT_6nS_xkbPFdhOViMzsu1nlZr5zMn3AMSHu9GXA"/>
+<span class="text-on-surface-variant text-[12px]">por <span class="text-on-surface">EloMaster_BR</span></span>
+</div>
+</div>
+<div class="pt-4 border-t border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-4 text-on-surface-variant text-[12px] font-bold">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">thumb_up</span> 892</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary-container transition-all group-hover:translate-x-1">arrow_forward</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Recently Published Section -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<div class="md:col-span-12">
+<h2 class="font-headline-md text-headline-md uppercase tracking-tight mb-6">Publicações <span class="text-primary-container">Recentes</span></h2>
+</div>
+<div class="md:col-span-8 space-y-3">
+<!-- List Row 1 -->
+<div class="bento-card p-4 flex items-center gap-4 hover:bg-white/5 cursor-pointer group">
+<div class="w-16 h-16 rounded-lg bg-surface border border-white/5 shrink-0 overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" data-alt="Abstract game level design art, neon paths on dark landscape." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD137tyfJ-h00COVGRVhWd15f5IbosLx1Fj0y_49uamvHodGEMWQBcOmH1KKEWBZmbWEU77iB4x6X9LO9yzpjUfqaIGsMGW_r2fSHvRCV8SdUqZSvbujkiWp906wb1i-_H9SB8fLKKAyqf4uhl6pB-XJtc_RzOH7NAG37zWwcw5RMMp6a7qa1GPK0thhpYaXVQII1xIG-9SpLz6SXzxD9qQYWGFz-n8Z_PX2C12iWH6RR9G--DJm9pF5IKeoxAN21mqwwFURo56sOQ')"></div>
+</div>
+<div class="flex-grow">
+<h4 class="font-headline-sm text-[18px] group-hover:text-primary-container transition-colors">Tier List de Dashers no Geometry Dash 2.2</h4>
+<div class="flex items-center gap-3 text-[12px] text-on-surface-variant mt-1">
+<span class="flex items-center gap-1 font-bold"><img class="w-4 h-4 rounded-full" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgUuOyyt31P8CoBCvyDLOPWT1tK7EUV8x59ktdkL2JiBVBwDChD2SXgyeOLmSY_TTw_fTOtGtjg5kAdHbbz5gjGNEs6UKQ3xNY33QlpsB3CzWSi6AuvWj3FdcETxpx-UtCkpU7cbqkbrZU1l-EQboRBy8qW4OY-yDljU16-bsS6YVqT_OTBH7iPC1ySIYgrn7EM1FH0CZ0jgds2YlsdheNQev18EpfHSKHUfCu3ahgwBU6yTgn-aqI3-8X92dN7c9eFVhJ4x_7eho"/> CubeKing</span>
+<span>há 10min</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="text-center px-4">
+<span class="block font-bold text-on-surface">12</span>
+<span class="text-[10px] uppercase text-on-surface-variant tracking-widest">votos</span>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary-container transition-colors">keyboard_arrow_up</button>
+</div>
+</div>
+<!-- List Row 2 -->
+<div class="bento-card p-4 flex items-center gap-4 hover:bg-white/5 cursor-pointer group">
+<div class="w-16 h-16 rounded-lg bg-surface border border-white/5 shrink-0 overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" data-alt="Cyberpunk character portrait, green glowing eyes, high end techwear." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDJusoFDm5kVBV0XBJGPUOFqTLMtv-3u43CMk6Lmtt9Z8R0y9JZVwBGvhhu52axglsaQRgjGvwSPn4o7zxOy8rfTZuQ7T8f66Jdvbvvz-4gd1X-4XnOmLndwZzK1_oK338FU_X2nmNfs9prULZ4EuwtPxWBJ0ZpxRlqZVoEA88HbgsYE40-IexeIYgbBluaqFLeELhvhIFgbhe8rAARhvh-7_ZCIPKe0v9VFX0aP9qkO27Gj9-0Yrye0n0t-eXo-tBCLrUMnUJ5g2A')"></div>
+</div>
+<div class="flex-grow">
+<h4 class="font-headline-sm text-[18px] group-hover:text-primary-container transition-colors">Cyberpunk 2077: Builds de Netrunner Patch 2.1</h4>
+<div class="flex items-center gap-3 text-[12px] text-on-surface-variant mt-1">
+<span class="flex items-center gap-1 font-bold"><img class="w-4 h-4 rounded-full" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDksCP0QUPEVd8PIX22m1UZ33bRWDNb2kFJdRGI1QaQPAS_FwdsJwsuBMT1Kr9QO3wIFXyFeqGlQrAL2zuB3n-Dx5Qt-bOB0dGy6O8yo4Bp92IzFkGNpiZ0eRl4LvK2qjWvJmteyXcXneLhKmSCZ2Wx5oam8dd_h3pZtZ_Y0_bJKzG45FGfMUhWGAwWt9xg53xjqJ6Gy0AKrW9_le17eRAtUpXh_Maj96hknDVdtvmIi9w9_rLjSheUpa2fvqyVs3cDgy7w9NuHD8Q"/> NightCity_V</span>
+<span>há 25min</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="text-center px-4">
+<span class="block font-bold text-on-surface">45</span>
+<span class="text-[10px] uppercase text-on-surface-variant tracking-widest">votos</span>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary-container transition-colors">keyboard_arrow_up</button>
+</div>
+</div>
+<!-- List Row 3 -->
+<div class="bento-card p-4 flex items-center gap-4 hover:bg-white/5 cursor-pointer group">
+<div class="w-16 h-16 rounded-lg bg-surface border border-white/5 shrink-0 overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" data-alt="Dark fantasy dragon eye close up, glowing golden iris, dragon scales." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCOIxqJwq91wbAn4hPGHOA5akljdWIv38pG31NLiYlz7tSBPV4RCgrcHDRXEGZwog1j0rwF2X6HUQI7tBqSDFEF-GnbxXgjYoawAFWHOS4-7QcpHRqtft7NFX9Ppdqx35Am_bCPYbYyyBZUT4TTCf46OwSx6upsE9qZ17XLrdkKLCHjcT6-KmqZEvSv0UdfeBn1G_onDTrnCL5U27WXsRUrxwKfi_Hy1tp-NT7AP8hFxZp0hrNgjtlifG_2orArfYVj5rjNVgFP9To')"></div>
+</div>
+<div class="flex-grow">
+<h4 class="font-headline-sm text-[18px] group-hover:text-primary-container transition-colors">Dota 2: Melhores Midlaners para Subir de Rank</h4>
+<div class="flex items-center gap-3 text-[12px] text-on-surface-variant mt-1">
+<span class="flex items-center gap-1 font-bold"><img class="w-4 h-4 rounded-full" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVQ_G5fjx5Jd8clGDDnfnSArEalvRhjPAeZSnMEPKQgoD2ZdMYBLrIPcOLCF_ah1r98xPZ8Un8-SBInuYDO3v4Owu8OpLRXqEELTNUUQBGpei5KdO6qNasQpyZCaTciBC4ZigZ4A3kH_0i5lqiv7x3xJuGPD6USdjYUc6ZNEXZxI25rtrfqksYMvzwzW0tfu3cfLlDw9i6T937V_9bPCtWWCmtdKIThZlOTYtFZKeK_3hAk_3qMth_FwfwUCPedMoE2Vr7_FnRB3Y"/> Miracle_Fan</span>
+<span>há 42min</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="text-center px-4">
+<span class="block font-bold text-on-surface">128</span>
+<span class="text-[10px] uppercase text-on-surface-variant tracking-widest">votos</span>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary-container transition-colors">keyboard_arrow_up</button>
+</div>
+</div>
+</div>
+<!-- Community Stats Card (Sidebar) -->
+<div class="md:col-span-4 space-y-6">
+<div class="bento-card p-6 bg-gradient-to-br from-[#161a22] to-[#1e1f25]">
+<h3 class="font-headline-sm text-headline-sm mb-4">Comunidade Ember</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center py-2 border-b border-white/5">
+<span class="text-on-surface-variant font-label-md">Criadores Ativos</span>
+<span class="font-bold text-primary-container">12.4k</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-white/5">
+<span class="text-on-surface-variant font-label-md">Lists Geradas</span>
+<span class="font-bold text-primary-container">842k</span>
+</div>
+<div class="flex justify-between items-center py-2">
+<span class="text-on-surface-variant font-label-md">Votos Hoje</span>
+<span class="font-bold text-primary-container">145k</span>
+</div>
+</div>
+<button class="w-full mt-6 bg-white/5 border border-white/10 text-on-surface py-3 rounded-xl font-bold uppercase tracking-wider hover:bg-white/10 transition-all">Ver Rankings de Usuários</button>
+</div>
+<div class="bento-card p-6 overflow-hidden relative group">
+
+<div class="relative z-10 space-y-4">
+<h3 class="font-headline-sm text-headline-sm">Torne-se Crítico Elite</h3>
+<p class="text-[14px] text-on-surface-variant">Suas análises podem ganhar selo de aprovação da comunidade e destaque na home.</p>
+<a class="inline-flex items-center gap-2 text-primary-container font-bold text-sm group-hover:gap-3 transition-all" href="#">Saiba mais <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-auto bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/20">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-12 w-full max-w-container-max mx-auto gap-8">
+<div class="space-y-4 text-center md:text-left">
+<span class="font-display-lg text-headline-md text-on-surface uppercase tracking-tighter">Ember &amp; Steel</span>
+<p class="text-on-surface-variant font-body-md text-body-md max-w-xs">© 2024 Ember &amp; Steel. Elevating UGC to Critical Excellence.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-x-8 gap-y-4">
+<a class="text-on-surface-variant hover:text-primary-container transition-colors font-label-sm text-label-sm uppercase tracking-widest" href="#">Gaming Tools</a>
+<a class="text-on-surface-variant hover:text-primary-container transition-colors font-label-sm text-label-sm uppercase tracking-widest" href="#">Community</a>
+<a class="text-on-surface-variant hover:text-primary-container transition-colors font-label-sm text-label-sm uppercase tracking-widest" href="#">Language Settings</a>
+<a class="text-on-surface-variant hover:text-primary-container transition-colors font-label-sm text-label-sm uppercase tracking-widest" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary-container transition-colors font-label-sm text-label-sm uppercase tracking-widest" href="#">Privacy Policy</a>
+</div>
+<div class="flex gap-4">
+<button class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary-container/20 hover:border-primary-container transition-all">
+<span class="material-symbols-outlined text-on-surface text-[20px]">share</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary-container/20 hover:border-primary-container transition-all">
+<span class="material-symbols-outlined text-on-surface text-[20px]">alternate_email</span>
+</button>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions and hover effects
+        document.querySelectorAll('.bento-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Subtle lift handled by CSS, but can add JS effects here if needed
+            });
+        });
+
+        // Search bar focus effects
+        const searchInput = document.querySelector('input[type="text"]');
+        const searchIcon = searchInput?.previousElementSibling;
+        
+        searchInput?.addEventListener('focus', () => {
+            searchIcon?.classList.add('text-primary-container');
+        });
+        
+        searchInput?.addEventListener('blur', () => {
+            searchIcon?.classList.remove('text-primary-container');
+        });
+    </script>
+</body></html>

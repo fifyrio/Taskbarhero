@@ -1,0 +1,53 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules
+.pnp
+.pnp.js
+temp/
+# testing
+coverage
+
+# next.js
+.next/
+out/
+build
+.swc/
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# turbo
+.turbo
+
+# ui
+dist/
+
+# typescript
+*.tsbuildinfo
+
+# generated images
+public/generated/*.png
+public/generated/*.jpg
+public/generated/*.jpeg
+
+# other 
+.react-email/
+.content-collections/
+.claude/scheduled_tasks.lock
+
+# stale AI-product showcase assets (2GB, unused by tier-list)
+public/images/showcases/

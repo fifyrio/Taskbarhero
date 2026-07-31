@@ -1,0 +1,209 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+/* ── Liquid-glass design system (cinematic landing) ── */
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.01);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: none;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.45) 0%,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0.15) 80%,
+    rgba(255, 255, 255, 0.45) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.liquid-glass-strong {
+  background: rgba(255, 255, 255, 0.01);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  border: none;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+.liquid-glass-strong::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0.2) 80%,
+    rgba(255, 255, 255, 0.5) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Blur-in entrance (CSS approximation of the Framer Motion word reveal) */
+@keyframes blurInUp {
+  0% {
+    filter: blur(10px);
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    filter: blur(0);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.blur-in {
+  opacity: 0;
+  animation: blurInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ══ TBH Tier List Wiki — immersive dark design system ══ */
+.tbh-root {
+  background-color: #14161b;
+  color: #e8eaf1;
+  --tbh-uncommon: #54fc0c;
+  --tbh-rare: #2f8bfc;
+  --tbh-legendary: #fc9c0c;
+  --tbh-immortal: #fc2424;
+  --tbh-arcana: #b40cfc;
+  --tbh-divine: #fce454;
+}
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* scanline / grain overlay */
+.tbh-scanline {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.05) 51%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 100;
+  mix-blend-mode: overlay;
+}
+.tbh-grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* compositor-only hover lift */
+.tbh-lift {
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tbh-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: inset 0 0 24px rgba(246, 183, 60, 0.1);
+}
+.tbh-glow { box-shadow: 0 0 12px rgba(246, 183, 60, 0.15); }
+
+/* rarity slots — colored glowing borders */
+.rarity-uncommon  { border-color: var(--tbh-uncommon);  box-shadow: 0 0 6px rgba(84, 252, 12, 0.35); }
+.rarity-rare      { border-color: var(--tbh-rare);      box-shadow: 0 0 6px rgba(47, 139, 252, 0.35); }
+.rarity-legendary { border-color: var(--tbh-legendary); box-shadow: 0 0 6px rgba(252, 156, 12, 0.35); }
+.rarity-immortal  { border-color: var(--tbh-immortal);  box-shadow: 0 0 6px rgba(252, 36, 36, 0.35); }
+.rarity-arcana    { border-color: var(--tbh-arcana);    box-shadow: 0 0 6px rgba(180, 12, 252, 0.35); }
+.rarity-divine    { border-color: var(--tbh-divine);    box-shadow: 0 0 6px rgba(252, 228, 84, 0.35); }
+
+.rdot-uncommon  { background: var(--tbh-uncommon); }
+.rdot-rare      { background: var(--tbh-rare); }
+.rdot-legendary { background: var(--tbh-legendary); }
+.rdot-immortal  { background: var(--tbh-immortal); }
+.rdot-arcana    { background: var(--tbh-arcana); }
+.rdot-divine    { background: var(--tbh-divine); }
+
+/* tier badges */
+.tier-s { background: #fc2424; color: #000; }
+.tier-a { background: #fc9c0c; color: #000; }
+.tier-b { background: #fce454; color: #000; }
+.tier-c { background: #54fc0c; color: #000; }
+
+/* market ticker */
+.tbh-ticker-wrap { overflow: hidden; width: 100%; }
+.tbh-ticker {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: tbh-ticker 40s linear infinite;
+}
+.tbh-ticker-wrap:hover .tbh-ticker { animation-play-state: paused; }
+@keyframes tbh-ticker {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tbh-ticker { animation: none; }
+  .tbh-lift:hover { transform: none; }
+}

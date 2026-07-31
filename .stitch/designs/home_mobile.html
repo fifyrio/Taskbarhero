@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TBH // TIER LIST WIKI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Space+Grotesk:wght@300;400;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        :root {
+            --pixel-font: 'Press Start 2P', cursive;
+        }
+
+        .pixel-text {
+            font-family: var(--pixel-font);
+            text-transform: uppercase;
+        }
+
+        /* CRT Scanline Overlay */
+        .crt-overlay::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            z-index: 100;
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .crt-flicker {
+            animation: flicker 0.15s infinite;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.98711; }
+            5% { opacity: 0.94123; }
+            10% { opacity: 0.99843; }
+            15% { opacity: 0.9201; }
+            20% { opacity: 0.99221; }
+            100% { opacity: 0.99; }
+        }
+
+        /* Scrollbar Hide */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .terminal-tile {
+            background: #1c1f27;
+            border: 1px solid #3e4248;
+            position: relative;
+        }
+
+        .glow-s { box-shadow: 0 0 10px rgba(252, 228, 84, 0.4); border-color: #fce454; } /* Divine Gold */
+        .glow-a { box-shadow: 0 0 10px rgba(252, 36, 36, 0.4); border-color: #fc2424; }  /* Red */
+        .glow-b { box-shadow: 0 0 10px rgba(180, 12, 252, 0.4); border-color: #b40cfc; } /* Purple */
+        .glow-c { box-shadow: 0 0 10px rgba(47, 139, 252, 0.4); border-color: #2f8bfc; } /* Blue */
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#14161b",
+                      "surface": "#1c1f27",
+                      "primary": "#f6b73c",
+                      "secondary": "#d6c5a2",
+                      "outline": "#3e4248",
+                      "outline-variant": "#504535",
+                      "on-surface": "#ece1d3",
+                      "on-surface-variant": "#d4c4ae",
+                      "rarity-green": "#54fc0c",
+                      "rarity-blue": "#2f8bfc",
+                      "rarity-orange": "#fc9c0c",
+                      "rarity-red": "#fc2424",
+                      "rarity-purple": "#b40cfc",
+                      "rarity-divine": "#fce454"
+              },
+              "fontFamily": {
+                      "label-xs": ["JetBrains Mono"],
+                      "display-lg": ["Space Grotesk"],
+                      "code-sm": ["JetBrains Mono"],
+                      "body-md": ["Inter"],
+                      "headline-md": ["Space Grotesk"]
+              }
+            }
+          }
+        }
+      </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden selection:bg-primary selection:text-background crt-overlay">
+<!-- 1. STICKY TOP BAR -->
+<header class="sticky top-0 z-50 flex items-center justify-between px-4 h-16 bg-surface/80 backdrop-blur-md border-b border-outline-variant">
+<div class="flex items-center gap-3">
+<button class="material-symbols-outlined text-primary">menu</button>
+<span class="pixel-text text-primary text-xl font-black tracking-tighter drop-shadow-[0_0_8px_rgba(251,188,64,0.4)]">TBH</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+<div class="w-8 h-8 bg-outline-variant border border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A pixel-art style character portrait of a futuristic operator with glowing goggles and a tech-heavy helmet, styled in the dark aesthetic of 90s cyberpunk gaming interfaces, using a gold and dark gray color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0q2NWA0oofkPXaSCwiHggh_aA4hWG-SYa0gxwB7liOzhpc0W3ZREUdsCVmGW3iWzAoW1oDH7o7uQiZy0RqvyzZpCvZP9b4WsEM1Tke0SBx1eqhMhFOw_dXgVHrCAaDZG40VnqWkLFJejVnPHRmCw4YdjSiF4WwV0ClKNUb7z6VK9aMPzgvPJTMV9B5nw85UPsregkImtCfGp_0MWNE9-2ykyHdeH7zNB8etZJN2mzOUOxmwLe8HhQTMrOgaFXV7h8AyAy17ehN6E"/>
+</div>
+</div>
+</header>
+<main class="pb-24">
+<!-- 3. HERO SECTION -->
+<section class="p-4 space-y-4">
+<div class="relative py-8 px-4 terminal-tile border-primary/50 overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+
+</div>
+<h1 class="pixel-text text-2xl text-primary leading-tight text-center relative z-10 crt-flicker">
+                    TIER LIST<br/>WIKI
+                </h1>
+<div class="flex justify-center mt-6">
+<button class="w-full bg-primary text-background font-bold py-3 px-6 pixel-text text-[10px] hover:shadow-[0_0_15px_rgba(246,183,60,0.6)] active:scale-95 transition-all">
+                        CRIAR TIER LIST
+                    </button>
+</div>
+</div>
+</section>
+<!-- 4. CATEGORY CHIPS -->
+<section class="px-4 overflow-x-auto no-scrollbar flex gap-2 mb-6">
+<button class="flex-shrink-0 bg-primary text-background px-4 py-1 text-[10px] pixel-text">TODOS</button>
+<button class="flex-shrink-0 border border-outline px-4 py-1 text-[10px] pixel-text text-on-surface-variant hover:border-primary">TANKS</button>
+<button class="flex-shrink-0 border border-outline px-4 py-1 text-[10px] pixel-text text-on-surface-variant hover:border-primary">SUPORTES</button>
+<button class="flex-shrink-0 border border-outline px-4 py-1 text-[10px] pixel-text text-on-surface-variant hover:border-primary">DPS</button>
+<button class="flex-shrink-0 border border-outline px-4 py-1 text-[10px] pixel-text text-on-surface-variant hover:border-primary">RAIDS</button>
+</section>
+<!-- 6. MERCADO TICKER -->
+<section class="bg-surface-container-low border-y border-outline mb-6">
+<div class="flex overflow-x-auto no-scrollbar py-2">
+<div class="flex gap-4 px-4 animate-marquee whitespace-nowrap">
+<div class="flex items-center gap-2 font-code-sm text-xs">
+<span class="text-on-surface-variant">IRON_ORE:</span>
+<span class="text-primary">2.4k</span>
+<span class="text-rarity-green text-[10px]">▲ 4.2%</span>
+</div>
+<div class="w-px h-4 bg-outline self-center"></div>
+<div class="flex items-center gap-2 font-code-sm text-xs">
+<span class="text-on-surface-variant">VOID_CRYSTAL:</span>
+<span class="text-primary">15.8k</span>
+<span class="text-rarity-red text-[10px]">▼ 1.1%</span>
+</div>
+<div class="w-px h-4 bg-outline self-center"></div>
+<div class="flex items-center gap-2 font-code-sm text-xs">
+<span class="text-on-surface-variant">DRAGON_SCALE:</span>
+<span class="text-primary">92k</span>
+<span class="text-rarity-green text-[10px]">▲ 12.5%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. EM TENDÊNCIA -->
+<section class="px-4 mb-8">
+<div class="flex items-center justify-between mb-4">
+<h2 class="pixel-text text-xs text-primary">EM TENDÊNCIA</h2>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">trending_up</span>
+</div>
+<div class="space-y-4">
+<!-- Card 1 -->
+<div class="terminal-tile p-3 space-y-3">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-bold text-on-surface leading-tight">Melhores Tanks para S7 Meta</h3>
+<p class="text-[10px] text-on-surface-variant font-code-sm">@OPERATOR_X01 // 2h atrás</p>
+</div>
+<span class="bg-primary/10 text-primary text-[9px] px-1 font-bold border border-primary/30">PATCH 1.4</span>
+</div>
+<div class="flex gap-2">
+<div class="w-10 h-10 border-2 glow-s flex items-center justify-center bg-background">
+<span class="pixel-text text-[10px] text-rarity-divine">S</span>
+</div>
+<div class="w-10 h-10 border-2 glow-a flex items-center justify-center bg-background">
+<span class="pixel-text text-[10px] text-rarity-red">A</span>
+</div>
+<div class="w-10 h-10 border-2 glow-a flex items-center justify-center bg-background">
+<span class="pixel-text text-[10px] text-rarity-red">A</span>
+</div>
+<div class="w-10 h-10 border-2 glow-b flex items-center justify-center bg-background">
+<span class="pixel-text text-[10px] text-rarity-purple">B</span>
+</div>
+<div class="w-10 h-10 border-2 border-outline flex items-center justify-center bg-background opacity-50">
+<span class="material-symbols-outlined text-xs">more_horiz</span>
+</div>
+</div>
+<div class="flex items-center gap-4 text-[10px] font-code-sm text-on-surface-variant pt-2 border-t border-outline">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">thumb_up</span> 1.2k</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">comment</span> 43</span>
+<span class="ml-auto flex items-center gap-1 text-primary"><span class="material-symbols-outlined text-xs">share</span> EXPORT</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="terminal-tile p-3 space-y-3">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-bold text-on-surface leading-tight">Farm de Runas: Guia Definitivo</h3>
+<p class="text-[10px] text-on-surface-variant font-code-sm">@LORE_KEEPER // 5h atrás</p>
+</div>
+<span class="bg-rarity-purple/10 text-rarity-purple text-[9px] px-1 font-bold border border-rarity-purple/30">GUIDE</span>
+</div>
+<div class="flex gap-2 overflow-x-auto no-scrollbar">
+<div class="w-10 h-10 border-2 glow-s bg-background flex items-center justify-center">
+<img class="w-full h-full p-1 object-contain" data-alt="A detailed digital asset of a glowing mythical golden rune stone with intricate glowing engravings, hovering in a dark void with floating magical particles, high-contrast dark-mode fantasy style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABUVSUMWBN0W7MrZuRaeOBpAzZD1FSLNs7teXXR_NgKxMFifX1AJkIf6Ush9hBhnlH65hB1-XSRmEkpdWQIfxyanAGosfz3r021-TuAz3s5btTqV6EVIV8nke-t_OO5eRn6hQ_DOnQO-b7Lwo7vFRHD4xqgKAutlrbEoj6BtxPBLs7LD-wlnJjJ-mRB-HN4LwVF8ITMSTD496OTWs3MJvsqPlXHwnoWyTLnjPoHTajbisBlAfCASrf1MxcSv5l53ZYvqnnG0vPQrw"/>
+</div>
+<div class="w-10 h-10 border-2 glow-b bg-background flex items-center justify-center">
+<img class="w-full h-full p-1 object-contain" data-alt="A mysterious glowing purple crystal item icon for a video game, featuring sharp geometric facets and light refraction, isolated on a dark technical background with scanline textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDs1OURv93ztFC4lHOSX6ocWCB30w3ig97wFHTrNK5vYdElkbIBTsg6VAIsI5qjPRhHfGoSae0WnRiVqnRtVsFvpQBMP0AumXaDooq5tz1sdUE8pElquuVGNmgNU64HM9CwpZ5nW_a3zf1OX9FIBDa5Kkt6hPUD73PI2_w1kd784VeyTRCz7puIqj_OmWgYgadpYyeLLfzsd84R-ZjjXLHoKymysaAqb6AkD3VyP5oRyhCetYpcxb3ywm8-CpZS5cIJXVpI68_LJ6g"/>
+</div>
+<div class="w-10 h-10 border-2 glow-c bg-background flex items-center justify-center">
+<img class="w-full h-full p-1 object-contain" data-alt="A blue glowing orb artifact, wrapped in silver filigree chains, designed as a 2D game asset for a high-end fantasy RPG interface, isolated on dark gray." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjJMGfvXfZ1fX1B0K3KOqyD0x9ldafoklZZpU_ZdXydV2_rqZAZ0UQEYDwjCBPzP-b8x7prYgWtrrQEqKE-hTb2qkRg69FED92ELDbFZ2OXVuB4aNhVTNeTPQlqhZI0ZNLpGSYv4kjNynnizpMJ4aYNqWt3eZJkyWU0JqYPFaFG-I07XRlH8i5PHGfwcWzNUnhKLOuWSoot9rVvQXHQL1A8yEAixatfVQ6kY5MeJZblZu1EoXkdvG-Pl-c34t2i_lz9M1fHSHYh44"/>
+</div>
+</div>
+<div class="flex items-center gap-4 text-[10px] font-code-sm text-on-surface-variant pt-2 border-t border-outline">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">thumb_up</span> 856</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">comment</span> 12</span>
+<span class="ml-auto flex items-center gap-1 text-primary"><span class="material-symbols-outlined text-xs">visibility</span> VIEW</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. PUBLICAÇÕES RECENTES -->
+<section class="px-4 mb-8">
+<h2 class="pixel-text text-xs text-primary mb-4">RECENT_FEED</h2>
+<div class="bg-surface border border-outline divide-y divide-outline">
+<div class="p-3 flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-rarity-orange animate-pulse"></div>
+<div class="flex-1 min-w-0">
+<p class="font-code-sm text-xs truncate">UPDATE: New Tier-S Hero 'Aurelius' added to database</p>
+<p class="text-[9px] text-on-surface-variant uppercase">system_msg // 12:04</p>
+</div>
+<span class="pixel-text text-[8px] bg-outline-variant px-1">S-TIER</span>
+</div>
+<div class="p-3 flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-rarity-blue"></div>
+<div class="flex-1 min-w-0">
+<p class="font-code-sm text-xs truncate">Market Alert: Void Crystal price dropped by 15%</p>
+<p class="text-[9px] text-on-surface-variant uppercase">market_bot // 11:58</p>
+</div>
+<span class="pixel-text text-[8px] bg-outline-variant px-1">INFO</span>
+</div>
+<div class="p-3 flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-rarity-red"></div>
+<div class="flex-1 min-w-0">
+<p class="font-code-sm text-xs truncate">NERF: Defense stats on Heavy Plates reduced</p>
+<p class="text-[9px] text-on-surface-variant uppercase">patch_notes // 11:45</p>
+</div>
+<span class="pixel-text text-[8px] bg-outline-variant px-1 text-rarity-red">HOT</span>
+</div>
+</div>
+</section>
+<!-- 8. FERRAMENTAS -->
+<section class="px-4 mb-8">
+<h2 class="pixel-text text-xs text-primary mb-4">TERMINAL_TOOLS</h2>
+<div class="grid grid-cols-2 gap-3">
+<div class="terminal-tile p-4 flex flex-col items-center gap-2 text-center hover:border-primary cursor-pointer active:bg-primary/5 group">
+<span class="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform">monitoring</span>
+<span class="pixel-text text-[8px] text-on-surface">Farming Optimizer</span>
+</div>
+<div class="terminal-tile p-4 flex flex-col items-center gap-2 text-center hover:border-primary cursor-pointer active:bg-primary/5 group">
+<span class="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform">calculate</span>
+<span class="pixel-text text-[8px] text-on-surface">DPS Calculator</span>
+</div>
+<div class="terminal-tile p-4 flex flex-col items-center gap-2 text-center hover:border-primary cursor-pointer active:bg-primary/5 group">
+<span class="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform">inventory_2</span>
+<span class="pixel-text text-[8px] text-on-surface">Vault Manager</span>
+</div>
+<div class="terminal-tile p-4 flex flex-col items-center gap-2 text-center hover:border-primary cursor-pointer active:bg-primary/5 group">
+<span class="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform">hub</span>
+<span class="pixel-text text-[8px] text-on-surface">Skill Tree Simulator</span>
+</div>
+</div>
+</section>
+<!-- Footer Info -->
+<footer class="px-4 py-8 text-center border-t border-outline-variant">
+<p class="pixel-text text-[8px] text-on-surface-variant leading-relaxed">
+                © 2024 TBH_TASKBAR_HERO<br/>
+                ENCRYPTED_PROTOCOL_ACTIVE<br/>
+                V1.0.4_BETA
+            </p>
+</footer>
+</main>
+<!-- 2. FIXED BOTTOM TAB BAR -->
+<nav class="fixed bottom-0 left-0 right-0 h-16 bg-surface-container-low/95 backdrop-blur-lg border-t border-outline-variant z-50 flex items-center justify-around px-2">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined fill-primary">home</span>
+<span class="pixel-text text-[7px]">Início</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined">format_list_bulleted</span>
+<span class="pixel-text text-[7px]">Tier Lists</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined">storefront</span>
+<span class="pixel-text text-[7px]">Mercado</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined">construction</span>
+<span class="pixel-text text-[7px]">Ferramentas</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined">person</span>
+<span class="pixel-text text-[7px]">Perfil</span>
+</button>
+</nav>
+<script>
+        // Simple ticker animation clone for smooth loop
+        const ticker = document.querySelector('.animate-marquee');
+        if (ticker) {
+            ticker.innerHTML += ticker.innerHTML;
+        }
+
+        // Add some random "glitch" to the flicker
+        setInterval(() => {
+            const flickerElements = document.querySelectorAll('.crt-flicker');
+            flickerElements.forEach(el => {
+                if (Math.random() > 0.95) {
+                    el.style.opacity = '0.5';
+                    setTimeout(() => el.style.opacity = '1', 50);
+                }
+            });
+        }, 1000);
+    </script>
+</body></html>

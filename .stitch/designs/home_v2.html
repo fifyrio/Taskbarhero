@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TBH // TIER LIST WIKI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Space+Grotesk:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error-container": "#93000a",
+                    "inverse-surface": "#ece1d3",
+                    "primary": "#ffd899",
+                    "on-tertiary-container": "#005673",
+                    "secondary-container": "#54482d",
+                    "surface-container-low": "#201b13",
+                    "secondary-fixed-dim": "#d6c5a2",
+                    "on-primary-container": "#6a4900",
+                    "surface-variant": "#3a342b",
+                    "inverse-primary": "#7d5700",
+                    "surface-tint": "#fbbc40",
+                    "on-secondary": "#3a2f17",
+                    "secondary": "#d6c5a2",
+                    "secondary-fixed": "#f3e1bc",
+                    "primary-fixed": "#ffdeaa",
+                    "surface-container": "#241f16",
+                    "inverse-on-surface": "#362f26",
+                    "surface-bright": "#3f382f",
+                    "primary-container": "#f6b73c",
+                    "surface": "#18130b",
+                    "on-primary-fixed-variant": "#5f4100",
+                    "tertiary-fixed": "#c1e8ff",
+                    "tertiary-fixed-dim": "#73d1ff",
+                    "surface-dim": "#18130b",
+                    "outline-variant": "#504535",
+                    "on-secondary-container": "#c8b795",
+                    "on-primary": "#422c00",
+                    "on-surface-variant": "#d4c4ae",
+                    "on-secondary-fixed-variant": "#51452b",
+                    "error": "#ffb4ab",
+                    "tertiary": "#b6e5ff",
+                    "surface-container-high": "#2f2920",
+                    "on-tertiary": "#003548",
+                    "on-primary-fixed": "#271900",
+                    "tertiary-container": "#63ceff",
+                    "on-tertiary-fixed": "#001e2b",
+                    "surface-container-highest": "#3a342b",
+                    "background": "#18130b",
+                    "on-secondary-fixed": "#231a05",
+                    "outline": "#9d8f7b",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-lowest": "#120d06",
+                    "on-error": "#690005",
+                    "on-tertiary-fixed-variant": "#004d67",
+                    "primary-fixed-dim": "#fbbc40",
+                    "on-background": "#ece1d3",
+                    "on-surface": "#ece1d3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "margin": "24px",
+                    "unit": "4px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "code-sm": ["JetBrains Mono"],
+                    "label-xs": ["JetBrains Mono"],
+                    "display-lg": ["Space Grotesk"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Space Grotesk"]
+            },
+            "fontSize": {
+                    "code-sm": ["13px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "label-xs": ["11px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["15px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        .scanline-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.05) 51%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 100;
+        }
+        .flicker {
+            animation: flicker-anim 0.05s infinite alternate;
+        }
+        @keyframes flicker-anim {
+            0% { opacity: 0.98; }
+            100% { opacity: 1; }
+        }
+        .terminal-glow {
+            box-shadow: 0 0 12px rgba(251, 188, 64, 0.2);
+        }
+        .rarity-uncommon { color: #4ade80; text-shadow: 0 0 5px #4ade80; }
+        .rarity-rare { color: #60a5fa; text-shadow: 0 0 5px #60a5fa; }
+        .rarity-legendary { color: #fbbf24; text-shadow: 0 0 5px #fbbf24; }
+        .rarity-immortal { color: #f472b6; text-shadow: 0 0 5px #f472b6; }
+        .rarity-arcana { color: #a78bfa; text-shadow: 0 0 5px #a78bfa; }
+        .rarity-divine { color: #f87171; text-shadow: 0 0 5px #f87171; }
+
+        .tier-s { background: #ff4d4d; color: #18130b; }
+        .tier-a { background: #ff9933; color: #18130b; }
+        .tier-b { background: #ffdb4d; color: #18130b; }
+        .tier-c { background: #99ff33; color: #18130b; }
+
+        body {
+            background-color: #18130b;
+            color: #ece1d3;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="flicker">
+<div class="scanline-overlay"></div>
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-gutter h-16 sticky top-0 z-50 border-b border-outline-variant bg-surface-container-low/80 backdrop-blur-md shadow-[0_0_12px_rgba(0,0,0,0.5)]">
+<div class="flex items-center gap-8">
+<div class="font-display-lg text-display-lg font-black text-primary drop-shadow-[0_0_8px_rgba(251,188,64,0.4)]">TBH</div>
+<nav class="hidden md:flex gap-6 font-code-sm text-code-sm uppercase tracking-wider">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">GEAR</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">STAGES</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">RUNES</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">HEROES</a>
+<a class="text-primary border-b-2 border-primary pb-1" href="#">MARKET</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">TOOLS</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline text-sm">search</span>
+<input class="bg-surface border border-outline-variant rounded-none py-1.5 pl-10 pr-4 text-code-sm font-code-sm focus:ring-1 focus:ring-primary focus:border-primary w-64 uppercase" placeholder="TERMINAL_SEARCH..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary font-code-sm text-code-sm px-4 py-2 hover:bg-primary-fixed-dim transition-all flex items-center gap-2 border border-primary/20">
+                IMPORT SAVE
+            </button>
+<div class="flex items-center gap-2 text-outline">
+<span class="material-symbols-outlined hover:text-primary cursor-pointer p-1">language</span>
+<span class="material-symbols-outlined hover:text-primary cursor-pointer p-1">settings</span>
+<span class="material-symbols-outlined hover:text-primary cursor-pointer p-1">account_circle</span>
+</div>
+</div>
+</header>
+<div class="flex max-w-container-max mx-auto min-h-screen relative">
+<!-- SideNavBar / Left Rail -->
+<aside class="fixed left-0 top-16 bottom-0 hidden md:flex flex-col p-4 z-40 border-r border-outline-variant bg-surface-container w-64">
+<div class="mb-8 p-2 border-l-2 border-primary bg-primary/5">
+<div class="font-headline-md text-headline-md text-primary font-bold">TBH: COMMAND</div>
+<div class="font-code-sm text-code-sm text-secondary opacity-70">DATABASE_V1.0.4</div>
+</div>
+<nav class="flex flex-col gap-2 flex-grow">
+<a class="flex items-center gap-3 p-3 font-code-sm text-code-sm font-bold uppercase hover:border-primary border-transparent border-l-4 transition-all text-secondary hover:bg-surface-variant hover:text-primary" href="#">
+<span class="material-symbols-outlined">shield</span> GEAR
+                </a>
+<a class="flex items-center gap-3 p-3 font-code-sm text-code-sm font-bold uppercase hover:border-primary border-transparent border-l-4 transition-all text-secondary hover:bg-surface-variant hover:text-primary" href="#">
+<span class="material-symbols-outlined">group</span> HEROES
+                </a>
+<a class="flex items-center gap-3 p-3 font-code-sm text-code-sm font-bold uppercase hover:border-primary border-transparent border-l-4 transition-all bg-primary text-on-primary shadow-[0_0_8px_rgba(251,188,64,0.6)]" href="#">
+<span class="material-symbols-outlined">diamond</span> RUNES
+                </a>
+<a class="flex items-center gap-3 p-3 font-code-sm text-code-sm font-bold uppercase hover:border-primary border-transparent border-l-4 transition-all text-secondary hover:bg-surface-variant hover:text-primary" href="#">
+<span class="material-symbols-outlined">storefront</span> MARKET
+                </a>
+<a class="flex items-center gap-3 p-3 font-code-sm text-code-sm font-bold uppercase hover:border-primary border-transparent border-l-4 transition-all text-secondary hover:bg-surface-variant hover:text-primary" href="#">
+<span class="material-symbols-outlined">construction</span> TOOLS
+                </a>
+</nav>
+<button class="mt-4 p-4 border border-primary text-primary font-code-sm text-code-sm hover:bg-primary/10 transition-all uppercase tracking-widest text-center">
+                DEPLOY MISSION
+            </button>
+<div class="mt-8 pt-4 border-t border-outline-variant flex flex-col gap-2">
+<div class="flex items-center gap-2 p-2 font-code-sm text-code-sm text-secondary hover:text-primary cursor-pointer">
+<span class="material-symbols-outlined">logout</span> LOGOUT
+                </div>
+<div class="flex items-center gap-2 p-2 font-code-sm text-code-sm text-secondary hover:text-primary cursor-pointer">
+<span class="material-symbols-outlined">terminal</span> SYSTEM
+                </div>
+</div>
+</aside>
+<!-- Main Feed -->
+<main class="ml-0 md:ml-64 flex-grow p-gutter border-r border-outline-variant pb-24">
+<!-- Hero Section -->
+<section class="mb-12 relative overflow-hidden border border-outline-variant p-8 bg-surface-container-low shadow-inner">
+<div class="absolute top-0 right-0 p-4 font-code-sm text-code-sm text-primary opacity-30 select-none">
+                    // AUTHENTICATED_SESSION_OK
+                </div>
+<div class="relative z-10 max-w-2xl">
+<h1 class="font-display-lg text-display-lg text-primary uppercase mb-4 tracking-tighter">TIER LIST WIKI</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 max-w-lg">
+                        Explore, analise e colabore com a comunidade para definir o meta atual do TBH. Otimize seus equipamentos e domine as fendas temporais.
+                    </p>
+<div class="flex gap-4">
+<button class="bg-primary text-on-primary font-code-sm text-code-sm px-8 py-4 font-bold uppercase border border-primary hover:glow transition-all active:scale-95 shadow-[0_0_15px_rgba(251,188,64,0.3)]">
+                            CRIAR TIER LIST
+                        </button>
+<button class="border border-outline text-on-surface font-code-sm text-code-sm px-8 py-4 font-bold uppercase hover:bg-surface-variant transition-all">
+                            EXPLORAR RANKINGS
+                        </button>
+</div>
+</div>
+<div class="absolute -right-20 -bottom-20 opacity-10">
+<span class="material-symbols-outlined text-[300px] text-primary">analytics</span>
+</div>
+</section>
+<!-- Category Chips -->
+<div class="flex gap-3 mb-10 overflow-x-auto pb-2 no-scrollbar">
+<button class="px-4 py-1.5 bg-primary/10 border border-primary/40 text-primary font-code-sm text-code-sm uppercase whitespace-nowrap">TODOS</button>
+<button class="px-4 py-1.5 bg-surface border border-outline-variant text-on-surface-variant font-code-sm text-code-sm uppercase hover:border-primary/40 whitespace-nowrap">TANKS</button>
+<button class="px-4 py-1.5 bg-surface border border-outline-variant text-on-surface-variant font-code-sm text-code-sm uppercase hover:border-primary/40 whitespace-nowrap">SUPORTES</button>
+<button class="px-4 py-1.5 bg-surface border border-outline-variant text-on-surface-variant font-code-sm text-code-sm uppercase hover:border-primary/40 whitespace-nowrap">DPS_FÍSICO</button>
+<button class="px-4 py-1.5 bg-surface border border-outline-variant text-on-surface-variant font-code-sm text-code-sm uppercase hover:border-primary/40 whitespace-nowrap">DPS_MÁGICO</button>
+<button class="px-4 py-1.5 bg-surface border border-outline-variant text-on-surface-variant font-code-sm text-code-sm uppercase hover:border-primary/40 whitespace-nowrap">EQUIPAMENTO_S</button>
+</div>
+<!-- EM TENDÊNCIA: TierEntityTiles -->
+<section class="mb-16">
+<div class="flex items-center gap-4 mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold uppercase tracking-widest">EM TENDÊNCIA</h2>
+<div class="h-[1px] flex-grow bg-outline-variant"></div>
+<span class="font-code-sm text-code-sm text-primary">LIVE_FEED.SYS</span>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+<!-- Tier Card 1 -->
+<div class="bg-surface-container border border-outline-variant p-4 hover:border-primary/40 transition-colors group">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">META PVP SEASON 4</h3>
+<div class="font-code-sm text-code-sm text-outline uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">person</span> OPERADOR_X99
+                                    <span class="mx-2">|</span>
+<span class="material-symbols-outlined text-sm">schedule</span> 2H ATRÁS
+                                </div>
+</div>
+<div class="flex gap-1">
+<span class="bg-primary/20 text-primary px-2 py-0.5 font-code-sm text-[10px]">HOT</span>
+<span class="bg-secondary-container text-secondary px-2 py-0.5 font-code-sm text-[10px]">VERIFICADO</span>
+</div>
+</div>
+<div class="space-y-3">
+<!-- Tier Row S -->
+<div class="flex gap-2">
+<div class="w-10 h-10 flex items-center justify-center font-bold text-lg tier-s">S</div>
+<div class="flex-grow flex gap-2 overflow-hidden">
+<div class="w-10 h-10 border border-rarity-arcana bg-surface shadow-[inset_0_0_8px_rgba(167,139,250,0.2)] flex items-center justify-center">
+<div class="w-8 h-8 bg-surface-container" data-alt="A futuristic obsidian energy crystal glowing with intense violet light, detailed textures, retro game inventory style, dark background." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAdQX9Wjz6D1p3rMkcDPaMvLhIBVAGASGcvfO49J6yjA97T-P3W4jllXiyJ3IwK73zcUwNEucRQsWVOSH2ax8MT_rdYJDmZFMHlS5cL9XacnzjzTpNkV_Ja_jznwELTd274VTTX02jWAksWBIb-THxly8oCnAwhPlCMKOAKJMQPmG-RilZIltFAdrNEvqIgTw3FwBS7DSyPpmGlK4JiON9scq9ZBH90k3BhVGcMK5C2djn_ZcCbyQCx7RyzQGqDR-mpZAnieZN4uMM')"></div>
+</div>
+<div class="w-10 h-10 border border-rarity-divine bg-surface shadow-[inset_0_0_8px_rgba(248,113,113,0.2)] flex items-center justify-center">
+<div class="w-8 h-8 bg-surface-container" data-alt="A legendary divine dragon bone sword with crimson lightning arcing around the blade, cinematic lighting, 90s game asset aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAgdTJQBrt7cem6QrvqEXIeThwoI2EQ8ytSVQzspsLX2IxOR4l332bKhUclQynvjY-xtlQyotR3DMSHjOknMKiw5r61NzHn2lJCK7hFz4Kn7TUO7tmICtxvq3gMBcjjn7FQF-E9vTAP5b49WZymam58jey5SAKDwNKaa14dNpAia-oibY7K3u2okqbvH13lNCMmV3VjN6BZMBV0KAKCHYnr84BUGdW6WlALVbMnlI3VT8861ZTInhQyQnhMPlGLZC-nqGZAKcL3H2Q')"></div>
+</div>
+<div class="w-10 h-10 border border-rarity-arcana bg-surface shadow-[inset_0_0_8px_rgba(167,139,250,0.2)] flex items-center justify-center">
+<div class="w-8 h-8 bg-surface-container" data-alt="A mystical purple floating orb containing a nebula, intricate golden carvings, dark high-contrast digital art style." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB9i1llzi3CkptYSPd3fnOuZ3juz1JFPGET0PbTMkQOEybG2avcjlBvQb9uJvvciqwJBJqiwjC6D27lYyUpCnNqC9CbFiu6S6ceJiJHQ72uoC2iGiFNpMOcQDf0oTgddLgkMPin4TUzxzdm9kIUQdsxxzpvdkOewkLBBhrHzd9h2Tsh026HDpmRcfUk3VmzeOt0k-FStMhTWHGfKHA2xsMt2dd47JU3WKuyKgABntuP13imYSyKifL_NZpvEm3LbeWXXUwDIstFqjw')"></div>
+</div>
+</div>
+</div>
+<!-- Tier Row A -->
+<div class="flex gap-2">
+<div class="w-10 h-10 flex items-center justify-center font-bold text-lg tier-a">A</div>
+<div class="flex-grow flex gap-2 overflow-hidden">
+<div class="w-10 h-10 border border-rarity-legendary bg-surface shadow-[inset_0_0_8px_rgba(251,191,36,0.2)] flex items-center justify-center">
+<div class="w-8 h-8 bg-surface-container" data-alt="A golden set of armor plates with mechanical gears, steampunk aesthetic, warm amber lighting, sharp industrial details." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBA7k3jdJ3aYqlOErgktpIyAERF5AGtkWJmtbcUWdxu-bhJ1GBRtjb4WWzHubYpfvSzUGQQJNEmO2kvPmfHHNCUVvFd--fpMS-cfBY0Xea6AWr9XhOh4iaCl6eUnVoe9eHpIgwuRtdH3mCU-es6wBrTQrGVARYWHWO_P3PHWxyk7FePY1wY1f4vD_b_fyfzLkI52iEZe_nFFPqCv8wukmnbI2COIxYpUE2GLtKn45jZjF3kmJ-FjyMh5B_YfOGU_QUhXycmn8gGUa8')"></div>
+</div>
+<div class="w-10 h-10 border border-rarity-rare bg-surface shadow-[inset_0_0_8px_rgba(96,165,250,0.2)] flex items-center justify-center">
+<div class="w-8 h-8 bg-surface-container" data-alt="A high-tech blue energy shield emitter, holographic interface elements, cyberpunk terminal visual style." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBNGZ1oz1Vyuv7yp3VBixl6RGFrmB4sd21kM8D6JJ1gH9sE5UwO8yZeD0Ql-XN1DzbdAgfM6sxhX1X_gjx4AIOB0e9OpMAE35z4Yoc80LHyRJqlvZZ3wO9rhGHq_90ZCbqnxO1zrTaJ8EifLnbl8VuhlGZwWxDdXcBtc8srRDIespl90UKuREAC3ogYvv_3CBVNDM8aOKK5YoFiADlMSDQ4BFBMmcKWnsrG8nCj7H4yy7mdxCfkCA7jA7VvsQqCpgldHp8-EBFyVt0')"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Tier Card 2 -->
+<div class="bg-surface-container border border-outline-variant p-4 hover:border-primary/40 transition-colors group">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">FAST_LEVEL_RUNES</h3>
+<div class="font-code-sm text-code-sm text-outline uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">person</span> DATA_MINER_01
+                                    <span class="mx-2">|</span>
+<span class="material-symbols-outlined text-sm">schedule</span> 5H ATRÁS
+                                </div>
+</div>
+<div class="flex gap-1">
+<span class="bg-surface-variant text-on-surface-variant px-2 py-0.5 font-code-sm text-[10px]">NEW</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex gap-2">
+<div class="w-10 h-10 flex items-center justify-center font-bold text-lg tier-s">S</div>
+<div class="flex-grow flex gap-2 overflow-hidden">
+<div class="w-10 h-10 border border-rarity-divine bg-surface shadow-[inset_0_0_8px_rgba(248,113,113,0.2)] flex items-center justify-center">
+<div class="w-8 h-8 bg-surface-container" data-alt="A glowing blood-red rune stone carved with ancient glyphs, radiating power, dark atmospheric fantasy style." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBYNLKp2_Q2vPjMCZ44h3xkHn2qcCPnHwwdH5KGVVxISeEpX8Mux99hMYy1xTZvXM9uYgqETBJnKGv_VK5xlenHGrZSEv2kDheGDOLfdtPjkLK2aHCAWs0lCmhCG-foXFYhyp6xiMetWzs1I_YyhUfaWwPoDNye6s47yVTFGBROHA7DcEWDv01PRUK5SWYw8KGnZzvRnrk0Er6eQpCfbBRjJSviO3J6SN_nUdBk1lnZDcrzbnK22kxFjEIZ-IvYhcV0nDsBpXLye3g')"></div>
+</div>
+</div>
+</div>
+<div class="flex gap-2">
+<div class="w-10 h-10 flex items-center justify-center font-bold text-lg tier-b">B</div>
+<div class="flex-grow flex gap-2 overflow-hidden">
+<div class="w-10 h-10 border border-rarity-uncommon bg-surface shadow-[inset_0_0_8px_rgba(74,222,128,0.2)] flex items-center justify-center">
+<div class="w-8 h-8 bg-surface-container" data-alt="A weathered green stone rune with faint organic textures, mossy and ancient, low-key lighting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCC74j2uvRS3Nq3sTiym4Jej59TDU0iwwQXrCIAvIfBkshcu3X2uydaXHlNwy2LQnZpCOUBto6_kuOXWi5DtgCHW4D1RpFs1etEBTAoAXgPFAvCIX4wt7aLF2v3EM3-6n8qI5IZB33qQ0uG3V6gcvp9oOtEP2SF3fc_T2XgCnR0LdLJs76PK8H9ZR61dQjv8HJd8-cOSU8Oex9qn6pJ_zb2BU74hFJwvqnJpOyJkBYyu7VryFio5cyE8UcimICoWCzo1zg4zNhj_q4')"></div>
+</div>
+<div class="w-10 h-10 border border-rarity-uncommon bg-surface shadow-[inset_0_0_8px_rgba(74,222,128,0.2)] flex items-center justify-center">
+<div class="w-8 h-8 bg-surface-container" data-alt="A jagged emerald crystal fragment, glowing with a soft internal pulse, sharp edges, dark environment." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAVGrvxD6P87L8VP7VYIXo0f-aV6N-17fg_BSxhsTwFGytkmmI7Y1jDUbAypIiDRMrVbZBtjXcxLStWDvL267314cp3ijxdpVY9rbSFQV8qx48KIHsRJTVwNVxjj7SJMXhQQXfCWKra0V8E9Mmum3canXx66cRcG-39FoDtxqKeDmGLQLdo57lQFIn4oXlHlNWX6ybhxj7-qJMhqC6jiuyWA7I921nhL1def9N848_HDiaWAhh8ZUO98oAXq1URMOxla0L0X3wuzo0')"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- PUBLICAÇÕES RECENTES -->
+<section>
+<div class="flex items-center gap-4 mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold uppercase tracking-widest">PUBLICAÇÕES RECENTES</h2>
+<div class="h-[1px] flex-grow bg-outline-variant"></div>
+</div>
+<div class="space-y-[1px] bg-outline-variant">
+<div class="bg-surface hover:bg-surface-container-high transition-colors p-4 flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-6">
+<div class="flex gap-1">
+<div class="w-2 h-2 rounded-full bg-rarity-arcana"></div>
+<div class="w-2 h-2 rounded-full bg-rarity-legendary"></div>
+<div class="w-2 h-2 rounded-full bg-rarity-divine"></div>
+</div>
+<div class="font-code-sm text-code-sm uppercase text-on-surface group-hover:text-primary transition-colors">Melhores Builds para Invocador das Sombras [Patch 1.0.4]</div>
+</div>
+<div class="font-code-sm text-code-sm text-outline font-mono">2024-05-12 // 14:22:05</div>
+</div>
+<div class="bg-surface hover:bg-surface-container-high transition-colors p-4 flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-6">
+<div class="flex gap-1">
+<div class="w-2 h-2 rounded-full bg-rarity-uncommon"></div>
+<div class="w-2 h-2 rounded-full bg-rarity-rare"></div>
+</div>
+<div class="font-code-sm text-code-sm uppercase text-on-surface group-hover:text-primary transition-colors">Guia de Farm: Vale dos Ancestrais (Solo)</div>
+</div>
+<div class="font-code-sm text-code-sm text-outline font-mono">2024-05-12 // 12:45:12</div>
+</div>
+<div class="bg-surface hover:bg-surface-container-high transition-colors p-4 flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-6">
+<div class="flex gap-1">
+<div class="w-2 h-2 rounded-full bg-rarity-immortal"></div>
+<div class="w-2 h-2 rounded-full bg-rarity-immortal"></div>
+</div>
+<div class="font-code-sm text-code-sm uppercase text-on-surface group-hover:text-primary transition-colors">Discussão: Buff no cajado de Arcana?</div>
+</div>
+<div class="font-code-sm text-code-sm text-outline font-mono">2024-05-11 // 23:10:55</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Right Sidebar -->
+<aside class="hidden xl:flex flex-col w-80 p-gutter gap-8 border-l border-outline-variant">
+<!-- ESTATÍSTICAS DA COMUNIDADE -->
+<div class="bg-surface-container-highest border border-outline-variant p-4 terminal-glow">
+<div class="flex items-center gap-2 mb-4 border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined text-primary text-sm">query_stats</span>
+<h3 class="font-code-sm text-code-sm text-primary font-bold uppercase">ESTATÍSTICAS DA COMUNIDADE</h3>
+</div>
+<div class="space-y-4">
+<div>
+<div class="text-[28px] font-mono text-on-surface leading-none">12.4K</div>
+<div class="font-code-sm text-code-sm text-outline uppercase">CRIADORES_ATIVOS</div>
+</div>
+<div class="h-[1px] bg-outline-variant"></div>
+<div>
+<div class="text-[28px] font-mono text-on-surface leading-none">842K</div>
+<div class="font-code-sm text-code-sm text-outline uppercase">LISTAS_GERADAS</div>
+</div>
+<div class="h-[1px] bg-outline-variant"></div>
+<div class="bg-primary/5 p-2 border border-primary/20">
+<div class="font-code-sm text-[11px] text-primary/60 mb-1 uppercase">ESTADO DO SERVIDOR</div>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+<span class="font-code-sm text-code-sm text-green-500 uppercase">OPERACIONAL_100%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- SISTEMA DE RARIDADE -->
+<div class="bg-surface-container border border-outline-variant p-4">
+<div class="flex items-center gap-2 mb-4 border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined text-secondary text-sm">grade</span>
+<h3 class="font-code-sm text-code-sm text-secondary font-bold uppercase">SISTEMA DE RARIDADE</h3>
+</div>
+<ul class="space-y-3 font-code-sm text-code-sm">
+<li class="flex items-center gap-3">
+<div class="w-3 h-3 bg-rarity-uncommon"></div>
+<span class="text-rarity-uncommon">INCOMUM</span>
+</li>
+<li class="flex items-center gap-3">
+<div class="w-3 h-3 bg-rarity-rare"></div>
+<span class="text-rarity-rare">RARO</span>
+</li>
+<li class="flex items-center gap-3">
+<div class="w-3 h-3 bg-rarity-legendary"></div>
+<span class="text-rarity-legendary">LENDÁRIO</span>
+</li>
+<li class="flex items-center gap-3">
+<div class="w-3 h-3 bg-rarity-immortal"></div>
+<span class="text-rarity-immortal">IMORTAL</span>
+</li>
+<li class="flex items-center gap-3">
+<div class="w-3 h-3 bg-rarity-arcana"></div>
+<span class="text-rarity-arcana">ARCANA</span>
+</li>
+<li class="flex items-center gap-3">
+<div class="w-3 h-3 bg-rarity-divine"></div>
+<span class="text-rarity-divine">DIVINO</span>
+</li>
+</ul>
+</div>
+<!-- AD SPACE / RECRUITMENT -->
+<div class="mt-auto border-t border-outline-variant pt-6">
+<div class="bg-surface p-4 border border-outline-variant group relative overflow-hidden">
+<div class="relative z-10">
+<div class="font-code-sm text-[10px] text-primary mb-2 uppercase">RECRUTAMENTO_ABERTO</div>
+<p class="font-code-sm text-code-sm text-on-surface-variant mb-4">Procuramos moderadores para a wiki. Recompensa: Badge exclusivo 'SENTINELA'.</p>
+<a class="text-primary font-bold text-code-sm hover:underline uppercase" href="#">CANDIDATAR-SE &gt;&gt;</a>
+</div>
+<div class="absolute right-0 bottom-0 opacity-20 transform translate-x-4 translate-y-4 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform">
+<span class="material-symbols-outlined text-6xl">gavel</span>
+</div>
+</div>
+</div>
+</aside>
+</div>
+<!-- Footer -->
+<footer class="w-full py-8 px-margin flex flex-col items-center gap-4 mt-auto border-t border-outline-variant bg-surface-container-lowest">
+<div class="flex flex-wrap justify-center gap-6 font-code-sm text-code-sm uppercase text-on-surface-variant">
+<a class="hover:text-primary hover:glow transition-opacity duration-75" href="#">WIKI</a>
+<a class="hover:text-primary hover:glow transition-opacity duration-75" href="#">PATCH_NOTES</a>
+<a class="hover:text-primary hover:glow transition-opacity duration-75" href="#">DISCORD</a>
+<a class="hover:text-primary hover:glow transition-opacity duration-75" href="#">API_DOCS</a>
+<a class="hover:text-primary hover:glow transition-opacity duration-75" href="#">SUPPORT</a>
+</div>
+<div class="text-label-xs font-label-xs text-outline tracking-widest uppercase">
+            © 2024 TBH_TASKBAR_HERO // ENCRYPTED_PROTOCOL_ACTIVE
+        </div>
+<div class="mt-4 flex gap-4 text-outline-variant">
+<span class="material-symbols-outlined text-sm">security</span>
+<span class="material-symbols-outlined text-sm">vpn_key</span>
+<span class="material-symbols-outlined text-sm">fingerprint</span>
+</div>
+</footer>
+<script>
+        // Simple interactive effect for "CRT flicker" or UI response
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('mousedown', () => {
+                document.body.style.filter = 'brightness(1.5) contrast(1.2)';
+                setTimeout(() => {
+                    document.body.style.filter = '';
+                }, 50);
+            });
+        });
+
+        // Simulating some dynamic data loading for that terminal feel
+        window.addEventListener('load', () => {
+            console.log("TBH_UI_INITIALIZED: SESSION_ID_" + Math.random().toString(36).substring(7).toUpperCase());
+        });
+    </script>
+</body></html>

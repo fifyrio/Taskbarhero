@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TBH // TIER LIST WIKI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Space+Grotesk:wght@300;400;600;700&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error-container": "#93000a",
+                    "inverse-surface": "#ece1d3",
+                    "primary": "#f6b73c",
+                    "on-tertiary-container": "#005673",
+                    "secondary-container": "#54482d",
+                    "surface-container-low": "#120d06",
+                    "secondary-fixed-dim": "#d6c5a2",
+                    "on-primary-container": "#6a4900",
+                    "surface-variant": "#3a342b",
+                    "inverse-primary": "#7d5700",
+                    "surface-tint": "#fbbc40",
+                    "on-secondary": "#3a2f17",
+                    "secondary": "#d6c5a2",
+                    "secondary-fixed": "#f3e1bc",
+                    "primary-fixed": "#ffdeaa",
+                    "surface-container": "#1c1f27",
+                    "inverse-on-surface": "#362f26",
+                    "surface-bright": "#3f382f",
+                    "primary-container": "#f6b73c",
+                    "surface": "#14161b",
+                    "on-primary-fixed-variant": "#5f4100",
+                    "tertiary-fixed": "#c1e8ff",
+                    "tertiary-fixed-dim": "#73d1ff",
+                    "surface-dim": "#14161b",
+                    "outline-variant": "#323232",
+                    "on-secondary-container": "#c8b795",
+                    "on-primary": "#14161b",
+                    "on-surface-variant": "#d4c4ae",
+                    "on-secondary-fixed-variant": "#51452b",
+                    "error": "#ffb4ab",
+                    "tertiary": "#b6e5ff",
+                    "surface-container-high": "#2f2920",
+                    "on-tertiary": "#003548",
+                    "on-primary-fixed": "#271900",
+                    "tertiary-container": "#63ceff",
+                    "on-tertiary-fixed": "#001e2b",
+                    "surface-container-highest": "#3a342b",
+                    "background": "#14161b",
+                    "on-secondary-fixed": "#231a05",
+                    "outline": "#4a4a4a",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-lowest": "#0a0a0a",
+                    "on-error": "#690005",
+                    "on-tertiary-fixed-variant": "#004d67",
+                    "primary-fixed-dim": "#fbbc40",
+                    "on-background": "#ece1d3",
+                    "on-surface": "#ece1d3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0px",
+                    "lg": "0px",
+                    "xl": "0px",
+                    "full": "0px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "margin": "24px",
+                    "unit": "4px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "code-sm": ["JetBrains Mono"],
+                    "label-xs": ["JetBrains Mono"],
+                    "display-lg": ["Space Grotesk"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Space Grotesk"]
+            },
+            "fontSize": {
+                    "code-sm": ["13px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "label-xs": ["11px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["15px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        .scanline-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.05) 51%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 100;
+        }
+        .flicker {
+            animation: flicker-anim 0.05s infinite alternate;
+        }
+        @keyframes flicker-anim {
+            0% { opacity: 0.98; }
+            100% { opacity: 1; }
+        }
+        .terminal-glow {
+            box-shadow: 0 0 12px rgba(246, 183, 60, 0.15);
+        }
+        .hover-lift:hover {
+            box-shadow: inset 0 0 20px rgba(246, 183, 60, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* Rarity System */
+        .rarity-uncommon { color: #54fc0c; border-color: #54fc0c; box-shadow: 0 0 5px rgba(84, 252, 12, 0.3); }
+        .rarity-rare { color: #2f8bfc; border-color: #2f8bfc; box-shadow: 0 0 5px rgba(47, 139, 252, 0.3); }
+        .rarity-legendary { color: #fc9c0c; border-color: #fc9c0c; box-shadow: 0 0 5px rgba(252, 156, 12, 0.3); }
+        .rarity-immortal { color: #fc2424; border-color: #fc2424; box-shadow: 0 0 5px rgba(252, 36, 36, 0.3); }
+        .rarity-arcana { color: #b40cfc; border-color: #b40cfc; box-shadow: 0 0 5px rgba(180, 12, 252, 0.3); }
+        .rarity-divine { color: #fce454; border-color: #fce454; box-shadow: 0 0 5px rgba(252, 228, 84, 0.3); }
+
+        .bg-uncommon { background-color: #54fc0c; }
+        .bg-rare { background-color: #2f8bfc; }
+        .bg-legendary { background-color: #fc9c0c; }
+        .bg-immortal { background-color: #fc2424; }
+        .bg-arcana { background-color: #b40cfc; }
+        .bg-divine { background-color: #fce454; }
+
+        .tier-s { background: #fc2424; color: #000; }
+        .tier-a { background: #fc9c0c; color: #000; }
+        .tier-b { background: #fce454; color: #000; }
+        .tier-c { background: #54fc0c; color: #000; }
+
+        .ticker-wrap {
+            overflow: hidden;
+            width: 100%;
+        }
+        .ticker {
+            display: inline-block;
+            white-space: nowrap;
+            padding-right: 100%;
+            animation: ticker 40s linear infinite;
+        }
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+
+        body {
+            background-color: #14161b;
+            color: #ece1d3;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .font-mono-tbh { font-family: 'JetBrains Mono', monospace; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="flicker">
+<div class="scanline-overlay"></div>
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-gutter h-16 sticky top-0 z-50 border-b border-outline-variant bg-surface/90 backdrop-blur-md">
+<div class="flex items-center gap-8">
+<div class="font-display-lg text-3xl font-black text-primary drop-shadow-[0_0_8px_rgba(246,183,60,0.4)]">TBH</div>
+<nav class="hidden md:flex gap-6 font-code-sm text-code-sm uppercase tracking-wider">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">GEAR</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">STAGES</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">RUNES</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">HEROES</a>
+<a class="text-primary border-b border-primary pb-1" href="#">MARKET</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">TOOLS</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline text-sm">search</span>
+<input class="bg-surface-container border border-outline-variant py-1.5 pl-10 pr-4 text-code-sm font-code-sm focus:ring-1 focus:ring-primary focus:border-primary w-64 uppercase" placeholder="TERMINAL_SEARCH..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary font-code-sm text-code-sm px-4 py-2 hover:bg-white transition-all flex items-center gap-2">
+            IMPORT SAVE
+        </button>
+<div class="flex items-center gap-2 text-outline">
+<span class="material-symbols-outlined hover:text-primary cursor-pointer p-1">language</span>
+<span class="material-symbols-outlined hover:text-primary cursor-pointer p-1">settings</span>
+<span class="material-symbols-outlined hover:text-primary cursor-pointer p-1">account_circle</span>
+</div>
+</div>
+</header>
+<div class="flex max-w-container-max mx-auto min-h-screen relative">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 bottom-0 hidden md:flex flex-col p-4 z-40 border-r border-outline-variant bg-surface-container-lowest w-64">
+<div class="mb-8 p-3 border-l-2 border-primary bg-primary/5">
+<div class="font-headline-md text-lg text-primary font-bold">TBH: COMMAND</div>
+<div class="font-code-sm text-xs text-secondary opacity-70">DATABASE_V1.0.4</div>
+</div>
+<nav class="flex flex-col gap-1 flex-grow font-mono-tbh">
+<a class="flex items-center gap-3 p-3 text-xs font-bold uppercase hover:bg-surface-variant text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-lg">shield</span> GEAR
+            </a>
+<a class="flex items-center gap-3 p-3 text-xs font-bold uppercase hover:bg-surface-variant text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-lg">group</span> HEROES
+            </a>
+<a class="flex items-center gap-3 p-3 text-xs font-bold uppercase bg-primary text-on-primary" href="#">
+<span class="material-symbols-outlined text-lg">diamond</span> RUNES
+            </a>
+<a class="flex items-center gap-3 p-3 text-xs font-bold uppercase hover:bg-surface-variant text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-lg">storefront</span> MARKET
+            </a>
+<a class="flex items-center gap-3 p-3 text-xs font-bold uppercase hover:bg-surface-variant text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-lg">construction</span> TOOLS
+            </a>
+</nav>
+<button class="mt-4 p-4 border border-primary text-primary font-mono-tbh text-xs hover:bg-primary/10 transition-all uppercase tracking-widest text-center">
+            DEPLOY MISSION
+        </button>
+<div class="mt-8 pt-4 border-t border-outline-variant">
+<div class="flex items-center gap-2 p-2 font-mono-tbh text-xs text-outline hover:text-primary cursor-pointer">
+<span class="material-symbols-outlined text-sm">logout</span> LOGOUT
+            </div>
+<div class="flex items-center gap-2 p-2 font-mono-tbh text-xs text-outline hover:text-primary cursor-pointer">
+<span class="material-symbols-outlined text-sm">terminal</span> SYSTEM
+            </div>
+</div>
+</aside>
+<!-- Main Feed -->
+<main class="ml-0 md:ml-64 flex-grow p-gutter border-r border-outline-variant">
+<!-- Hero -->
+<section class="mb-10 border border-outline-variant p-10 bg-surface-container-low relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 font-mono-tbh text-[10px] text-primary opacity-40">// AUTHENTICATED_SESSION_OK</div>
+<div class="relative z-10 max-w-xl">
+<h1 class="font-display-lg text-5xl text-primary uppercase mb-4 tracking-tighter">TIER LIST WIKI</h1>
+<p class="font-body-md text-on-surface-variant mb-8">
+                    Explore, analise e colabore com a comunidade para definir o meta atual do TBH. Otimize seus equipamentos e domine as fendas temporais.
+                </p>
+<div class="flex gap-4">
+<button class="bg-primary text-on-primary font-mono-tbh text-sm px-8 py-4 font-bold uppercase hover:brightness-110">CRIAR TIER LIST</button>
+<button class="border border-outline text-on-surface font-mono-tbh text-sm px-8 py-4 font-bold uppercase hover:bg-surface-variant">EXPLORAR RANKINGS</button>
+</div>
+</div>
+<div class="absolute right-0 bottom-0 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-[240px]">monitoring</span>
+</div>
+</section>
+<!-- Category Chips -->
+<div class="flex gap-2 mb-12 overflow-x-auto pb-4 no-scrollbar">
+<button class="px-5 py-1.5 bg-primary/10 border border-primary text-primary font-mono-tbh text-xs uppercase">TODOS</button>
+<button class="px-5 py-1.5 border border-outline-variant text-on-surface-variant font-mono-tbh text-xs uppercase hover:border-primary">TANKS</button>
+<button class="px-5 py-1.5 border border-outline-variant text-on-surface-variant font-mono-tbh text-xs uppercase hover:border-primary">SUPORTES</button>
+<button class="px-5 py-1.5 border border-outline-variant text-on-surface-variant font-mono-tbh text-xs uppercase hover:border-primary">DPS_FÍSICO</button>
+<button class="px-5 py-1.5 border border-outline-variant text-on-surface-variant font-mono-tbh text-xs uppercase hover:border-primary">DPS_MÁGICO</button>
+<button class="px-5 py-1.5 border border-outline-variant text-on-surface-variant font-mono-tbh text-xs uppercase hover:border-primary">EQUIPAMENTO_S</button>
+</div>
+<!-- EM TENDÊNCIA -->
+<section class="mb-16">
+<div class="flex items-center gap-4 mb-6">
+<h2 class="font-headline-md text-xl text-on-surface font-bold uppercase tracking-widest">EM TENDÊNCIA</h2>
+<div class="h-[1px] flex-grow bg-outline-variant"></div>
+<span class="font-mono-tbh text-xs text-primary">LIVE_FEED.SYS</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[180px]">
+<div class="md:col-span-2 md:row-span-2 bg-surface-container border border-outline-variant p-5 hover-lift transition-all relative group">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-headline-md text-2xl text-primary leading-tight group-hover:underline">META PVP SEASON 4: THE VOID RISES</h3>
+<div class="flex items-center gap-2 mt-2 font-mono-tbh text-[10px] text-outline uppercase">
+<div class="w-5 h-5 bg-primary/20 rounded-full flex items-center justify-center">X</div>
+                                OPERADOR_X99 <span class="mx-1">/</span> 2H ATRÁS
+                            </div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="bg-primary/20 text-primary px-2 py-0.5 text-[9px] font-bold">HOT</span>
+<div class="flex items-center gap-2 text-outline text-[10px]">
+<span class="material-symbols-outlined text-xs">thumb_up</span> 1.2k
+                                <span class="material-symbols-outlined text-xs">forum</span> 42
+                            </div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 flex items-center justify-center font-bold text-lg tier-s font-mono-tbh">S</div>
+<div class="flex gap-2">
+<div class="w-12 h-12 border-2 rarity-divine bg-surface-container-lowest"></div>
+<div class="w-12 h-12 border-2 rarity-arcana bg-surface-container-lowest"></div>
+<div class="w-12 h-12 border-2 rarity-legendary bg-surface-container-lowest"></div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 flex items-center justify-center font-bold text-lg tier-a font-mono-tbh">A</div>
+<div class="flex gap-2">
+<div class="w-12 h-12 border-2 rarity-immortal bg-surface-container-lowest"></div>
+<div class="w-12 h-12 border-2 rarity-rare bg-surface-container-lowest"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="md:col-span-2 bg-surface-container border border-outline-variant p-4 hover-lift transition-all group">
+<div class="flex justify-between mb-3">
+<h4 class="font-headline-md text-lg text-on-surface group-hover:text-primary font-mono-tbh">FAST_LEVEL_RUNES</h4>
+<div class="text-[10px] text-outline flex items-center gap-1 font-mono-tbh"><span class="material-symbols-outlined text-xs">thumb_up</span> 842</div>
+</div>
+<div class="flex items-center gap-3 font-mono-tbh">
+<div class="w-8 h-8 flex items-center justify-center font-bold text-sm tier-s">S</div>
+<div class="flex gap-1">
+<div class="w-8 h-8 border rarity-arcana bg-black/40"></div>
+<div class="w-8 h-8 border rarity-divine bg-black/40"></div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-4 hover-lift transition-all group">
+<h4 class="font-headline-md text-sm text-on-surface mb-3 truncate group-hover:text-primary font-mono-tbh">CORE_DPS_BUILD</h4>
+<div class="flex items-center gap-2 font-mono-tbh">
+<div class="w-6 h-6 flex items-center justify-center font-bold text-xs tier-a">A</div>
+<div class="w-8 h-8 border rarity-legendary bg-black/20"></div>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-4 hover-lift transition-all group">
+<h4 class="font-headline-md text-sm text-on-surface mb-3 truncate group-hover:text-primary font-mono-tbh">TANK_STAMINA_V2</h4>
+<div class="flex items-center gap-2 font-mono-tbh">
+<div class="w-6 h-6 flex items-center justify-center font-bold text-xs tier-b">B</div>
+<div class="w-8 h-8 border rarity-rare bg-black/20"></div>
+</div>
+</div>
+<div class="md:col-span-2 bg-surface-container border border-outline-variant p-4 hover-lift transition-all group">
+<div class="flex justify-between mb-3">
+<h4 class="font-headline-md text-lg text-on-surface group-hover:text-primary font-mono-tbh">FARM_VALLEY_META</h4>
+<div class="text-[10px] text-outline font-mono-tbh">BY: GRINDER_PRO</div>
+</div>
+<div class="flex gap-2 font-mono-tbh">
+<div class="w-8 h-8 flex items-center justify-center font-bold text-sm tier-s">S</div>
+<div class="w-10 h-10 border rarity-immortal"></div>
+<div class="w-10 h-10 border rarity-immortal"></div>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-4 hover-lift transition-all group">
+<h4 class="font-headline-md text-sm text-on-surface mb-3 group-hover:text-primary font-mono-tbh">AFK_DUNGEON</h4>
+<div class="flex items-center gap-2 font-mono-tbh">
+<div class="w-6 h-6 flex items-center justify-center font-bold text-xs tier-c">C</div>
+<div class="w-8 h-8 border rarity-uncommon"></div>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-4 hover-lift transition-all group">
+<h4 class="font-headline-md text-sm text-on-surface mb-3 group-hover:text-primary font-mono-tbh">MAGIC_BURST</h4>
+<div class="flex items-center gap-2 font-mono-tbh">
+<div class="w-6 h-6 flex items-center justify-center font-bold text-xs tier-s">S</div>
+<div class="w-8 h-8 border rarity-arcana"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- MELHORES DA SEMANA -->
+<section class="mb-16">
+<div class="flex items-center gap-4 mb-6">
+<h2 class="font-headline-md text-xl text-on-surface font-bold uppercase tracking-widest">MELHORES DA SEMANA</h2>
+<div class="h-[1px] flex-grow bg-outline-variant"></div>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
+<div class="flex-shrink-0 w-64 bg-surface-container-low border border-primary/30 p-4 relative overflow-hidden group hover:border-primary">
+<div class="absolute -right-2 -top-4 font-display-lg text-7xl text-primary/10 select-none italic">#1</div>
+<div class="relative z-10">
+<div class="text-primary font-mono-tbh text-[10px] mb-1">98% UPVOTED</div>
+<h4 class="font-headline-md text-base text-on-surface mb-4">ABYSS WALKER BUILD</h4>
+<div class="flex gap-1">
+<div class="w-8 h-8 border rarity-divine bg-black/40"></div>
+<div class="w-8 h-8 border rarity-divine bg-black/40"></div>
+<div class="w-8 h-8 border rarity-arcana bg-black/40"></div>
+</div>
+</div>
+</div>
+<div class="flex-shrink-0 w-64 bg-surface-container-lowest border border-outline-variant p-4 relative group hover:border-primary">
+<div class="absolute -right-2 -top-4 font-display-lg text-7xl text-outline/10 italic">#2</div>
+<div class="relative z-10">
+<div class="text-outline font-mono-tbh text-[10px] mb-1">94% UPVOTED</div>
+<h4 class="font-headline-md text-base text-on-surface mb-4">DRAGON SLAYER V5</h4>
+<div class="flex gap-1">
+<div class="w-8 h-8 border rarity-immortal bg-black/40"></div>
+<div class="w-8 h-8 border rarity-legendary bg-black/40"></div>
+</div>
+</div>
+</div>
+<div class="flex-shrink-0 w-64 bg-surface-container-lowest border border-outline-variant p-4 relative group hover:border-primary">
+<div class="absolute -right-2 -top-4 font-display-lg text-7xl text-outline/10 italic">#3</div>
+<div class="relative z-10">
+<div class="text-outline font-mono-tbh text-[10px] mb-1">89% UPVOTED</div>
+<h4 class="font-headline-md text-base text-on-surface mb-4">ENDLESS GOLD GUIDE</h4>
+<div class="flex gap-1">
+<div class="w-8 h-8 border rarity-rare bg-black/40"></div>
+</div>
+</div>
+</div>
+<div class="flex-shrink-0 w-64 bg-surface-container-lowest border border-outline-variant p-4 relative group hover:border-primary">
+<div class="absolute -right-2 -top-4 font-display-lg text-7xl text-outline/10 italic">#4</div>
+<div class="relative z-10">
+<div class="text-outline font-mono-tbh text-[10px] mb-1">85% UPVOTED</div>
+<h4 class="font-headline-md text-base text-on-surface mb-4">S-RANK RUNES 1.4</h4>
+<div class="flex gap-1">
+<div class="w-8 h-8 border rarity-arcana bg-black/40"></div>
+</div>
+</div>
+</div>
+<div class="flex-shrink-0 w-64 bg-surface-container-lowest border border-outline-variant p-4 relative group hover:border-primary">
+<div class="absolute -right-2 -top-4 font-display-lg text-7xl text-outline/10 italic">#5</div>
+<div class="relative z-10">
+<div class="text-outline font-mono-tbh text-[10px] mb-1">81% UPVOTED</div>
+<h4 class="font-headline-md text-base text-on-surface mb-4">STARTER SET META</h4>
+<div class="flex gap-1">
+<div class="w-8 h-8 border rarity-uncommon bg-black/40"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- PUBLICAÇÕES RECENTES -->
+<section class="mb-16">
+<div class="flex items-center gap-4 mb-6">
+<h2 class="font-headline-md text-xl text-on-surface font-bold uppercase tracking-widest">PUBLICAÇÕES RECENTES</h2>
+<div class="h-[1px] flex-grow bg-outline-variant"></div>
+</div>
+<div class="bg-outline-variant space-y-[1px] font-mono-tbh text-[11px] uppercase">
+<div class="bg-surface p-3 flex items-center justify-between group hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="flex gap-1">
+<div class="w-2 h-2 rounded-full bg-arcana"></div>
+<div class="w-2 h-2 rounded-full bg-divine"></div>
+</div>
+<span class="bg-primary/20 text-primary px-1.5 py-0.5 text-[9px] font-bold font-mono-tbh">TIER_S</span>
+<span class="text-on-surface group-hover:text-primary">Melhores Builds para Invocador das Sombras [Patch 1.0.4]</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-primary">BY: SHADOW_LORD</span>
+<span class="text-outline">2024-05-12 // 14:22:05</span>
+<span class="text-on-surface w-12 text-right">+412</span>
+</div>
+</div>
+<div class="bg-surface p-3 flex items-center justify-between group hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="flex gap-1"><div class="w-2 h-2 rounded-full bg-rare"></div></div>
+<span class="bg-surface-variant text-outline px-1.5 py-0.5 text-[9px] font-bold font-mono-tbh">TIER_B</span>
+<span class="text-on-surface group-hover:text-primary">Guia de Farm: Vale dos Ancestrais (Solo)</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-primary">BY: FARMER_BOT</span>
+<span class="text-outline">2024-05-12 // 13:45:12</span>
+<span class="text-on-surface w-12 text-right">+281</span>
+</div>
+</div>
+<div class="bg-surface p-3 flex items-center justify-between group hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="flex gap-1"><div class="w-2 h-2 rounded-full bg-legendary"></div></div>
+<span class="bg-primary/20 text-primary px-1.5 py-0.5 text-[9px] font-bold font-mono-tbh">TIER_A</span>
+<span class="text-on-surface group-hover:text-primary">COMO DERROTAR O BOSS 'TASKMASTER'</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-primary">BY: RAID_LEADER</span>
+<span class="text-outline">2024-05-12 // 12:10:00</span>
+<span class="text-on-surface w-12 text-right">+156</span>
+</div>
+</div>
+<div class="bg-surface p-3 flex items-center justify-between group hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="flex gap-1"><div class="w-2 h-2 rounded-full bg-immortal"></div></div>
+<span class="bg-primary/20 text-primary px-1.5 py-0.5 text-[9px] font-bold font-mono-tbh">TIER_S</span>
+<span class="text-on-surface group-hover:text-primary">DISCUSSÃO: BUFF NO CAJADO DE ARCANA?</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-primary">BY: DATA_MINER</span>
+<span class="text-outline">2024-05-12 // 11:05:32</span>
+<span class="text-on-surface w-12 text-right">+89</span>
+</div>
+</div>
+<div class="bg-surface p-3 flex items-center justify-between group hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="flex gap-1"><div class="w-2 h-2 rounded-full bg-uncommon"></div></div>
+<span class="bg-surface-variant text-outline px-1.5 py-0.5 text-[9px] font-bold font-mono-tbh">TIER_C</span>
+<span class="text-on-surface group-hover:text-primary">NEWBIE EQUIPMENT PROGRESSION</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-primary">BY: GUIDE_MASTER</span>
+<span class="text-outline">2024-05-12 // 09:44:21</span>
+<span class="text-on-surface w-12 text-right">+2.1k</span>
+</div>
+</div>
+</div>
+</section>
+<!-- FERRAMENTAS -->
+<section class="mb-16">
+<div class="flex items-center gap-4 mb-6">
+<h2 class="font-headline-md text-xl text-on-surface font-bold uppercase tracking-widest">FERRAMENTAS</h2>
+<div class="h-[1px] flex-grow bg-outline-variant"></div>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+<div class="bg-surface-container border border-outline-variant p-5 hover:border-primary transition-colors cursor-pointer flex items-center gap-4 group">
+<div class="w-10 h-10 border border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary/10">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<div>
+<div class="font-mono-tbh text-xs text-on-surface uppercase">Farming Optimizer</div>
+<div class="text-[9px] text-outline font-mono-tbh">ROI_CALC_V2</div>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-5 hover:border-primary transition-colors cursor-pointer flex items-center gap-4 group">
+<div class="w-10 h-10 border border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary/10">
+<span class="material-symbols-outlined">search_check</span>
+</div>
+<div>
+<div class="font-mono-tbh text-xs text-on-surface uppercase">BiS Finder</div>
+<div class="text-[9px] text-outline font-mono-tbh">BEST_IN_SLOT</div>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-5 hover:border-primary transition-colors cursor-pointer flex items-center gap-4 group">
+<div class="w-10 h-10 border border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary/10">
+<span class="material-symbols-outlined">calculate</span>
+</div>
+<div>
+<div class="font-mono-tbh text-xs text-on-surface uppercase">Damage Calculator</div>
+<div class="text-[9px] text-outline font-mono-tbh">DPS_SIM_PRO</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 1. MERCADO — MARKET Live Ticker -->
+<section class="mb-16 w-full overflow-hidden">
+<div class="flex items-center gap-4 mb-6">
+<h2 class="font-headline-md text-xl text-on-surface font-bold uppercase tracking-widest">MERCADO — MARKET</h2>
+<div class="h-[1px] flex-grow bg-outline-variant"></div>
+<span class="font-mono-tbh text-xs text-primary animate-pulse">LIVE_PRICES</span>
+</div>
+<div class="ticker-wrap bg-surface-container-lowest py-4 border-y border-outline-variant">
+<div class="ticker flex gap-8">
+<div class="inline-flex items-center gap-3 px-4 py-2 bg-surface-container border-2 rarity-divine">
+<div class="w-6 h-6 bg-divine/20 flex items-center justify-center"><span class="material-symbols-outlined text-sm">diamond</span></div>
+<div class="flex flex-col">
+<span class="text-[10px] font-bold">ARCANE CRYSTAL</span>
+<span class="font-mono-tbh text-xs">42.5K <span class="text-green-500">▲ 2.4%</span></span>
+</div>
+</div>
+<div class="inline-flex items-center gap-3 px-4 py-2 bg-surface-container border-2 rarity-legendary">
+<div class="w-6 h-6 bg-legendary/20 flex items-center justify-center"><span class="material-symbols-outlined text-sm">skull</span></div>
+<div class="flex flex-col">
+<span class="text-[10px] font-bold">DRAGON BONE</span>
+<span class="font-mono-tbh text-xs">14.2K <span class="text-red-500">▼ 0.8%</span></span>
+</div>
+</div>
+<div class="inline-flex items-center gap-3 px-4 py-2 bg-surface-container border-2 rarity-immortal">
+<div class="w-6 h-6 bg-immortal/20 flex items-center justify-center"><span class="material-symbols-outlined text-sm">bloodtype</span></div>
+<div class="flex flex-col">
+<span class="text-[10px] font-bold">VOID ESSENCE</span>
+<span class="font-mono-tbh text-xs">8.9K <span class="text-green-500">▲ 11%</span></span>
+</div>
+</div>
+<div class="inline-flex items-center gap-3 px-4 py-2 bg-surface-container border-2 rarity-arcana">
+<div class="w-6 h-6 bg-arcana/20 flex items-center justify-center"><span class="material-symbols-outlined text-sm">auto_awesome</span></div>
+<div class="flex flex-col">
+<span class="text-[10px] font-bold">STAR SHARD</span>
+<span class="font-mono-tbh text-xs">124K <span class="text-green-500">▲ 0.2%</span></span>
+</div>
+</div>
+<div class="inline-flex items-center gap-3 px-4 py-2 bg-surface-container border-2 rarity-rare">
+<div class="w-6 h-6 bg-rare/20 flex items-center justify-center"><span class="material-symbols-outlined text-sm">water_drop</span></div>
+<div class="flex flex-col">
+<span class="text-[10px] font-bold">MANA POTION XL</span>
+<span class="font-mono-tbh text-xs">450 <span class="text-red-500">▼ 1.5%</span></span>
+</div>
+</div>
+<div class="inline-flex items-center gap-3 px-4 py-2 bg-surface-container border-2 rarity-uncommon">
+<div class="w-6 h-6 bg-uncommon/20 flex items-center justify-center"><span class="material-symbols-outlined text-sm">hardware</span></div>
+<div class="flex flex-col">
+<span class="text-[10px] font-bold">IRON INGOT</span>
+<span class="font-mono-tbh text-xs">12 <span class="text-outline">-- 0.0%</span></span>
+</div>
+</div>
+<div class="inline-flex items-center gap-3 px-4 py-2 bg-surface-container border-2 rarity-divine">
+<div class="w-6 h-6 bg-divine/20 flex items-center justify-center"><span class="material-symbols-outlined text-sm">token</span></div>
+<div class="flex flex-col">
+<span class="text-[10px] font-bold">DIVINE TOKEN</span>
+<span class="font-mono-tbh text-xs">1.2M <span class="text-green-500">▲ 5.6%</span></span>
+</div>
+</div>
+<div class="inline-flex items-center gap-3 px-4 py-2 bg-surface-container border-2 rarity-legendary">
+<div class="w-6 h-6 bg-legendary/20 flex items-center justify-center"><span class="material-symbols-outlined text-sm">flare</span></div>
+<div class="flex flex-col">
+<span class="text-[10px] font-bold">SUN CRYSTAL</span>
+<span class="font-mono-tbh text-xs">88K <span class="text-red-500">▼ 4.1%</span></span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. CATEGORIAS DA DATABASE -->
+<section class="mb-16">
+<div class="flex items-center gap-4 mb-6">
+<h2 class="font-headline-md text-xl text-on-surface font-bold uppercase tracking-widest">CATEGORIAS DA DATABASE</h2>
+<div class="h-[1px] flex-grow bg-outline-variant"></div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-5 gap-px bg-outline-variant border border-outline-variant">
+<div class="bg-surface-container p-6 flex flex-col items-center justify-center group hover:bg-primary/5 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-3xl mb-3 text-outline group-hover:text-primary">shield</span>
+<span class="font-mono-tbh text-[10px] uppercase tracking-widest">GEAR</span>
+<span class="font-mono-tbh text-[9px] text-outline">1,240 ITEMS</span>
+</div>
+<div class="bg-surface-container p-6 flex flex-col items-center justify-center group hover:bg-primary/5 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-3xl mb-3 text-outline group-hover:text-primary">category</span>
+<span class="font-mono-tbh text-[10px] uppercase tracking-widest">MATERIALS</span>
+<span class="font-mono-tbh text-[9px] text-outline">4.8K ITEMS</span>
+</div>
+<div class="bg-surface-container p-6 flex flex-col items-center justify-center group hover:bg-primary/5 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-3xl mb-3 text-outline group-hover:text-primary">map</span>
+<span class="font-mono-tbh text-[10px] uppercase tracking-widest">STAGES</span>
+<span class="font-mono-tbh text-[9px] text-outline">84 AREAS</span>
+</div>
+<div class="bg-surface-container p-6 flex flex-col items-center justify-center group hover:bg-primary/5 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-3xl mb-3 text-outline group-hover:text-primary">pest_control_rodent</span>
+<span class="font-mono-tbh text-[10px] uppercase tracking-widest">MONSTERS</span>
+<span class="font-mono-tbh text-[9px] text-outline">312 ENTITIES</span>
+</div>
+<div class="bg-surface-container p-6 flex flex-col items-center justify-center group hover:bg-primary/5 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-3xl mb-3 text-outline group-hover:text-primary">diamond</span>
+<span class="font-mono-tbh text-[10px] uppercase tracking-widest">RUNES</span>
+<span class="font-mono-tbh text-[9px] text-outline">156 TYPES</span>
+</div>
+<div class="bg-surface-container p-6 flex flex-col items-center justify-center group hover:bg-primary/5 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-3xl mb-3 text-outline group-hover:text-primary">bolt</span>
+<span class="font-mono-tbh text-[10px] uppercase tracking-widest">BUFFS</span>
+<span class="font-mono-tbh text-[9px] text-outline">92 EFFECTS</span>
+</div>
+<div class="bg-surface-container p-6 flex flex-col items-center justify-center group hover:bg-primary/5 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-3xl mb-3 text-outline group-hover:text-primary">person</span>
+<span class="font-mono-tbh text-[10px] uppercase tracking-widest">HEROES</span>
+<span class="font-mono-tbh text-[9px] text-outline">24 CLASSES</span>
+</div>
+<div class="bg-surface-container p-6 flex flex-col items-center justify-center group hover:bg-primary/5 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-3xl mb-3 text-outline group-hover:text-primary">pets</span>
+<span class="font-mono-tbh text-[10px] uppercase tracking-widest">PETS</span>
+<span class="font-mono-tbh text-[9px] text-outline">12 COMPANIONS</span>
+</div>
+<div class="bg-surface-container p-6 flex flex-col items-center justify-center group hover:bg-primary/5 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-3xl mb-3 text-outline group-hover:text-primary">view_in_ar</span>
+<span class="font-mono-tbh text-[10px] uppercase tracking-widest">CUBE</span>
+<span class="font-mono-tbh text-[9px] text-outline">UPGRADE_SIM</span>
+</div>
+<div class="bg-surface-container p-6 flex flex-col items-center justify-center group hover:bg-primary/5 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-3xl mb-3 text-outline group-hover:text-primary">experiment</span>
+<span class="font-mono-tbh text-[10px] uppercase tracking-widest">ALCHEMY</span>
+<span class="font-mono-tbh text-[9px] text-outline">64 RECIPES</span>
+</div>
+</div>
+</section>
+<!-- 3. CRIADORES EM DESTAQUE -->
+<section class="mb-16">
+<div class="flex items-center gap-4 mb-6">
+<h2 class="font-headline-md text-xl text-on-surface font-bold uppercase tracking-widest">CRIADORES EM DESTAQUE</h2>
+<div class="h-[1px] flex-grow bg-outline-variant"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+<div class="bg-surface-container border border-outline-variant p-4 text-center group hover-lift transition-all">
+<div class="w-16 h-16 mx-auto bg-primary/20 flex items-center justify-center border-2 border-primary mb-3">
+<span class="material-symbols-outlined text-primary text-3xl">smart_toy</span>
+</div>
+<div class="font-mono-tbh text-xs font-bold text-primary mb-1 uppercase">X_CODE_X</div>
+<div class="text-[9px] text-outline font-mono-tbh uppercase">124 TIER_LISTS</div>
+<div class="text-[9px] text-primary font-mono-tbh mt-2">12.4K FOLLOWERS</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-4 text-center group hover-lift transition-all">
+<div class="w-16 h-16 mx-auto bg-surface-variant flex items-center justify-center border border-outline mb-3">
+<span class="material-symbols-outlined text-outline text-3xl">person_outline</span>
+</div>
+<div class="font-mono-tbh text-xs font-bold text-on-surface mb-1 uppercase">SHADOW_LORD</div>
+<div class="text-[9px] text-outline font-mono-tbh uppercase">82 TIER_LISTS</div>
+<div class="text-[9px] text-primary font-mono-tbh mt-2">8.1K FOLLOWERS</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-4 text-center group hover-lift transition-all">
+<div class="w-16 h-16 mx-auto bg-arcana/10 flex items-center justify-center border-2 rarity-arcana mb-3">
+<span class="material-symbols-outlined text-arcana text-3xl">psychology</span>
+</div>
+<div class="font-mono-tbh text-xs font-bold text-arcana mb-1 uppercase">DATA_MINER</div>
+<div class="text-[9px] text-outline font-mono-tbh uppercase">56 TIER_LISTS</div>
+<div class="text-[9px] text-primary font-mono-tbh mt-2">5.2K FOLLOWERS</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-4 text-center group hover-lift transition-all">
+<div class="w-16 h-16 mx-auto bg-immortal/10 flex items-center justify-center border-2 rarity-immortal mb-3">
+<span class="material-symbols-outlined text-immortal text-3xl">shield_moon</span>
+</div>
+<div class="font-mono-tbh text-xs font-bold text-immortal mb-1 uppercase">RAID_LEADER</div>
+<div class="text-[9px] text-outline font-mono-tbh uppercase">41 TIER_LISTS</div>
+<div class="text-[9px] text-primary font-mono-tbh mt-2">4.8K FOLLOWERS</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-4 text-center group hover-lift transition-all">
+<div class="w-16 h-16 mx-auto bg-divine/10 flex items-center justify-center border-2 rarity-divine mb-3">
+<span class="material-symbols-outlined text-divine text-3xl">star</span>
+</div>
+<div class="font-mono-tbh text-xs font-bold text-divine mb-1 uppercase">GRINDER_PRO</div>
+<div class="text-[9px] text-outline font-mono-tbh uppercase">104 TIER_LISTS</div>
+<div class="text-[9px] text-primary font-mono-tbh mt-2">2.4K FOLLOWERS</div>
+</div>
+</div>
+</section>
+<!-- 4. ENVIE SUA TIER LIST Banner -->
+<section class="mb-24">
+<div class="bg-surface-container-high border-2 border-primary/50 p-8 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(246,183,60,0.1),transparent)] pointer-events-none"></div>
+<div class="relative z-10 text-center md:text-left">
+<h2 class="font-display-lg text-3xl text-primary mb-2 uppercase tracking-tight">ENVIE SUA TIER LIST</h2>
+<p class="font-body-md text-on-surface-variant max-w-md">Compartilhe seu conhecimento estratégico com milhares de jogadores e ganhe o selo de 'ESTRATEGIISTA_X' na comunidade.</p>
+</div>
+<button class="relative z-10 bg-primary text-on-primary font-mono-tbh text-base px-10 py-5 font-bold uppercase hover:scale-105 transition-transform shadow-[0_0_20px_rgba(246,183,60,0.3)]">
+        PUBLICAR_AGORA.EXE
+    </button>
+</div>
+</section>
+</main>
+<!-- Right Sidebar -->
+<aside class="hidden xl:flex flex-col w-80 p-gutter gap-8 border-l border-outline-variant">
+<div class="bg-surface-container border border-outline-variant p-4 terminal-glow">
+<div class="flex items-center gap-2 mb-4 border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined text-primary text-sm">query_stats</span>
+<h3 class="font-mono-tbh text-xs text-primary font-bold uppercase">ESTATÍSTICAS DA COMUNIDADE</h3>
+</div>
+<div class="space-y-4">
+<div>
+<div class="text-3xl font-mono-tbh text-on-surface leading-none">12.4K</div>
+<div class="font-mono-tbh text-[10px] text-outline uppercase mt-1">CRIADORES_ATIVOS</div>
+</div>
+<div class="h-[1px] bg-outline-variant"></div>
+<div>
+<div class="text-3xl font-mono-tbh text-on-surface leading-none">842K</div>
+<div class="font-mono-tbh text-[10px] text-outline uppercase mt-1">LISTAS_GERADAS</div>
+</div>
+<div class="h-[1px] bg-outline-variant"></div>
+<div class="bg-primary/5 p-3 border border-primary/20">
+<div class="font-mono-tbh text-[10px] text-primary/60 mb-1 uppercase tracking-tighter">ESTADO DO SERVIDOR</div>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+<span class="font-mono-tbh text-xs text-green-500 uppercase">OPERACIONAL_100%</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-4">
+<div class="flex items-center gap-2 mb-4 border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined text-secondary text-sm">grade</span>
+<h3 class="font-mono-tbh text-xs text-secondary font-bold uppercase">SISTEMA DE RARIDADE</h3>
+</div>
+<ul class="space-y-3 font-mono-tbh text-xs">
+<li class="flex items-center gap-3">
+<div class="w-3 h-3 bg-uncommon"></div>
+<span class="text-rarity-uncommon font-bold">INCOMUM</span>
+</li>
+<li class="flex items-center gap-3">
+<div class="w-3 h-3 bg-rare"></div>
+<span class="text-rarity-rare font-bold">RARO</span>
+</li>
+<li class="flex items-center gap-3">
+<div class="w-3 h-3 bg-legendary"></div>
+<span class="text-rarity-legendary font-bold">LENDÁRIO</span>
+</li>
+<li class="flex items-center gap-3">
+<div class="w-3 h-3 bg-immortal"></div>
+<span class="text-rarity-immortal font-bold">IMORTAL</span>
+</li>
+<li class="flex items-center gap-3">
+<div class="w-3 h-3 bg-arcana"></div>
+<span class="text-rarity-arcana font-bold">ARCANA</span>
+</li>
+<li class="flex items-center gap-3">
+<div class="w-3 h-3 bg-divine"></div>
+<span class="text-rarity-divine font-bold">DIVINO</span>
+</li>
+</ul>
+</div>
+</aside>
+</div>
+<!-- 5. Expanded Footer -->
+<footer class="w-full bg-surface-container-lowest border-t border-outline-variant pt-16 pb-8">
+<div class="max-w-container-max mx-auto px-margin grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
+<div class="flex flex-col gap-4">
+<h4 class="font-mono-tbh text-xs font-bold text-primary border-b border-primary/20 pb-2 uppercase tracking-widest">DATABASE</h4>
+<nav class="flex flex-col gap-2 font-mono-tbh text-[11px] uppercase text-outline">
+<a class="hover:text-primary transition-colors" href="#">&gt;&gt; TODOS_ITENS</a>
+<a class="hover:text-primary transition-colors" href="#">&gt;&gt; DROP_TABLES</a>
+<a class="hover:text-primary transition-colors" href="#">&gt;&gt; BOSS_GUIDES</a>
+<a class="hover:text-primary transition-colors" href="#">&gt;&gt; EXP_CALC</a>
+<a class="hover:text-primary transition-colors" href="#">&gt;&gt; META_HISTORY</a>
+</nav>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-mono-tbh text-xs font-bold text-primary border-b border-primary/20 pb-2 uppercase tracking-widest">FERRAMENTAS</h4>
+<nav class="flex flex-col gap-2 font-mono-tbh text-[11px] uppercase text-outline">
+<a class="hover:text-primary transition-colors" href="#">&gt;&gt; TIER_MAKER</a>
+<a class="hover:text-primary transition-colors" href="#">&gt;&gt; BUILD_SIM</a>
+<a class="hover:text-primary transition-colors" href="#">&gt;&gt; DAMAGE_CHECK</a>
+<a class="hover:text-primary transition-colors" href="#">&gt;&gt; SAVE_EXTRACTOR</a>
+<a class="hover:text-primary transition-colors" href="#">&gt;&gt; API_V1_DOCS</a>
+</nav>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-mono-tbh text-xs font-bold text-primary border-b border-primary/20 pb-2 uppercase tracking-widest">COMUNIDADE</h4>
+<nav class="flex flex-col gap-2 font-mono-tbh text-[11px] uppercase text-outline">
+<a class="hover:text-primary transition-colors" href="#">&gt;&gt; DISCORD_SERVER</a>
+<a class="hover:text-primary transition-colors" href="#">&gt;&gt; REDDIT_WIKI</a>
+<a class="hover:text-primary transition-colors" href="#">&gt;&gt; BUG_REPORTS</a>
+<a class="hover:text-primary transition-colors" href="#">&gt;&gt; DONATIONS</a>
+<a class="hover:text-primary transition-colors" href="#">&gt;&gt; PARTNERS</a>
+</nav>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-mono-tbh text-xs font-bold text-primary border-b border-primary/20 pb-2 uppercase tracking-widest">IDIOMAS // LANGS</h4>
+<div class="grid grid-cols-2 gap-x-4 gap-y-2 font-mono-tbh text-[9px] uppercase text-outline">
+<a class="text-primary" href="#">EN_US</a>
+<a class="hover:text-primary" href="#">PT_BR</a>
+<a class="hover:text-primary" href="#">ES_ES</a>
+<a class="hover:text-primary" href="#">FR_FR</a>
+<a class="hover:text-primary" href="#">DE_DE</a>
+<a class="hover:text-primary" href="#">JP_JP</a>
+<a class="hover:text-primary" href="#">KR_KR</a>
+<a class="hover:text-primary" href="#">CN_ZH</a>
+<a class="hover:text-primary" href="#">RU_RU</a>
+<a class="hover:text-primary" href="#">IT_IT</a>
+<a class="hover:text-primary" href="#">PL_PL</a>
+<a class="hover:text-primary" href="#">TR_TR</a>
+<a class="hover:text-primary" href="#">VN_VN</a>
+<a class="hover:text-primary" href="#">TH_TH</a>
+<a class="hover:text-primary" href="#">ID_ID</a>
+<a class="hover:text-primary" href="#">AR_SA</a>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center gap-4">
+<div class="text-label-xs font-mono-tbh text-outline tracking-[0.2em] uppercase opacity-50 text-center">
+        TBH_TASKBAR_HERO // ENCRYPTED_PROTOCOL_ACTIVE // © 2024 TERMINAL_SYSTEMS
+    </div>
+<div class="flex gap-6 text-outline opacity-30">
+<span class="material-symbols-outlined text-base">security</span>
+<span class="material-symbols-outlined text-base">vpn_key</span>
+<span class="material-symbols-outlined text-base">fingerprint</span>
+</div>
+</div>
+</footer>
+<script>
+    document.querySelectorAll('button, a').forEach(el => {
+        el.addEventListener('mousedown', () => {
+            document.body.style.filter = 'brightness(1.3) contrast(1.1)';
+            setTimeout(() => { document.body.style.filter = ''; }, 60);
+        });
+    });
+</script>
+</body></html>

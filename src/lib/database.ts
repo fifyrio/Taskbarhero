@@ -118,6 +118,66 @@ export function rowName(row: Row, meta: DatasetMeta, locale = 'en'): string {
   return String(row[idField(meta)] ?? '');
 }
 
+// Curated foreign-key columns → the dataset they reference. A column links when its
+// name equals or ends with one of these key names (e.g. NextRuneKey -> runes,
+// MainWeaponGearType -> gear_types) and the value exists in the target dataset.
+const FK_TARGETS: Record<string, string> = {
+  HeroKey: 'heroes',
+  MonsterKey: 'monsters',
+  SkillKey: 'skills',
+  PassiveSkillKey: 'passive_skills',
+  RuneKey: 'runes',
+  GearKey: 'gear',
+  ItemKey: 'items',
+  GearType: 'gear_types',
+  BuffKey: 'buffs',
+  StatusEffectKey: 'status_effects',
+  AttributeKey: 'attributes',
+  UniqueModKey: 'unique_mods',
+  StatModKey: 'stat_mods',
+  PetKey: 'pets',
+  StageKey: 'stages',
+  CurrencyKey: 'currencies',
+  DropKey: 'drops',
+};
+// Longest key names first so e.g. PassiveSkillKey wins over SkillKey.
+const FK_KEYS = Object.keys(FK_TARGETS).sort((a, b) => b.length - a.length);
+
+const keySetCache = new Map<string, Set<string>>();
+function getKeySet(name: string): Set<string> {
+  const cached = keySetCache.get(name);
+  if (cached) return cached;
+  const meta = getDatasetMeta(name);
+  const set = new Set<string>();
+  if (meta) {
+    const id = idField(meta);
+    for (const r of getRows(name)) set.add(String(r[id]));
+  }
+  keySetCache.set(name, set);
+  return set;
+}
+
+// Resolve a (column, value) pair to a link target if it's a known foreign key
+// whose value exists in the referenced dataset. `selfId` is the current dataset's
+// own id column, which must not link to itself.
+export function resolveFk(
+  column: string,
+  value: unknown,
+  selfId: string,
+): { dataset: string; key: string } | null {
+  if (value === null || value === undefined || value === '') return null;
+  const key = String(value);
+  for (const fk of FK_KEYS) {
+    if (column === selfId) continue;
+    if (column === fk || column.endsWith(fk)) {
+      const dataset = FK_TARGETS[fk];
+      if (getKeySet(dataset).has(key)) return { dataset, key };
+      return null;
+    }
+  }
+  return null;
+}
+
 // Web paths of images that were downloaded locally (now served from public/game/*).
 // manifest local_path "images/game/x.png" -> public URL "/game/x.png".
 let availableImages: Set<string> | null = null;

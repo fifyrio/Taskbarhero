@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Link } from '@/i18n/routing';
 import Header from '@/components/common/Header';
-import { getDatasetMeta, getRow, idField, rowName, rowIconUrl } from '@/lib/database';
+import { getDatasetMeta, getRow, idField, rowName, rowIconUrl, resolveFk } from '@/lib/database';
 
 export const dynamic = 'force-dynamic';
 
@@ -89,12 +89,27 @@ export default function DatasetDetailPage({
         <section className="mb-8">
           <h2 className="font-mono text-[11px] uppercase tracking-widest text-faint mb-3">Stats</h2>
           <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line border border-line">
-            {scalarEntries.map(([c, v]) => (
-              <div key={c} className="bg-surface px-3 py-2">
-                <dt className="font-mono text-[10px] uppercase tracking-wider text-faint truncate">{c}</dt>
-                <dd className="font-mono text-sm text-ink truncate">{String(v)}</dd>
-              </div>
-            ))}
+            {scalarEntries.map(([c, v]) => {
+              const fk = resolveFk(c, v, id);
+              return (
+                <div key={c} className="bg-surface px-3 py-2">
+                  <dt className="font-mono text-[10px] uppercase tracking-wider text-faint truncate">{c}</dt>
+                  <dd className="font-mono text-sm truncate">
+                    {fk ? (
+                      <Link
+                        href={`/database/${fk.dataset}/${encodeURIComponent(fk.key)}`}
+                        prefetch={false}
+                        className="text-gold hover:underline"
+                      >
+                        {String(v)} ↗
+                      </Link>
+                    ) : (
+                      <span className="text-ink">{String(v)}</span>
+                    )}
+                  </dd>
+                </div>
+              );
+            })}
           </dl>
         </section>
 

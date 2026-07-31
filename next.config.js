@@ -1,10 +1,9 @@
 const createNextIntlPlugin = require('next-intl/plugin');
 const withNextIntl = createNextIntlPlugin();
-const withMDX = require('@next/mdx')()
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
 
   // Enable SWC minification for faster builds and smaller bundles
   swcMinify: true,
@@ -21,8 +20,8 @@ const nextConfig = {
 
   // Optimize package imports to reduce bundle size
   experimental: {
-    optimizePackageImports: ['@supabase/supabase-js', 'react-hot-toast', 'react-markdown'],
+    optimizePackageImports: ['@supabase/supabase-js', 'react-hot-toast'],
   },
 }
 
-module.exports = withNextIntl(withMDX(nextConfig));
+module.exports = withNextIntl(nextConfig);

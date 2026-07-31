@@ -155,7 +155,6 @@
     },
     "footer": {
       "brand": "Taskbar Hero - AI 创意工坊",
-      "poweredBy": "由 Gemini 3 Image Preview 提供支持",
       "copyright": "© 2026 Taskbar Hero. 保留所有权利。"
     },
     "status": {
@@ -178,8 +177,7 @@
         "title2": "AI 图像工作室",
         "subtitle": "利用 AI 的力量创作令人惊叹的图像。从逼真的照片到艺术插画，瞬间将您的想象力变为现实。",
         "cta": "开始创作",
-        "appStore": "应用商店",
-        "poweredBy": "由 Gemini 3 Image Preview 提供支持"
+        "appStore": "应用商店"
       },
       "transformation": {
         "badge": "释放 AI 魔法，打造您的数字身份",

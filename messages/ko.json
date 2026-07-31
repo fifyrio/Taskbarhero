@@ -155,7 +155,6 @@
     },
     "footer": {
       "brand": "Taskbar Hero - AI로 창작하다",
-      "poweredBy": "Gemini 3 Image Preview 기반",
       "copyright": "© 2026 Taskbar Hero. 모든 권리 보유."
     },
     "status": {
@@ -172,8 +171,7 @@
         "title2": "AI 이미지 스튜디오",
         "subtitle": "AI의 힘으로 멋진 이미지를 만드세요. 사실적인 사진부터 예술적인 일러스트레이션까지, 여러분의 상상을 몇 초 만에 생생하게 구현하세요.",
         "cta": "창작 시작하기",
-        "appStore": "앱 스토어",
-        "poweredBy": "Gemini 3 Image Preview 기반"
+        "appStore": "앱 스토어"
       },
       "transformation": {
         "badge": "디지털 아이덴티티를 위한 AI 마법을 발휘하세요",

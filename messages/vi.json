@@ -155,7 +155,6 @@
     },
     "footer": {
       "brand": "Taskbar Hero - Sáng Tạo với AI",
-      "poweredBy": "Được hỗ trợ bởi Gemini 3 Image Preview",
       "copyright": "© 2026 Taskbar Hero. Đã đăng ký bản quyền."
     },
     "status": {
@@ -172,8 +171,7 @@
         "title2": "Xưởng Ảnh AI",
         "subtitle": "Tạo những hình ảnh tuyệt đẹp với sức mạnh của AI. Từ những bức ảnh chân thực đến những hình minh họa nghệ thuật, đưa trí tưởng tượng của bạn vào cuộc sống trong vài giây.",
         "cta": "Bắt Đầu Sáng Tạo",
-        "appStore": "App Store",
-        "poweredBy": "Được hỗ trợ bởi Gemini 3 Image Preview"
+        "appStore": "App Store"
       },
       "transformation": {
         "badge": "GIẢI PHÓNG PHÉP THUẬT AI CHO DANH TÍNH KỸ THUẬT SỐ CỦA BẠN",

@@ -155,7 +155,6 @@
     },
     "footer": {
       "brand": "Taskbar Hero - สร้างด้วย AI",
-      "poweredBy": "ขับเคลื่อนโดย Gemini 3 Image Preview",
       "copyright": "© 2026 Taskbar Hero สงวนลิขสิทธิ์"
     },
     "status": {
@@ -172,8 +171,7 @@
         "title2": "สตูดิโอรูปภาพ AI",
         "subtitle": "สร้างรูปภาพที่น่าทึ่งด้วยพลังของ AI จากภาพถ่ายที่สมจริงไปจนถึงภาพประกอบทางศิลปะ ทำให้จินตนาการของคุณเป็นจริงในไม่กี่วินาที",
         "cta": "เริ่มสร้างสรรค์",
-        "appStore": "แอปสโตร์",
-        "poweredBy": "ขับเคลื่อนโดย Gemini 3 Image Preview"
+        "appStore": "แอปสโตร์"
       },
       "transformation": {
         "badge": "ปลดปล่อยเวทมนตร์ AI สำหรับตัวตนดิจิทัลของคุณ",

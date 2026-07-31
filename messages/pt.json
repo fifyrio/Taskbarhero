@@ -155,7 +155,6 @@
     },
     "footer": {
       "brand": "Taskbar Hero - Crie com IA",
-      "poweredBy": "Alimentado por Gemini 3 Image Preview",
       "copyright": "© 2026 Taskbar Hero. Todos os direitos reservados."
     },
     "status": {
@@ -172,8 +171,7 @@
         "title2": "Estúdio de Imagem IA",
         "subtitle": "Crie imagens deslumbrantes com o poder da IA. De fotos realistas a ilustrações artísticas, dê vida à sua imaginação em segundos.",
         "cta": "Começar a Criar",
-        "appStore": "App Store",
-        "poweredBy": "Alimentado por Gemini 3 Image Preview"
+        "appStore": "App Store"
       },
       "transformation": {
         "badge": "LIBERE A MAGIA DA IA PARA SUA IDENTIDADE DIGITAL",

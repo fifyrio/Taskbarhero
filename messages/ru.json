@@ -155,7 +155,6 @@
     },
     "footer": {
       "brand": "Taskbar Hero - Творите с ИИ",
-      "poweredBy": "Работает на Gemini 3 Image Preview",
       "copyright": "© 2026 Taskbar Hero. Все права защищены."
     },
     "status": {
@@ -172,8 +171,7 @@
         "title2": "ИИ Студия Изображений",
         "subtitle": "Создавайте потрясающие изображения с силой ИИ. От реалистичных фото до художественных иллюстраций, воплощайте свое воображение в жизнь за секунды.",
         "cta": "Начать Творить",
-        "appStore": "App Store",
-        "poweredBy": "Работает на Gemini 3 Image Preview"
+        "appStore": "App Store"
       },
       "transformation": {
         "badge": "РАСКРОЙТЕ МАГИЮ ИИ ДЛЯ ВАШЕЙ ЦИФРОВОЙ ЛИЧНОСТИ",

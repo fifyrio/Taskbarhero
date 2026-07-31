@@ -68,15 +68,6 @@ export default function Footer() {
             </a>
           </div>
 
-          <div className="flex items-center gap-2 liquid-glass px-3 py-1 rounded-full border border-yellow-400/30 order-1 md:order-2">
-            <svg className="w-3 h-3 text-yellow-600" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
-            </svg>
-            <span className="text-xs font-semibold text-white">
-              {t('poweredBy')}
-            </span>
-          </div>
-
           <div className="flex items-center space-x-4 order-3">
             <LanguageSwitcher direction="up" />
             <div className="flex space-x-3">

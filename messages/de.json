@@ -155,7 +155,6 @@
     },
     "footer": {
       "brand": "Taskbar Hero - Erstellen mit KI",
-      "poweredBy": "Bereitgestellt von Gemini 3 Image Preview",
       "copyright": "© 2026 Taskbar Hero. Alle Rechte vorbehalten."
     },
     "status": {
@@ -172,8 +171,7 @@
         "title2": "KI Bild Studio",
         "subtitle": "Erstellen Sie atemberaubende Bilder mit der Kraft der KI. Von realistischen Fotos bis zu künstlerischen Illustrationen, erwecken Sie Ihre Fantasie in Sekunden zum Leben.",
         "cta": "Erstellen starten",
-        "appStore": "App Store",
-        "poweredBy": "Bereitgestellt von Gemini 3 Image Preview"
+        "appStore": "App Store"
       },
       "transformation": {
         "badge": "ENTFESSELN SIE KI-MAGIE FÜR IHRE DIGITALE IDENTITÄT",

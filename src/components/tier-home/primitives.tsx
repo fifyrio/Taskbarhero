@@ -1,4 +1,5 @@
-import type { Rarity, TierLabel } from './mockData';
+type Rarity = 'uncommon' | 'rare' | 'legendary' | 'immortal' | 'arcana' | 'divine';
+type TierLabel = 'S' | 'A' | 'B' | 'C';
 
 const RARITY_BORDER: Record<Rarity, string> = {
   uncommon: 'rarity-uncommon',

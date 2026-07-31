@@ -154,8 +154,7 @@
       "importSave": "Importar save"
     },
     "footer": {
-      "brand": "Taskbar Hero - Create with AI",
-      "poweredBy": "Powered by Gemini 3 Image Preview",
+      "brand": "Taskbar Hero — TBH Wiki & Database",
       "copyright": "© 2026 Taskbar Hero. All rights reserved."
     },
     "status": {
@@ -178,8 +177,7 @@
         "title2": "AI Image Studio",
         "subtitle": "Create stunning images with the power of AI. From realistic photos to artistic illustrations, bring your imagination to life in seconds.",
         "cta": "Start Creating",
-        "appStore": "App Store",
-        "poweredBy": "Powered by Gemini 3 Image Preview"
+        "appStore": "App Store"
       },
       "transformation": {
         "badge": "UNLEASH AI MAGIC FOR YOUR DIGITAL IDENTITY",

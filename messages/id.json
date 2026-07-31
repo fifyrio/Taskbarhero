@@ -155,7 +155,6 @@
     },
     "footer": {
       "brand": "Taskbar Hero - Buat dengan AI",
-      "poweredBy": "Didukung oleh Gemini 3 Image Preview",
       "copyright": "© 2026 Taskbar Hero. Hak cipta dilindungi undang-undang."
     },
     "status": {
@@ -172,8 +171,7 @@
         "title2": "Studio Gambar AI",
         "subtitle": "Buat gambar menakjubkan dengan kekuatan AI. Dari foto realistis hingga ilustrasi artistik, hidupkan imajinasi Anda dalam hitungan detik.",
         "cta": "Mulai Membuat",
-        "appStore": "App Store",
-        "poweredBy": "Didukung oleh Gemini 3 Image Preview"
+        "appStore": "App Store"
       },
       "transformation": {
         "badge": "LEPASKAN SIHIR AI UNTUK IDENTITAS DIGITAL ANDA",

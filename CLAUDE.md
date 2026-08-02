@@ -45,8 +45,9 @@ RLS: reference data public-read; tier lists public when published, owner-managed
 ## Conventions
 
 - Immutable updates, small focused files, explicit error handling
-- SEO: English canonical without `/en`; all 14 locales in `alternates.languages`.
-  Production domain `https://www.taskbarhero.wiki`
+- SEO: English canonical without `/en`; English-only for now (locales in
+  `src/i18n/config.ts`, re-add once translations are complete).
+  Production domain `https://taskbarherowiki.co` (taskbarhero.wiki is third-party — never use for canonical/OG/sitemap)
 - Commands: `pnpm dev` (port 3001), `pnpm build`, `pnpm lint`, `pnpm type-check`
 
 ## Deploy (Vercel)

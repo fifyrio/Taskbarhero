@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { SITE_URL } from '@/lib/site';
 import { notFound } from 'next/navigation';
 import { Link } from '@/i18n/routing';
 import Header from '@/components/common/Header';
@@ -10,7 +11,7 @@ import type { TierListWithItems, TierListItem } from '@/types/tier-list';
 
 export const dynamic = 'force-dynamic';
 
-const BASE_URL = 'https://www.taskbarhero.wiki';
+const BASE_URL = SITE_URL;
 
 async function fetchList(slug: string): Promise<TierListWithItems | null> {
   try {

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { SITE_URL } from '@/lib/site';
 import Header from '@/components/common/Header';
 import BuilderClient from './BuilderClient';
 
@@ -11,9 +12,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const path = locale === 'en' ? '/tier-lists/new' : `/${locale}/tier-lists/new`;
   return {
-    title: 'Criar Tier List | Taskbar Hero',
-    description: 'Monte sua própria tier list de jogo e publique para a comunidade.',
-    alternates: { canonical: `https://www.taskbarhero.wiki${path}` },
+    title: 'Create Tier List | TBH Wiki',
+    description: 'Build your own TBH: Task Bar Hero tier list and share it with the community.',
+    alternates: { canonical: `${SITE_URL}${path}` },
     robots: { index: false, follow: true },
   };
 }

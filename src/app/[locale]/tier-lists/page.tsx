@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { SITE_URL } from '@/lib/site';
 import { Link } from '@/i18n/routing';
 import Header from '@/components/common/Header';
 import { SectionHeader, Icon } from '@/components/tier-home/primitives';
@@ -13,7 +14,7 @@ export async function generateMetadata({
 }: {
   params: { locale: string };
 }): Promise<Metadata> {
-  const baseUrl = 'https://www.taskbarhero.wiki';
+  const baseUrl = SITE_URL;
   const path = locale === 'en' ? '/tier-lists' : `/${locale}/tier-lists`;
   return {
     title: 'Tier Lists da Comunidade | Taskbar Hero',

@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { SITE_URL } from '@/lib/site';
 import { Metadata } from 'next';
 import WikiHome from '@/components/wiki-home/WikiHome';
 import { WebsiteSchema, BreadcrumbSchema } from '@/components/seo';
@@ -16,7 +17,7 @@ export async function generateMetadata({
   // SEO Best Practice: Canonical URL should always point to the production domain
   // to prevent duplicate content issues across different environments (dev, staging, etc.)
   // English locale uses root path without /en prefix, other locales use /{locale} prefix
-  const baseUrl = 'https://www.taskbarhero.wiki';
+  const baseUrl = SITE_URL;
   const pathSegment = locale === 'en' ? '' : `/${locale}`;
   const canonicalUrl = `${baseUrl}${pathSegment}`;
 
@@ -78,33 +79,6 @@ export async function generateMetadata({
     },
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        'en': `${baseUrl}`,
-        'zh': `${baseUrl}/zh`,
-        'de': `${baseUrl}/de`,
-        'fr': `${baseUrl}/fr`,
-        'ja': `${baseUrl}/ja`,
-        'ko': `${baseUrl}/ko`,
-        'es': `${baseUrl}/es`,
-        'pt': `${baseUrl}/pt`,
-        'ru': `${baseUrl}/ru`,
-        'it': `${baseUrl}/it`,
-        'th': `${baseUrl}/th`,
-        'vi': `${baseUrl}/vi`,
-        'id': `${baseUrl}/id`,
-        'zh-TW': `${baseUrl}/zh-TW`
-      },
-    },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
     },
   };
 }
@@ -115,7 +89,7 @@ export default async function HomePage({
   params: { locale: string }
 }) {
   const t = await getTranslations({ locale, namespace: 'pages.home.seo' });
-  const baseUrl = 'https://www.taskbarhero.wiki';
+  const baseUrl = SITE_URL;
   const pathSegment = locale === 'en' ? '' : `/${locale}`;
 
   return (

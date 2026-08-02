@@ -1,4 +1,5 @@
 import { JsonLd } from './JsonLd';
+import { SITE_URL } from '@/lib/site';
 
 interface WebsiteSchemaProps {
   name: string;
@@ -11,7 +12,7 @@ export function WebsiteSchema({
   name,
   url,
   description,
-  logoUrl = 'https://www.taskbarhero.wiki/images/logo.png',
+  logoUrl = `${SITE_URL}/images/logo.png`,
 }: WebsiteSchemaProps) {
   return (
     <JsonLd

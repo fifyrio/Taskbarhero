@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { SITE_URL } from '@/lib/site';
 import { notFound } from 'next/navigation';
 import { Link } from '@/i18n/routing';
 import Header from '@/components/common/Header';
@@ -23,7 +24,7 @@ export function generateMetadata({
   params: { locale: string; dataset: string };
 }): Metadata {
   const meta = getDatasetMeta(dataset);
-  const baseUrl = 'https://www.taskbarhero.wiki';
+  const baseUrl = SITE_URL;
   const path = locale === 'en' ? `/database/${dataset}` : `/${locale}/database/${dataset}`;
   const label = meta?.label ?? dataset;
   return {

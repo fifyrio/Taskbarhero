@@ -27,6 +27,7 @@ const nextConfig = {
       '/[locale]/database/**': ['./data/taskbarhero-database/**'],
       '/[locale]/page': ['./data/taskbarhero-database/**'],
       '/api/search': ['./data/taskbarhero-database/**'],
+      '/sitemap.xml': ['./data/taskbarhero-database/**'],
     },
   },
 }

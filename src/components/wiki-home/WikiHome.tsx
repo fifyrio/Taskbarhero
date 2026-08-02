@@ -61,8 +61,7 @@ export default function WikiHome({ locale }: { locale: string }) {
             <p className="font-sans text-sm sm:text-base text-ink/80 leading-relaxed mb-8">
               Every hero, monster, gear, item, rune, skill and stage in TBH: Task Bar Hero —
               {' '}
-              {manifest.row_count.toLocaleString()} entries across {manifest.dataset_count} datasets,
-              in 16 languages.
+              {manifest.row_count.toLocaleString()} entries across {manifest.dataset_count} datasets.
             </p>
             <div className="mb-8">
               <SearchBox />

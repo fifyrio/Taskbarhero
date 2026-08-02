@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { SITE_URL } from '@/lib/site';
 import { Link } from '@/i18n/routing';
 import Header from '@/components/common/Header';
 import { SectionHeader, Icon } from '@/components/tier-home/primitives';
@@ -11,12 +12,12 @@ export function generateMetadata({
 }: {
   params: { locale: string };
 }): Metadata {
-  const baseUrl = 'https://www.taskbarhero.wiki';
+  const baseUrl = SITE_URL;
   const path = locale === 'en' ? '/database' : `/${locale}/database`;
   return {
     title: 'Database | Taskbar Hero Wiki',
     description:
-      'Complete TBH: Task Bar Hero database — heroes, monsters, gear, items, runes, skills, stages and more, in 16 languages.',
+      'Complete TBH: Task Bar Hero database — heroes, monsters, gear, items, runes, skills, stages and more.',
     alternates: { canonical: `${baseUrl}${path}` },
   };
 }

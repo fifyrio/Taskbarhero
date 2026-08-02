@@ -3,19 +3,23 @@ import Footer from '@/components/common/Footer';
 import { AuthProvider } from '@/contexts/AuthContext';
 import AppToaster from '@/components/common/AppToaster';
 import CookieConsent from '@/components/common/CookieConsent';
-import GoogleOneTap from '@/components/auth/GoogleOneTap';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+import { SITE_URL, SITE_NAME, INDEXING_ENABLED } from '@/lib/site';
 
 export const metadata = {
-  title: 'Taskbar Hero - AI Image Editor',
-  description: 'Generate and edit images with the power of AI',
-  metadataBase: new URL('https://www.taskbarhero.wiki'),
-  alternates: {
-    canonical: '/',
+  title: {
+    default: `${SITE_NAME} — TBH: Task Bar Hero Database`,
+    template: `%s | ${SITE_NAME}`,
   },
+  description:
+    'Community database for TBH: Task Bar Hero — heroes, gear, runes, monsters, skills, stages and items.',
+  metadataBase: new URL(SITE_URL),
+  robots: INDEXING_ENABLED
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
@@ -45,18 +49,6 @@ export default async function RootLayout({
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Instrument+Serif:ital@0;1&family=Barlow:wght@300;400;500;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
         />
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6420997954410485" crossOrigin="anonymous"></script>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-VSCPE0FT5G"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-VSCPE0FT5G');
-            `,
-          }}
-        />
       </head>
       <body className="font-sans antialiased">
         <NextIntlClientProvider messages={messages}>
@@ -69,7 +61,6 @@ export default async function RootLayout({
             </div>
             <AppToaster />
             <CookieConsent />
-            <GoogleOneTap />
           </AuthProvider>
           <Analytics />
           <SpeedInsights />

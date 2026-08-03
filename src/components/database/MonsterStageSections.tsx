@@ -4,7 +4,7 @@ import type { MonsterGuide, StageGuide, ItemRef } from '@/lib/drops';
 function SectionTitle({ title, tag }: { title: string; tag?: string }) {
   return (
     <div className="flex items-baseline justify-between mb-3 border-b border-line pb-2">
-      <h2 className="font-display text-lg font-bold text-ink uppercase tracking-wide">{title}</h2>
+      <h2 className="tbh-banner font-pixel text-[10px] uppercase px-8 py-2.5">{title}</h2>
       {tag && <span className="font-mono text-[10px] uppercase tracking-widest text-faint">{tag}</span>}
     </div>
   );
@@ -86,7 +86,7 @@ export function StageOverview({ guide }: { guide: StageGuide }) {
                 key={`${m.key}-${m.boss}`}
                 href={`/database/monsters/${m.key}`}
                 prefetch={false}
-                className="tbh-lift group border border-line bg-surface hover:border-gold p-3 text-center transition-colors"
+                className="tbh-lift group tbh-frame hover:border-gold p-3 text-center transition-colors"
               >
                 <span className="block w-12 h-12 mx-auto mb-2 bg-panel border border-line group-hover:border-gold transition-colors overflow-hidden">
                   {m.portrait && (
@@ -113,7 +113,7 @@ export function StageOverview({ guide }: { guide: StageGuide }) {
           <SectionTitle title="Drops" />
           <div className="space-y-3">
             {guide.drops.map((d) => (
-              <div key={`${d.box.id}-${d.role}`} className="border border-line bg-surface p-4">
+              <div key={`${d.box.id}-${d.role}`} className="tbh-frame p-4">
                 <div className="flex flex-wrap items-center gap-2 mb-2">
                   <ItemChip item={d.box} />
                   <span className="font-mono text-[11px] text-dim">
@@ -133,7 +133,7 @@ export function StageOverview({ guide }: { guide: StageGuide }) {
               </div>
             ))}
             {guide.firstClear.length > 0 && (
-              <div className="border border-line bg-surface p-4">
+              <div className="tbh-frame p-4">
                 <span className="font-mono text-[11px] uppercase tracking-wider text-faint mr-2">
                   First clear reward pool:
                 </span>
@@ -145,7 +145,7 @@ export function StageOverview({ guide }: { guide: StageGuide }) {
               </div>
             )}
             {guide.soulstone && (
-              <div className="border border-line bg-surface p-4">
+              <div className="tbh-frame p-4">
                 <span className="font-mono text-[11px] uppercase tracking-wider text-faint mr-2">
                   Soulstone:
                 </span>

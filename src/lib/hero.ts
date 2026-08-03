@@ -118,7 +118,7 @@ function buildSkill(skill: Row, locale: string, maxLevel: number | null, slot: H
   }
   return {
     key: Number(skill.SkillKey),
-    name: pick(skill.SkillNameKey_i18n, locale) || `Skill ${skill.SkillKey}`,
+    name: pick(skill.SkillNameKey_i18n, locale) || (slot === 'base-attack' ? 'Basic Attack' : `Skill ${skill.SkillKey}`),
     description,
     slot,
     trigger: triggerLabel(skill),

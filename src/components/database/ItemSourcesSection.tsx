@@ -20,7 +20,7 @@ function ItemChip({ item }: { item: ItemRef }) {
 function SectionTitle({ title, tag }: { title: string; tag?: string }) {
   return (
     <div className="flex items-baseline justify-between mb-3 border-b border-line pb-2">
-      <h2 className="font-display text-lg font-bold text-ink uppercase tracking-wide">{title}</h2>
+      <h2 className="tbh-banner font-pixel text-[10px] uppercase px-8 py-2.5">{title}</h2>
       {tag && <span className="font-mono text-[10px] uppercase tracking-widest text-faint">{tag}</span>}
     </div>
   );
@@ -40,7 +40,7 @@ export default function ItemSourcesSection({ sources }: { sources: ItemSources }
           {stageDrops.length > 0 && (
             <div className="space-y-3 mb-6">
               {stageDrops.map((d) => (
-                <div key={d.box.id} className="border border-line bg-surface p-4">
+                <div key={d.box.id} className="tbh-frame p-4">
                   <div className="flex flex-wrap items-center gap-2 mb-2">
                     <ItemChip item={d.box} />
                     {d.poolShare != null && (
@@ -74,7 +74,7 @@ export default function ItemSourcesSection({ sources }: { sources: ItemSources }
           )}
 
           {crafting.length > 0 && (
-            <div className="border border-line bg-surface p-4 mb-6">
+            <div className="tbh-frame p-4 mb-6">
               <h3 className="font-mono text-[11px] uppercase tracking-widest text-faint mb-2">Crafting</h3>
               <ul className="space-y-2">
                 {crafting.map((c) => (
@@ -94,7 +94,7 @@ export default function ItemSourcesSection({ sources }: { sources: ItemSources }
           )}
 
           {synthesis.length > 0 && (
-            <div className="border border-line bg-surface p-4 mb-6">
+            <div className="tbh-frame p-4 mb-6">
               <h3 className="font-mono text-[11px] uppercase tracking-widest text-faint mb-2">Synthesis</h3>
               <p className="font-sans text-sm text-dim mb-2">
                 Can appear as a synthesis result for these recipe settings:
@@ -113,7 +113,7 @@ export default function ItemSourcesSection({ sources }: { sources: ItemSources }
           )}
 
           {cubeRecipes.length > 0 && (
-            <div className="border border-line bg-surface p-4 mb-6">
+            <div className="tbh-frame p-4 mb-6">
               <h3 className="font-mono text-[11px] uppercase tracking-widest text-faint mb-2">Cube Recipes</h3>
               <ul className="flex flex-wrap gap-2">
                 {cubeRecipes.map((c) => (
@@ -132,7 +132,7 @@ export default function ItemSourcesSection({ sources }: { sources: ItemSources }
           <SectionTitle title="Used In" tag={`${usedIn.length} RECIPES`} />
           <div className="space-y-2">
             {usedIn.map((u) => (
-              <div key={u.recipeKey} className="border border-line bg-surface p-4">
+              <div key={u.recipeKey} className="tbh-frame p-4">
                 <div className="font-mono text-xs text-dim mb-2">
                   <span className="text-ink">{u.craftingType}</span> · Tier {u.tier} · consumes ×{u.amount}
                 </div>

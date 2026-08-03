@@ -98,7 +98,7 @@ export default function DatasetListPage({
           </span>
         </header>
 
-        <div className="border border-line bg-surface overflow-x-auto">
+        <div className="tbh-frame overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="border-b border-line font-mono text-[11px] uppercase tracking-wider text-faint">

@@ -6,7 +6,7 @@ import { Link } from '@/i18n/routing';
 // Tier lists, save import, login and the language switcher are hidden until
 // those features actually work — see the P0 launch checklist.
 const NAV_ITEMS = [
-  { label: 'Database', href: '/database' },
+  { label: 'Database', href: '/database', icon: '/game/ui/Icon_Guides.png' },
 ];
 
 export default function Header() {
@@ -45,7 +45,11 @@ export default function Header() {
                 prefetch={false}
                 className="font-pixel text-[10px] text-tan hover:text-gold transition-colors py-2"
               >
-                {item.label}
+                <span className="inline-flex items-center gap-1.5">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={item.icon} alt="" width={16} height={16} className="w-4 h-4 object-contain [image-rendering:pixelated]" />
+                  {item.label}
+                </span>
               </Link>
             ))}
           </nav>

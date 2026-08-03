@@ -52,7 +52,7 @@ export default function DatabaseOverviewPage() {
                   key={d.name}
                   href={`/database/${d.name}`}
                   prefetch={false}
-                  className="tbh-lift group border border-line bg-surface hover:border-gold p-4 transition-colors"
+                  className="tbh-lift group tbh-frame hover:border-gold p-4 transition-colors"
                 >
                   <div className="flex items-center justify-between mb-2">
                     <span className="font-display text-sm font-bold text-ink uppercase tracking-wide group-hover:text-gold transition-colors">

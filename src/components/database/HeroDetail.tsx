@@ -16,10 +16,21 @@ const GRADE_COLOR: Record<string, string> = {
   COSMIC: 'text-rarity-arcana',
 };
 
+// ClassType -> large character sprite in /game/ui. Hunter's sprite is named
+// after its crossbow archetype ("Abalist") in the game files.
+const CLASS_SPRITE: Record<string, string> = {
+  Knight: 'Knight',
+  Ranger: 'Ranger',
+  Sorcerer: 'Sorcerer',
+  Priest: 'Priest',
+  Hunter: 'Abalist',
+  Slayer: 'Slayer',
+};
+
 function SectionTitle({ title, tag }: { title: string; tag?: string }) {
   return (
     <div className="flex items-baseline justify-between mb-3 border-b border-line pb-2">
-      <h2 className="font-display text-lg font-bold text-ink uppercase tracking-wide">{title}</h2>
+      <h2 className="tbh-banner font-pixel text-[10px] uppercase px-8 py-2.5">{title}</h2>
       {tag && <span className="font-mono text-[10px] uppercase tracking-widest text-faint">{tag}</span>}
     </div>
   );
@@ -27,7 +38,7 @@ function SectionTitle({ title, tag }: { title: string; tag?: string }) {
 
 function SkillCard({ skill }: { skill: HeroSkill }) {
   return (
-    <article className="border border-line bg-surface p-4">
+    <article className="tbh-frame p-4">
       <div className="flex items-baseline justify-between gap-3 mb-1.5">
         <h3 className="font-display text-base font-bold text-gold uppercase tracking-wide">
           {skill.name}
@@ -77,7 +88,17 @@ export default function HeroDetail({ hero }: { hero: HeroProfile }) {
   return (
     <>
       {/* Hero header */}
-      <header className="mb-10 border border-line bg-[#0f1116] p-6 sm:p-8 flex flex-col sm:flex-row gap-6">
+      <header className="tbh-frame mb-10 relative overflow-hidden p-6 sm:p-8 flex flex-col sm:flex-row gap-6">
+        {CLASS_SPRITE[hero.classType] && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={`/game/ui/Arrage_ChaAnim_${CLASS_SPRITE[hero.classType]}_Large_0.png`}
+            alt=""
+            width={220}
+            height={220}
+            className="hidden lg:block absolute right-4 bottom-0 w-[200px] object-contain [image-rendering:pixelated] opacity-90 drop-shadow-[0_0_20px_rgba(246,183,60,0.2)] pointer-events-none select-none"
+          />
+        )}
         {hero.icon && (
           <div className="w-28 h-28 shrink-0 bg-panel border border-gold/40 flex items-center justify-center overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -179,7 +200,7 @@ export default function HeroDetail({ hero }: { hero: HeroProfile }) {
         <SectionTitle title="Usable Gear" tag={hero.gear.map((g) => g.gearType).join(' + ')} />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {hero.gear.map((g) => (
-            <div key={g.gearType} className="border border-line bg-surface p-4">
+            <div key={g.gearType} className="tbh-frame p-4">
               <div className="flex items-baseline justify-between mb-3">
                 <h3 className="font-display text-base font-bold text-ink uppercase tracking-wide">
                   {g.gearType.toLowerCase()}s
@@ -243,7 +264,7 @@ export default function HeroDetail({ hero }: { hero: HeroProfile }) {
                 key={h.key}
                 href={`/database/heroes/${h.key}`}
                 prefetch={false}
-                className="tbh-lift group border border-line bg-surface hover:border-gold p-3 text-center transition-colors"
+                className="tbh-lift group tbh-frame hover:border-gold p-3 text-center transition-colors"
               >
                 <span className="block w-10 h-10 mx-auto mb-2 bg-panel border border-line group-hover:border-gold transition-colors overflow-hidden">
                   {h.icon ? (

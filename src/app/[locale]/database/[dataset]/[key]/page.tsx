@@ -177,7 +177,7 @@ export default function DatasetDetailPage({
             <h2 className="font-mono text-[11px] uppercase tracking-widest text-faint mb-3">Details</h2>
             <div className="space-y-3">
               {complexEntries.map(([c, v]) => (
-                <details key={c} className="border border-line bg-surface">
+                <details key={c} className="tbh-frame">
                   <summary className="cursor-pointer px-3 py-2 font-mono text-xs uppercase tracking-wider text-dim hover:text-gold">
                     {c}
                   </summary>

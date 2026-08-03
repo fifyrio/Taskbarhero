@@ -3,7 +3,7 @@
 // point canonical/OG/sitemap URLs there. Official domain: taskbarherowiki.co.
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_APP_URL || 'https://taskbarherowiki.co';
+  process.env.NEXT_PUBLIC_APP_URL || 'https://www.taskbarherowiki.co';
 
 export const SITE_NAME = 'TBH Wiki';
 

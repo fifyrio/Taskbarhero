@@ -8,7 +8,7 @@ export const config = {
 
   // Application
   app: {
-    url: process.env.NEXT_PUBLIC_APP_URL || 'https://taskbarherowiki.co',
+    url: process.env.NEXT_PUBLIC_APP_URL || 'https://www.taskbarherowiki.co',
   },
 
   // Development

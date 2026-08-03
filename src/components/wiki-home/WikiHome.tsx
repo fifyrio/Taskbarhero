@@ -10,7 +10,37 @@ import {
   idField,
   rowName,
   rowIconUrl,
+  type Row,
 } from '@/lib/database';
+
+// Highest gear grades, best first — used to pick homepage featured gear.
+const TOP_GRADES = ['COSMIC', 'CELESTIAL', 'BEYOND', 'ARCANA', 'IMMORTAL', 'DIVINE'];
+
+// One featured top-grade item per gear type, deduped by name.
+function featuredGear(count: number): Row[] {
+  const items = getRows('items').filter((r) => r.type === 'GEAR');
+  const byGrade = new Map<string, Row[]>();
+  for (const it of items) {
+    const g = String(it.grade);
+    byGrade.set(g, [...(byGrade.get(g) ?? []), it]);
+  }
+  const out: Row[] = [];
+  const seenNames = new Set<string>();
+  const seenTypes = new Set<string>();
+  for (const grade of TOP_GRADES) {
+    for (const it of byGrade.get(grade) ?? []) {
+      const name = JSON.stringify(it.name);
+      const gearType = String(it.gear);
+      if (seenNames.has(name) || seenTypes.has(gearType)) continue;
+      seenNames.add(name);
+      seenTypes.add(gearType);
+      out.push(it);
+      if (out.length >= count) return out;
+    }
+    seenTypes.clear();
+  }
+  return out;
+}
 
 // Datasets surfaced as primary browse tiles on the homepage.
 const FEATURED_DATASETS = ['heroes', 'gear', 'runes', 'monsters', 'skills', 'stages', 'items', 'pets'];
@@ -34,6 +64,16 @@ export default function WikiHome({ locale }: { locale: string }) {
 
   const heroesMeta = getDatasetMeta('heroes');
   const heroes = heroesMeta ? getRows('heroes').slice(0, 6) : [];
+
+  const gear = featuredGear(8);
+  // First stage of each act as entry points into the stage graph.
+  const stageRows = getRows('stages').filter((s) => s.STAGETYPE === 'NORMAL');
+  const acts = Array.from(new Set(stageRows.map((s) => Number(s.Act)))).sort((a, b) => a - b);
+  const actEntries = acts.map((act) => ({
+    act,
+    stages: stageRows.filter((s) => Number(s.Act) === act).slice(0, 4),
+    total: stageRows.filter((s) => Number(s.Act) === act).length,
+  }));
 
   return (
     <div className="tbh-root tbh-grain font-display min-h-screen">
@@ -146,6 +186,84 @@ export default function WikiHome({ locale }: { locale: string }) {
                   </Link>
                 );
               })}
+            </div>
+          </section>
+        )}
+
+        {/* Featured top-grade gear */}
+        {gear.length > 0 && (
+          <section className="mb-12">
+            <SectionHeader title="TOP GEAR" tag="HIGHEST GRADES" />
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
+              {gear.map((g) => {
+                const name = rowName(g, getDatasetMeta('items')!, locale);
+                return (
+                  <Link
+                    key={String(g.id)}
+                    href={`/database/items/${g.id}`}
+                    prefetch={false}
+                    className="tbh-lift group border border-line bg-surface hover:border-gold p-3 text-center transition-colors"
+                  >
+                    <span className="block w-10 h-10 mx-auto mb-2 bg-panel border border-line group-hover:border-gold transition-colors overflow-hidden">
+                      {g.icon ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={String(g.icon)} alt="" width={40} height={40} className="w-full h-full object-contain [image-rendering:pixelated]" />
+                      ) : (
+                        <Icon name="shield" className="text-gold text-[20px]" />
+                      )}
+                    </span>
+                    <span className="font-sans text-xs text-ink group-hover:text-gold transition-colors truncate block">
+                      {name}
+                    </span>
+                    <span className="font-mono text-[9px] uppercase tracking-widest text-faint">
+                      {String(g.grade)}
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        {/* Stages by act */}
+        {actEntries.length > 0 && (
+          <section className="mb-12">
+            <SectionHeader title="STAGES" tag={`${stageRows.length} NORMAL`} />
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {actEntries.map((a) => (
+                <div key={a.act} className="border border-line bg-surface p-4">
+                  <div className="flex items-baseline justify-between mb-3 pb-2 border-b border-line">
+                    <h3 className="font-display text-sm font-bold text-ink uppercase tracking-wide">
+                      Act {a.act}
+                    </h3>
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-faint">
+                      {a.total} stages
+                    </span>
+                  </div>
+                  <ul className="space-y-1.5">
+                    {a.stages.map((s) => (
+                      <li key={String(s.StageKey)}>
+                        <Link
+                          href={`/database/stages/${s.StageKey}`}
+                          prefetch={false}
+                          className="font-mono text-xs text-dim hover:text-gold transition-colors"
+                        >
+                          {a.act}-{String(s.StageNo)} · {rowName(s, getDatasetMeta('stages')!, locale)}
+                        </Link>
+                      </li>
+                    ))}
+                    <li>
+                      <Link
+                        href="/database/stages"
+                        prefetch={false}
+                        className="font-mono text-[11px] uppercase tracking-wider text-gold hover:underline"
+                      >
+                        All stages →
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              ))}
             </div>
           </section>
         )}

@@ -6,8 +6,9 @@ import Header from '@/components/common/Header';
 import { getDatasetMeta, getRow, idField, rowName, rowIconUrl, resolveFk } from '@/lib/database';
 import { getHeroProfile } from '@/lib/hero';
 import HeroDetail from '@/components/database/HeroDetail';
-import { getItemSources } from '@/lib/drops';
+import { getItemSources, getMonsterGuide, getStageGuide } from '@/lib/drops';
 import ItemSourcesSection from '@/components/database/ItemSourcesSection';
+import { MonsterAppearances, StageOverview } from '@/components/database/MonsterStageSections';
 
 export const dynamic = 'force-dynamic';
 
@@ -160,6 +161,16 @@ export default function DatasetDetailPage({
         {dataset === 'items' && (
           <ItemSourcesSection sources={getItemSources(decodeURIComponent(key), locale)} />
         )}
+
+        {dataset === 'monsters' && (() => {
+          const guide = getMonsterGuide(decodeURIComponent(key), locale);
+          return guide ? <MonsterAppearances guide={guide} /> : null;
+        })()}
+
+        {dataset === 'stages' && (() => {
+          const guide = getStageGuide(decodeURIComponent(key), locale);
+          return guide ? <StageOverview guide={guide} /> : null;
+        })()}
 
         {complexEntries.length > 0 && (
           <section>

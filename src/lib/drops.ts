@@ -338,3 +338,155 @@ export function getItemSources(itemId: string | number, locale = 'en'): ItemSour
 
   return { stageDrops, crafting, synthesis: synthesisDeduped, cubeRecipes, usedIn };
 }
+
+// ---------------------------------------------------------------------------
+// Monster & stage guides (reuse the same indexes)
+// ---------------------------------------------------------------------------
+
+export interface MonsterStageAppearance {
+  key: string;
+  name: string;
+  act: number | null;
+  no: number | null;
+  boss: boolean;
+  spawnPct: number | null;
+  box: ItemRef | null;
+  boxChance: number | null;
+}
+
+export interface MonsterGuide {
+  appearances: MonsterStageAppearance[];
+}
+
+interface PrecomputedStageRef {
+  key: number;
+  act?: number;
+  no?: number;
+  boss?: boolean;
+  spawnPct?: number;
+}
+
+export function getMonsterGuide(monsterKey: string | number, locale = 'en'): MonsterGuide | null {
+  const monster = getRows('monsters').find((r) => String(r.MonsterKey) === String(monsterKey));
+  if (!monster) return null;
+  const stagesByKey = new Map<number, Row>();
+  for (const s of getRows('stages')) stagesByKey.set(Number(s.StageKey), s);
+
+  const refs = (monster.stages as PrecomputedStageRef[] | null) ?? [];
+  const appearances: MonsterStageAppearance[] = refs.map((ref) => {
+    const stage = stagesByKey.get(Number(ref.key));
+    const boxKey = stage
+      ? (ref.boss ? stage.BossDropItemKey : stage.MonsterDropItemKey)
+      : null;
+    const rate = stage
+      ? Number((ref.boss ? stage.BossDropItemRate : stage.MonsterDropItemRate) ?? 0)
+      : 0;
+    return {
+      key: String(ref.key),
+      name: stage ? pick(stage.StageNameKey_i18n, locale) || String(ref.key) : String(ref.key),
+      act: ref.act ?? null,
+      no: ref.no ?? null,
+      boss: Boolean(ref.boss),
+      spawnPct: ref.spawnPct ?? null,
+      box: boxKey == null ? null : itemRef(Number(boxKey), locale),
+      boxChance: boxKey == null ? null : rate / 10,
+    };
+  });
+  return { appearances };
+}
+
+export interface StageGuide {
+  waveMonsters: { key: string; name: string; portrait: string | null; boss: boolean }[];
+  drops: {
+    box: ItemRef;
+    role: 'monster' | 'boss';
+    chance: number;
+    preview: ItemRef[];
+  }[];
+  firstClear: ItemRef[];
+  soulstone: { item: ItemRef; amount: number } | null;
+}
+
+/** All drop-table keys attached to a box (boxId * 10 + variant). */
+function boxDropKeys(boxId: number): number[] {
+  const ix = indexes();
+  const out: number[] = [];
+  for (let variant = 0; variant <= 9; variant++) {
+    const dk = boxId * 10 + variant;
+    if (ix.dropRowsByKey.has(dk)) out.push(dk);
+  }
+  return out;
+}
+
+function boxPreview(boxId: number, locale: string): ItemRef[] {
+  const seen = new Set<string>();
+  const out: ItemRef[] = [];
+  for (const dk of boxDropKeys(boxId)) {
+    for (const item of dropResults(dk, locale, 8)) {
+      if (seen.has(item.id)) continue;
+      seen.add(item.id);
+      out.push(item);
+      if (out.length >= 8) return out;
+    }
+  }
+  return out;
+}
+
+export function getStageGuide(stageKey: string | number, locale = 'en'): StageGuide | null {
+  const stage = getRows('stages').find((r) => String(r.StageKey) === String(stageKey));
+  if (!stage) return null;
+
+  const monstersByKey = new Map<number, Row>();
+  for (const m of getRows('monsters')) monstersByKey.set(Number(m.MonsterKey), m);
+
+  const monsterRef = (key: number, boss: boolean) => {
+    const m = monstersByKey.get(key);
+    return {
+      key: String(key),
+      name: m ? pick(m.MonsterNameStringKey_i18n, locale) || String(key) : String(key),
+      portrait: m?.portrait == null ? null : String(m.portrait),
+      boss,
+    };
+  };
+
+  const waveMonsters = String(stage.Monsters ?? '')
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((tok) => monsterRef(Number(tok.split('_')[0]), false));
+  if (stage.BossMonsterKey != null) {
+    waveMonsters.push(monsterRef(Number(stage.BossMonsterKey), true));
+  }
+
+  const drops: StageGuide['drops'] = [];
+  if (stage.MonsterDropItemKey != null) {
+    const boxId = Number(stage.MonsterDropItemKey);
+    drops.push({
+      box: itemRef(boxId, locale),
+      role: 'monster',
+      chance: Number(stage.MonsterDropItemRate ?? 0) / 10,
+      preview: boxPreview(boxId, locale),
+    });
+  }
+  if (stage.BossDropItemKey != null) {
+    const boxId = Number(stage.BossDropItemKey);
+    drops.push({
+      box: itemRef(boxId, locale),
+      role: 'boss',
+      chance: Number(stage.BossDropItemRate ?? 0) / 10,
+      preview: boxPreview(boxId, locale),
+    });
+  }
+
+  const firstClear =
+    stage.FirstClearDropKey == null ? [] : dropResults(Number(stage.FirstClearDropKey), locale, 8);
+
+  const soulstone =
+    stage.SoulstoneItemKey == null
+      ? null
+      : {
+          item: itemRef(Number(stage.SoulstoneItemKey), locale),
+          amount: Number(stage.SoulstoneAmount ?? 0),
+        };
+
+  return { waveMonsters, drops, firstClear, soulstone };
+}

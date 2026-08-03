@@ -88,7 +88,7 @@ interface SectionHeaderProps {
 export function SectionHeader({ title, tag, live }: SectionHeaderProps) {
   return (
     <div className="flex items-center gap-4 mb-6">
-      <h2 className="font-display text-lg md:text-xl text-ink font-bold uppercase tracking-widest">
+      <h2 className="tbh-banner font-pixel text-xs md:text-sm uppercase px-10 py-3">
         {title}
       </h2>
       <div className="h-px flex-grow bg-line" />

@@ -83,22 +83,37 @@ export default function WikiHome({ locale }: { locale: string }) {
         {/* Hero */}
         <section
           aria-labelledby="wiki-hero-heading"
-          className="mb-10 border border-line p-6 sm:p-10 bg-[#0f1116] relative overflow-hidden"
+          className="tbh-frame mb-10 relative overflow-hidden"
         >
-          <div className="absolute top-0 right-0 p-4 font-mono text-[10px] text-gold opacity-40 hidden sm:block">
-            {'// TBH_DATABASE_ONLINE'}
-          </div>
-          <div className="relative z-10 max-w-2xl">
-            <p className="font-mono text-[11px] uppercase tracking-widest text-gold mb-3">
-              {'// TASK_BAR_HERO_WIKI'}
+          {/* Game world art inside the panel, dimmed left-to-right for text. */}
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-[url('/game/ui/Act3_Bg.png')] bg-cover bg-center [image-rendering:pixelated] opacity-30"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,11,10,0.95)_0%,rgba(13,11,10,0.8)_55%,rgba(13,11,10,0.35)_100%)]"
+          />
+          {/* Knight sprite on the right */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/game/ui/Arrage_ChaAnim_Knight_Large_0.png"
+            alt=""
+            width={280}
+            height={280}
+            className="hidden md:block absolute right-6 bottom-0 w-[240px] lg:w-[280px] object-contain [image-rendering:pixelated] drop-shadow-[0_0_24px_rgba(246,183,60,0.25)] pointer-events-none select-none"
+          />
+          <div className="relative z-10 max-w-2xl p-6 sm:p-10">
+            <p className="tbh-banner inline-block font-pixel text-[10px] uppercase px-8 py-2 mb-5">
+              Task Bar Hero Wiki
             </p>
             <h1
               id="wiki-hero-heading"
-              className="font-display text-4xl sm:text-6xl text-gold uppercase mb-4 tracking-tighter font-bold drop-shadow-[0_0_14px_rgba(246,183,60,0.35)]"
+              className="font-pixel text-2xl sm:text-4xl text-gold uppercase mb-5 leading-relaxed drop-shadow-[0_3px_0_rgba(0,0,0,0.8)]"
             >
               TBH Database
             </h1>
-            <p className="font-sans text-sm sm:text-base text-ink/80 leading-relaxed mb-8">
+            <p className="font-sans text-sm sm:text-base text-ink/85 leading-relaxed mb-8">
               Every hero, monster, gear, item, rune, skill and stage in TBH: Task Bar Hero —
               {' '}
               {manifest.row_count.toLocaleString()} entries across {manifest.dataset_count} datasets.
@@ -110,21 +125,18 @@ export default function WikiHome({ locale }: { locale: string }) {
               <Link
                 href="/database"
                 prefetch={false}
-                className="bg-gold text-surface font-mono text-sm px-8 py-4 font-bold uppercase tracking-wide transition-[filter,transform] hover:brightness-110 active:scale-[0.98]"
+                className="tbh-btn font-pixel text-[11px] px-8 py-4 uppercase text-center"
               >
                 Browse database
               </Link>
               <Link
                 href="/database/heroes"
                 prefetch={false}
-                className="border border-line text-ink font-mono text-sm px-8 py-4 font-bold uppercase tracking-wide transition-colors hover:bg-panel hover:border-gold"
+                className="tbh-btn-ghost font-pixel text-[11px] px-8 py-4 uppercase text-center"
               >
                 View heroes
               </Link>
             </div>
-          </div>
-          <div className="absolute right-0 bottom-0 opacity-5 pointer-events-none select-none">
-            <Icon name="database" className="text-[220px] leading-none" />
           </div>
         </section>
 
@@ -137,7 +149,7 @@ export default function WikiHome({ locale }: { locale: string }) {
                 key={d.name}
                 href={`/database/${d.name}`}
                 prefetch={false}
-                className="tbh-lift group border border-line bg-surface hover:border-gold p-5 transition-colors"
+                className="tbh-lift tbh-frame tbh-frame-hover group p-5 transition-colors"
               >
                 <div className="flex items-center justify-between mb-3">
                   <Icon
@@ -170,7 +182,7 @@ export default function WikiHome({ locale }: { locale: string }) {
                     key={key}
                     href={`/database/heroes/${key}`}
                     prefetch={false}
-                    className="tbh-lift group border border-line bg-surface hover:border-gold p-4 text-center transition-colors"
+                    className="tbh-lift tbh-frame tbh-frame-hover group p-4 text-center transition-colors"
                   >
                     <div className="w-12 h-12 mx-auto mb-3 bg-panel border border-line flex items-center justify-center group-hover:border-gold transition-colors overflow-hidden">
                       {icon ? (
@@ -202,7 +214,7 @@ export default function WikiHome({ locale }: { locale: string }) {
                     key={String(g.id)}
                     href={`/database/items/${g.id}`}
                     prefetch={false}
-                    className="tbh-lift group border border-line bg-surface hover:border-gold p-3 text-center transition-colors"
+                    className="tbh-lift tbh-frame tbh-frame-hover group p-3 text-center transition-colors"
                   >
                     <span className="block w-10 h-10 mx-auto mb-2 bg-panel border border-line group-hover:border-gold transition-colors overflow-hidden">
                       {g.icon ? (
@@ -231,7 +243,7 @@ export default function WikiHome({ locale }: { locale: string }) {
             <SectionHeader title="STAGES" tag={`${stageRows.length} NORMAL`} />
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {actEntries.map((a) => (
-                <div key={a.act} className="border border-line bg-surface p-4">
+                <div key={a.act} className="tbh-frame p-4">
                   <div className="flex items-baseline justify-between mb-3 pb-2 border-b border-line">
                     <h3 className="font-display text-sm font-bold text-ink uppercase tracking-wide">
                       Act {a.act}
@@ -273,7 +285,7 @@ export default function WikiHome({ locale }: { locale: string }) {
           <SectionHeader title="ALL CATEGORIES" tag={`${manifest.dataset_count}`} />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {groups.map((g) => (
-              <div key={g.group} className="border border-line bg-surface p-4">
+              <div key={g.group} className="tbh-frame p-4">
                 <div className="flex items-center gap-2 mb-3 pb-2 border-b border-line">
                   <Icon name={GROUP_ICON[g.group] ?? 'category'} className="text-gold text-[18px]" />
                   <h3 className="font-display text-sm font-bold text-ink uppercase tracking-wide">

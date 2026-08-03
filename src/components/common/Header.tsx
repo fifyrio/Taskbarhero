@@ -13,16 +13,26 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="tbh-root bg-surface/90 backdrop-blur-md border-b border-line sticky top-0 z-50">
+    <header className="sticky top-0 z-50 border-b-2 border-[#2a0806] bg-[linear-gradient(180deg,#3a0d0a_0%,#240806_100%)] shadow-[inset_0_-1px_0_rgba(246,183,60,0.25),0_4px_14px_rgba(0,0,0,0.5)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Text logo */}
-          <Link href="/" prefetch={false} className="flex items-baseline gap-2 group">
-            <span className="font-display text-2xl font-black uppercase tracking-tighter text-gold drop-shadow-[0_0_8px_rgba(246,183,60,0.4)] group-hover:brightness-110 transition">
-              TBH
-            </span>
-            <span className="hidden sm:inline font-mono text-[10px] uppercase tracking-[0.15em] text-dim">
-              {'// Task Bar Hero Wiki'}
+          {/* Gold-framed logo chip */}
+          <Link href="/" prefetch={false} className="tbh-frame tbh-frame-hover flex items-center gap-2.5 px-3 py-1.5 group">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/game/ui/Icon_Gold.png"
+              alt=""
+              width={22}
+              height={22}
+              className="w-[22px] h-[22px] object-contain [image-rendering:pixelated]"
+            />
+            <span className="flex flex-col leading-none">
+              <span className="font-pixel text-sm text-gold group-hover:brightness-110 transition">
+                TBH
+              </span>
+              <span className="hidden sm:block font-mono text-[9px] uppercase tracking-[0.15em] text-tan mt-1">
+                Task Bar Hero Wiki
+              </span>
             </span>
           </Link>
 
@@ -33,7 +43,7 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 prefetch={false}
-                className="text-dim hover:text-gold transition-colors py-2"
+                className="font-pixel text-[10px] text-tan hover:text-gold transition-colors py-2"
               >
                 {item.label}
               </Link>
@@ -67,7 +77,7 @@ export default function Header() {
                   key={item.href}
                   href={item.href}
                   prefetch={false}
-                  className="text-dim hover:text-gold transition-colors px-4"
+                  className="font-pixel text-[10px] text-tan hover:text-gold transition-colors px-4"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}

@@ -15,7 +15,7 @@ export function generateMetadata({
   const baseUrl = SITE_URL;
   const path = locale === 'en' ? '/database' : `/${locale}/database`;
   return {
-    title: 'Database | Taskbar Hero Wiki',
+    title: 'Database',
     description:
       'Complete TBH: Task Bar Hero database — heroes, monsters, gear, items, runes, skills, stages and more.',
     alternates: { canonical: `${baseUrl}${path}` },

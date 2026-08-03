@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import { Link } from '@/i18n/routing';
 import Header from '@/components/common/Header';
 import { getDatasetMeta, getRow, idField, rowName, rowIconUrl, resolveFk } from '@/lib/database';
+import { getHeroProfile } from '@/lib/hero';
+import HeroDetail from '@/components/database/HeroDetail';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,8 +22,20 @@ export function generateMetadata({
     locale === 'en'
       ? `/database/${dataset}/${key}`
       : `/${locale}/database/${dataset}/${key}`;
+
+  if (dataset === 'heroes') {
+    const hero = getHeroProfile(decodeURIComponent(key), locale);
+    if (hero) {
+      return {
+        title: `${hero.name} — Skills, Stats & Gear`,
+        description: `${hero.name} (${hero.classType}) guide for TBH: Task Bar Hero — ${hero.description} Base stats, all ${hero.actives.length} active skills with per-level values, passive upgrades and usable ${hero.mainWeapon.toLowerCase()}/${hero.subWeapon.toLowerCase()} gear.`,
+        alternates: { canonical: `${baseUrl}${path}` },
+      };
+    }
+  }
+
   return {
-    title: `${name} | ${meta?.label ?? dataset} | Taskbar Hero`,
+    title: `${name} | ${meta?.label ?? dataset}`,
     description: `${name} — full stats and details from the TBH: Task Bar Hero ${meta?.label ?? dataset} database.`,
     alternates: { canonical: `${baseUrl}${path}` },
   };
@@ -40,6 +54,33 @@ export default function DatasetDetailPage({
   if (!meta) notFound();
   const row = getRow(dataset, decodeURIComponent(key));
   if (!row) notFound();
+
+  // Heroes get a curated, player-readable page instead of the raw field dump.
+  if (dataset === 'heroes') {
+    const hero = getHeroProfile(decodeURIComponent(key), locale);
+    if (hero) {
+      return (
+        <div className="tbh-root tbh-grain font-display min-h-screen">
+          <div className="tbh-scanline" aria-hidden />
+          <Header />
+          <main className="max-w-[1100px] mx-auto px-4 sm:px-6 py-8">
+            <nav className="font-mono text-[11px] uppercase tracking-widest text-faint mb-4">
+              <Link href="/database" prefetch={false} className="hover:text-gold transition-colors">
+                Database
+              </Link>
+              <span className="mx-2">/</span>
+              <Link href="/database/heroes" prefetch={false} className="hover:text-gold transition-colors">
+                Heroes
+              </Link>
+              <span className="mx-2">/</span>
+              <span className="text-gold">{hero.name}</span>
+            </nav>
+            <HeroDetail hero={hero} />
+          </main>
+        </div>
+      );
+    }
+  }
 
   const id = idField(meta);
   const name = rowName(row, meta, locale);

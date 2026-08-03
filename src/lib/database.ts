@@ -89,8 +89,13 @@ export function getRows(name: string): Row[] {
 }
 
 // Primary-key column for a dataset (first column by manifest convention, e.g. HeroKey).
+// Some datasets (e.g. items) were re-shaped after the manifest was written and use
+// plain `id` instead — fall back to what the rows actually contain.
 export function idField(meta: DatasetMeta): string {
-  return meta.columns[0];
+  const declared = meta.columns[0];
+  const first = getRows(meta.name)[0];
+  if (first && !(declared in first) && 'id' in first) return 'id';
+  return declared;
 }
 
 export function getRow(name: string, key: string): Row | null {
@@ -113,6 +118,15 @@ export function rowName(row: Row, meta: DatasetMeta, locale = 'en'): string {
       if (v) return String(v).replace(/\n/g, ' ');
     }
   }
+  // Re-shaped datasets (items) carry a plain `name` i18n object not declared in
+  // the manifest columns.
+  const inlineName = row['name'];
+  if (inlineName && typeof inlineName === 'object') {
+    const v = (inlineName as Record<string, string>)[dataLocale]
+      ?? (inlineName as Record<string, string>)['en-US'];
+    if (v) return String(v).replace(/\n/g, ' ');
+  }
+  if (typeof inlineName === 'string' && inlineName) return inlineName;
   const nameCol = meta.columns.find((c) => /name/i.test(c) && !c.endsWith('_i18n'));
   if (nameCol && row[nameCol]) return String(row[nameCol]);
   return String(row[idField(meta)] ?? '');

@@ -28,7 +28,7 @@ export function generateMetadata({
   const path = locale === 'en' ? `/database/${dataset}` : `/${locale}/database/${dataset}`;
   const label = meta?.label ?? dataset;
   return {
-    title: `${label} | Taskbar Hero Database`,
+    title: `${label} Database`,
     description: `All ${label} in TBH: Task Bar Hero — ${meta?.rows ?? 0} entries with stats and details.`,
     alternates: { canonical: `${baseUrl}${path}` },
   };

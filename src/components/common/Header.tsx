@@ -13,28 +13,25 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b-2 border-[#2a0806] bg-[linear-gradient(180deg,#3a0d0a_0%,#240806_100%)] shadow-[inset_0_-1px_0_rgba(246,183,60,0.25),0_4px_14px_rgba(0,0,0,0.5)]">
+    <header className="tbh-taskbar sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Gold-framed logo chip */}
-          <Link href="/" prefetch={false} className="tbh-frame tbh-frame-hover flex items-center gap-2.5 px-3 py-1.5 group">
+        <div className="flex justify-between items-center h-14">
+          {/* Start button */}
+          <Link href="/" prefetch={false} className="tbh-btn flex items-center gap-2 px-3 py-1.5 group">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/game/ui/Icon_Gold.png"
               alt=""
-              width={22}
-              height={22}
-              className="w-[22px] h-[22px] object-contain [image-rendering:pixelated]"
+              width={18}
+              height={18}
+              className="w-[18px] h-[18px] object-contain [image-rendering:pixelated]"
             />
-            <span className="flex flex-col leading-none">
-              <span className="font-pixel text-sm text-gold group-hover:brightness-110 transition">
-                TBH
-              </span>
-              <span className="hidden sm:block font-mono text-[9px] uppercase tracking-[0.15em] text-tan mt-1">
-                Task Bar Hero Wiki
-              </span>
-            </span>
+            <span className="font-pixel text-[11px]">TBH</span>
           </Link>
+          <span className="hidden sm:flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.15em] text-dim mr-auto ml-4">
+            <span className="tbh-led" aria-hidden />
+            task_bar_hero.wiki — database online
+          </span>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6 font-mono text-xs uppercase tracking-wider">

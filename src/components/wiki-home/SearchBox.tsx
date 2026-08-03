@@ -65,18 +65,20 @@ export default function SearchBox() {
 
   return (
     <div ref={boxRef} className="relative max-w-lg">
-      <Icon
-        name="search"
-        className="absolute left-3 top-1/2 -translate-y-1/2 text-faint text-lg pointer-events-none"
-      />
+      <span
+        aria-hidden
+        className="absolute left-3 top-1/2 -translate-y-1/2 font-mono text-sm text-[#3ddc97] pointer-events-none"
+      >
+        &gt;
+      </span>
       <input
         type="search"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onFocus={() => results.length > 0 && setOpen(true)}
-        placeholder="SEARCH_DATABASE..."
+        placeholder="search_database --all"
         aria-label="Search the database"
-        className="w-full bg-panel border border-line py-3 pl-11 pr-4 text-sm font-mono text-ink uppercase placeholder:text-faint focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold transition-colors"
+        className="w-full bg-[#0d1015] border border-line py-3 pl-8 pr-4 text-sm font-mono text-ink placeholder:text-faint caret-[#3ddc97] focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold transition-colors"
       />
 
       {open && (query.trim().length >= 2) && (

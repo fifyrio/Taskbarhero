@@ -83,17 +83,20 @@ export default function WikiHome({ locale }: { locale: string }) {
         {/* Hero */}
         <section
           aria-labelledby="wiki-hero-heading"
-          className="tbh-frame mb-10 relative overflow-hidden"
+          className="tbh-window mb-10 relative overflow-hidden"
         >
-          {/* Game world art inside the panel, dimmed left-to-right for text. */}
+          {/* Game world art as the window's wallpaper, dimmed for text. */}
           <div
             aria-hidden
-            className="absolute inset-0 bg-[url('/game/ui/Act3_Bg.png')] bg-cover bg-center [image-rendering:pixelated] opacity-30"
+            className="absolute inset-x-0 top-[28px] bottom-0 bg-[url('/game/ui/Act3_Bg.png')] bg-cover bg-center [image-rendering:pixelated] opacity-25"
           />
           <div
             aria-hidden
-            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,11,10,0.95)_0%,rgba(13,11,10,0.8)_55%,rgba(13,11,10,0.35)_100%)]"
+            className="absolute inset-x-0 top-[28px] bottom-0 bg-[linear-gradient(90deg,rgba(11,13,18,0.95)_0%,rgba(11,13,18,0.8)_55%,rgba(11,13,18,0.35)_100%)]"
           />
+          <span className="absolute top-0 left-3 h-[28px] flex items-center font-mono text-[10px] uppercase tracking-widest text-dim z-10">
+            C:\TBH\database
+          </span>
           {/* Knight sprite on the right */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -104,8 +107,8 @@ export default function WikiHome({ locale }: { locale: string }) {
             className="hidden md:block absolute right-6 bottom-0 w-[240px] lg:w-[280px] object-contain [image-rendering:pixelated] drop-shadow-[0_0_24px_rgba(246,183,60,0.25)] pointer-events-none select-none"
           />
           <div className="relative z-10 max-w-2xl p-6 sm:p-10">
-            <p className="tbh-banner inline-block font-pixel text-[10px] uppercase px-8 py-2 mb-5">
-              Task Bar Hero Wiki
+            <p className="tbh-banner inline-block font-mono text-[11px] uppercase tracking-widest mb-5">
+              Task_Bar_Hero_Wiki
             </p>
             <h1
               id="wiki-hero-heading"

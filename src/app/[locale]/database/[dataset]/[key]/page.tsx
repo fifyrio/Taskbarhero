@@ -6,6 +6,8 @@ import Header from '@/components/common/Header';
 import { getDatasetMeta, getRow, idField, rowName, rowIconUrl, resolveFk } from '@/lib/database';
 import { getHeroProfile } from '@/lib/hero';
 import HeroDetail from '@/components/database/HeroDetail';
+import { getItemSources } from '@/lib/drops';
+import ItemSourcesSection from '@/components/database/ItemSourcesSection';
 
 export const dynamic = 'force-dynamic';
 
@@ -154,6 +156,10 @@ export default function DatasetDetailPage({
             })}
           </dl>
         </section>
+
+        {dataset === 'items' && (
+          <ItemSourcesSection sources={getItemSources(decodeURIComponent(key), locale)} />
+        )}
 
         {complexEntries.length > 0 && (
           <section>

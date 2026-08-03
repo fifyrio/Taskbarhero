@@ -168,14 +168,14 @@
     "home": {
       "seo": {
         "title": "Taskbar Hero Wiki — Heroes, Items, Gear & Database",
-        "description": "Complete TBH: Task Bar Hero database — every hero, monster, gear, item, rune, skill and stage, with full stats in 16 languages.",
+        "description": "Complete TBH: Task Bar Hero database — every hero, monster, gear, item, rune, skill and stage with full stats, drop sources and recipes.",
         "ogTitle": "Taskbar Hero Wiki & Database",
-        "ogDescription": "Browse the full TBH: Task Bar Hero database — heroes, gear, items, runes, skills, stages and more, in 16 languages."
+        "ogDescription": "Browse the full TBH: Task Bar Hero database — heroes, gear, items, runes, skills, stages, drop rates and recipes."
       },
       "hero": {
         "title1": "Taskbar Hero",
-        "title2": "AI Image Studio",
-        "subtitle": "Create stunning images with the power of AI. From realistic photos to artistic illustrations, bring your imagination to life in seconds.",
+        "title2": "Wiki & Database",
+        "subtitle": "Every hero, item, monster, stage and drop in TBH: Task Bar Hero.",
         "cta": "Start Creating",
         "appStore": "App Store"
       },

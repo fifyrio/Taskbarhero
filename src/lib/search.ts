@@ -59,7 +59,7 @@ export function search(query: string, limit = 24): SearchResult[] {
   const contains: SearchEntry[] = [];
   for (const e of index) {
     const pos = e.nameLower.indexOf(q);
-    if (pos === 0) starts.push(e);
+    if (pos === 0 || e.key === q) starts.push(e);
     else if (pos > 0) contains.push(e);
     if (starts.length >= limit) break;
   }

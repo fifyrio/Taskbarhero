@@ -76,6 +76,12 @@ export default function SearchBox() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onFocus={() => results.length > 0 && setOpen(true)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' && query.trim().length >= 2) {
+            setOpen(false);
+            router.push(`/search?q=${encodeURIComponent(query.trim())}`);
+          }
+        }}
         placeholder="search_database --all"
         aria-label="Search the database"
         className="w-full bg-[#0d1015] border border-line py-3 pl-8 pr-4 text-sm font-mono text-ink placeholder:text-faint caret-[#3ddc97] focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold transition-colors"

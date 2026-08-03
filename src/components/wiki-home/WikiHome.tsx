@@ -12,13 +12,16 @@ import {
   rowIconUrl,
   type Row,
 } from '@/lib/database';
+import { getSourcedItemIds } from '@/lib/drops';
 
 // Highest gear grades, best first — used to pick homepage featured gear.
 const TOP_GRADES = ['COSMIC', 'CELESTIAL', 'BEYOND', 'ARCANA', 'IMMORTAL', 'DIVINE'];
 
-// One featured top-grade item per gear type, deduped by name.
+// One featured top-grade item per gear type, deduped by name. Only items with
+// an actual drop/craft source — their pages answer "how to get".
 function featuredGear(count: number): Row[] {
-  const items = getRows('items').filter((r) => r.type === 'GEAR');
+  const sourced = getSourcedItemIds();
+  const items = getRows('items').filter((r) => r.type === 'GEAR' && sourced.has(Number(r.id)));
   const byGrade = new Map<string, Row[]>();
   for (const it of items) {
     const g = String(it.grade);

@@ -1,27 +1,31 @@
 import type { MetadataRoute } from 'next';
 import { SITE_URL } from '@/lib/site';
 import { getDatasets, getRows } from '@/lib/database';
+import { getSourcedItemIds } from '@/lib/drops';
 
-// English-only sitemap: core pages, one URL per dataset index, plus the six
-// curated hero pages (strongest landing pages). Other detail pages (25k+) are
-// intentionally excluded until they carry player-readable content.
+// English-only sitemap covering only substantial pages: core pages, dataset
+// indexes, the six curated hero pages, all stages and monsters (both carry
+// relationship sections), and items that have at least one drop/craft source.
+// Thin item pages (name + icon only) are excluded and served noindex.
 export default function sitemap(): MetadataRoute.Sitemap {
-  const core: MetadataRoute.Sitemap = [
-    { url: SITE_URL, changeFrequency: 'weekly', priority: 1 },
-    { url: `${SITE_URL}/database`, changeFrequency: 'weekly', priority: 0.9 },
-  ];
-
-  const datasets: MetadataRoute.Sitemap = getDatasets().map((d) => ({
-    url: `${SITE_URL}/database/${d.name}`,
+  const entry = (path: string, priority: number): MetadataRoute.Sitemap[number] => ({
+    url: `${SITE_URL}${path}`,
     changeFrequency: 'weekly' as const,
-    priority: 0.7,
-  }));
+    priority,
+  });
 
-  const heroes: MetadataRoute.Sitemap = getRows('heroes').map((h) => ({
-    url: `${SITE_URL}/database/heroes/${h.HeroKey}`,
-    changeFrequency: 'weekly' as const,
-    priority: 0.9,
-  }));
+  const core = [entry('', 1), entry('/database', 0.9)];
 
-  return [...core, ...heroes, ...datasets];
+  const heroes = getRows('heroes').map((h) => entry(`/database/heroes/${h.HeroKey}`, 0.9));
+  const stages = getRows('stages').map((s) => entry(`/database/stages/${s.StageKey}`, 0.7));
+  const monsters = getRows('monsters').map((m) => entry(`/database/monsters/${m.MonsterKey}`, 0.7));
+
+  const sourced = getSourcedItemIds();
+  const items = getRows('items')
+    .filter((i) => sourced.has(Number(i.id)))
+    .map((i) => entry(`/database/items/${i.id}`, 0.6));
+
+  const datasets = getDatasets().map((d) => entry(`/database/${d.name}`, 0.5));
+
+  return [...core, ...heroes, ...stages, ...monsters, ...items, ...datasets];
 }

@@ -490,3 +490,153 @@ export function getStageGuide(stageKey: string | number, locale = 'en'): StageGu
 
   return { waveMonsters, drops, firstClear, soulstone };
 }
+
+// ---------------------------------------------------------------------------
+// Item guide: player-readable header data for item pages
+// ---------------------------------------------------------------------------
+
+export interface ItemGuide {
+  id: string;
+  name: string;
+  grade: string | null;
+  itemType: string | null;      // GEAR | MATERIAL | STAGEBOX
+  gearType: string | null;      // SWORD, SHIELD, ...
+  level: number | null;
+  icon: string | null;
+  /** Readable base stats from the gear table, e.g. "Attack Damage +1". */
+  baseStats: string[];
+  /** Inherent stat lines (non-NONE only). */
+  inherentStats: string[];
+  /** Heroes that can equip this gear type. */
+  usableHeroes: { key: string; name: string; icon: string | null; slot: 'main' | 'off-hand' }[];
+  /** Same-name items at other grades/levels. */
+  versions: { id: string; grade: string | null; level: number | null }[];
+}
+
+// Split CamelCase stat identifiers into words ("AttackDamage" -> "Attack Damage").
+function statLabel(stat: string): string {
+  return stat.replace(/([a-z])([A-Z])/g, '$1 $2');
+}
+
+export function getItemGuide(itemId: string | number, locale = 'en'): ItemGuide | null {
+  const ix = indexes();
+  const id = Number(itemId);
+  const item = ix.itemsById.get(id);
+  if (!item) return null;
+
+  const gearType = item.gear == null ? null : String(item.gear);
+
+  const baseStats: string[] = [];
+  const inherentStats: string[] = [];
+  if (gearType) {
+    const gearRow = getRows('gear').find((g) => Number(g.GearKey) === id);
+    const typeRow = getRows('gear_types').find((t) => t.GearType === gearType);
+    if (gearRow && typeRow) {
+      for (const slot of [1, 2] as const) {
+        const stat = typeRow[`BaseStat${slot}_STATTYPE`];
+        const value = gearRow[`BaseStat${slot}_Value`];
+        if (stat && stat !== 'NONE' && value != null) {
+          baseStats.push(`${statLabel(String(stat))} +${value}`);
+        }
+      }
+      for (const slot of [1, 2, 3] as const) {
+        const stat = gearRow[`InherentStat${slot}_STATTYPE`];
+        const value = gearRow[`InherentStat${slot}_Value`];
+        if (stat && stat !== 'NONE' && Number(value) !== 0) {
+          inherentStats.push(`${statLabel(String(stat))} +${value}`);
+        }
+      }
+    }
+  }
+
+  const usableHeroes: ItemGuide['usableHeroes'] = [];
+  if (gearType) {
+    for (const h of getRows('heroes')) {
+      const slot =
+        h.MainWeaponGearType === gearType ? 'main' :
+        h.SubWeaponGearType === gearType ? 'off-hand' : null;
+      if (!slot) continue;
+      usableHeroes.push({
+        key: String(h.HeroKey),
+        name: pick(h.HeroNameKey_i18n, locale) || String(h.HeroKey),
+        icon: h.icon == null ? null : String(h.icon),
+        slot,
+      });
+    }
+  }
+
+  const nameEn = pick(item.name, 'en');
+  const versions: ItemGuide['versions'] = [];
+  if (nameEn) {
+    ix.itemsById.forEach((other, otherId) => {
+      if (otherId === id) return;
+      if (pick(other.name, 'en') !== nameEn) return;
+      versions.push({
+        id: String(otherId),
+        grade: other.grade == null ? null : String(other.grade),
+        level: other.level == null ? null : Number(other.level),
+      });
+    });
+    versions.sort((a, b) => (a.level ?? 0) - (b.level ?? 0));
+  }
+
+  return {
+    id: String(id),
+    name: pick(item.name, locale) || String(id),
+    grade: item.grade == null ? null : String(item.grade),
+    itemType: item.type == null ? null : String(item.type),
+    gearType,
+    level: item.level == null ? null : Number(item.level),
+    icon: item.icon == null ? null : String(item.icon),
+    baseStats,
+    inherentStats,
+    usableHeroes,
+    versions,
+  };
+}
+
+/** Item ids that have at least one drop/craft source — the "quality" set for
+ *  sitemap inclusion and indexing decisions. */
+export function getSourcedItemIds(): Set<number> {
+  const ix = indexes();
+  const out = new Set<number>();
+  ix.dropKeysByItem.forEach((_dks, item) => out.add(item));
+  ix.craftByMaterial.forEach((_recipes, item) => out.add(item));
+  return out;
+}
+
+export interface StageSummary {
+  name: string;
+  act: number | null;
+  stageNo: number | null;
+  level: number | null;
+  type: string;
+  waveAmount: number | null;
+  waveMonsterAmount: number | null;
+  bossName: string | null;
+  nextStage: { key: string; name: string } | null;
+}
+
+export function getStageSummary(stageKey: string | number, locale = 'en'): StageSummary | null {
+  const stage = getRows('stages').find((r) => String(r.StageKey) === String(stageKey));
+  if (!stage) return null;
+  const boss = stage.BossMonsterKey == null
+    ? null
+    : getRows('monsters').find((m) => Number(m.MonsterKey) === Number(stage.BossMonsterKey));
+  const next = stage.NextStageKey == null
+    ? null
+    : getRows('stages').find((s) => Number(s.StageKey) === Number(stage.NextStageKey));
+  return {
+    name: pick(stage.StageNameKey_i18n, locale) || String(stage.StageKey),
+    act: stage.Act == null ? null : Number(stage.Act),
+    stageNo: stage.StageNo == null ? null : Number(stage.StageNo),
+    level: stage.StageLevel == null ? null : Number(stage.StageLevel),
+    type: String(stage.STAGETYPE ?? 'NORMAL'),
+    waveAmount: stage.WaveAmount == null ? null : Number(stage.WaveAmount),
+    waveMonsterAmount: stage.WaveMonsterAmount == null ? null : Number(stage.WaveMonsterAmount),
+    bossName: boss ? pick(boss.MonsterNameStringKey_i18n, locale) || String(stage.BossMonsterKey) : null,
+    nextStage: next
+      ? { key: String(next.StageKey), name: pick(next.StageNameKey_i18n, locale) || String(next.StageKey) }
+      : null,
+  };
+}

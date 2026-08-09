@@ -29,14 +29,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const list = await fetchList(slug);
   if (!list) {
-    return { title: 'Tier list não encontrada | Taskbar Hero' };
+    return { title: 'Tier list not found | Taskbar Hero' };
   }
   const path =
     locale === 'en'
       ? `/tier-lists/${slug}`
       : `/${locale}/tier-lists/${slug}`;
   const description =
-    list.description ?? `Tier list ${list.title} — ranking da comunidade.`;
+    list.description ?? `Tier list ${list.title} — community ranking.`;
   return {
     title: `${list.title} | Tier List`,
     description,
@@ -125,7 +125,7 @@ export default async function TierListViewerPage({
           className="inline-flex items-center gap-1 font-mono text-[11px] uppercase text-faint hover:text-gold transition mb-6"
         >
           <Icon name="arrow_back" className="text-[14px] leading-none" />
-          Voltar
+          Back
         </Link>
 
         <header className="border-b border-line pb-6 mb-8">

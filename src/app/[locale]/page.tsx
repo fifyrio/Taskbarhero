@@ -47,13 +47,18 @@ export async function generateMetadata({
     title: t('title'),
     description: t('description'),
     keywords: [
-      'Task Bar Hero',
       'TBH wiki',
+      'tbhwiki',
+      'TBH: Task Bar Hero',
+      'Task Bar Hero',
+      'taskbarhero',
+      'tbh task bar hero wiki',
       'TBH database',
+      'TBH builds',
+      'TBH tier list',
       'Task Bar Hero heroes',
       'Task Bar Hero items',
-      'Task Bar Hero gear',
-      'Task Bar Hero tier list'
+      'Task Bar Hero gear'
     ],
     openGraph: {
       title: t('ogTitle'),
@@ -102,7 +107,7 @@ export default async function HomePage({
       <BreadcrumbSchema
         items={[{ name: 'Home', url: `${baseUrl}${pathSegment}` }]}
       />
-      <WikiHome locale={locale} />
+      {await WikiHome({ locale })}
     </>
   );
 }

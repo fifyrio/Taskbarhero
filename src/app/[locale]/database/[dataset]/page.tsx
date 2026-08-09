@@ -13,6 +13,7 @@ import {
   type DatasetMeta,
   type Row,
 } from '@/lib/database';
+import { DATASET_SEO } from '@/lib/dataset-seo';
 
 export const dynamic = 'force-dynamic';
 
@@ -27,9 +28,13 @@ export function generateMetadata({
   const baseUrl = SITE_URL;
   const path = locale === 'en' ? `/database/${dataset}` : `/${locale}/database/${dataset}`;
   const label = meta?.label ?? dataset;
+  const seo = DATASET_SEO[dataset];
   return {
-    title: `${label} Database`,
-    description: `All ${label} in TBH: Task Bar Hero — ${meta?.rows ?? 0} entries with stats and details.`,
+    title: seo?.title ?? `${label} Database`,
+    description:
+      seo?.description ??
+      `All ${label} in TBH: Task Bar Hero — ${meta?.rows ?? 0} entries with stats and details.`,
+    ...(seo?.keywords ? { keywords: seo.keywords } : {}),
     alternates: { canonical: `${baseUrl}${path}` },
   };
 }

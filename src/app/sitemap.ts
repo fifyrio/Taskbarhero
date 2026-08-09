@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { SITE_URL } from '@/lib/site';
 import { getDatasets, getRows } from '@/lib/database';
 import { getSourcedItemIds } from '@/lib/drops';
+import { BUILD_SLUGS } from '@/lib/builds';
 
 // English-only sitemap covering only substantial pages: core pages, dataset
 // indexes, the six curated hero pages, all stages and monsters (both carry
@@ -14,7 +15,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority,
   });
 
-  const core = [entry('', 1), entry('/database', 0.9)];
+  const core = [
+    entry('', 1),
+    entry('/database', 0.9),
+    entry('/builds', 0.9),
+    entry('/tier-lists', 0.8),
+    entry('/tools', 0.7),
+    entry('/tools/grades', 0.7),
+  ];
+
+  const builds = BUILD_SLUGS.map((s) => entry(`/builds/${s}`, 0.8));
 
   const heroes = getRows('heroes').map((h) => entry(`/database/heroes/${h.HeroKey}`, 0.9));
   const stages = getRows('stages').map((s) => entry(`/database/stages/${s.StageKey}`, 0.7));
@@ -27,5 +37,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const datasets = getDatasets().map((d) => entry(`/database/${d.name}`, 0.5));
 
-  return [...core, ...heroes, ...stages, ...monsters, ...items, ...datasets];
+  return [...core, ...builds, ...heroes, ...stages, ...monsters, ...items, ...datasets];
 }

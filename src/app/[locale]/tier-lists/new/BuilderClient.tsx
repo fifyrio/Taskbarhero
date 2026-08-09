@@ -17,7 +17,7 @@ function slugify(input: string): string {
       .replace(/[̀-ͯ]/g, '')
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/^-+|-+$/g, '')
-      .slice(0, 60) || `lista-${Date.now()}`
+      .slice(0, 60) || `list-${Date.now()}`
   );
 }
 
@@ -104,11 +104,11 @@ export default function BuilderClient() {
       return;
     }
     if (!gameId) {
-      setError('Selecione um jogo');
+      setError('Select a game');
       return;
     }
     if (!title.trim()) {
-      setError('Informe um título');
+      setError('Enter a title');
       return;
     }
 
@@ -128,7 +128,7 @@ export default function BuilderClient() {
       });
       const json = await res.json();
       if (!res.ok || !json.success || !json.data) {
-        throw new Error(json.error || 'Falha ao salvar');
+        throw new Error(json.error || 'Failed to save');
       }
 
       if (publish) {
@@ -143,7 +143,7 @@ export default function BuilderClient() {
 
       router.push(`/tier-lists/${json.data.slug}`);
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Falha ao salvar');
+      setError(err instanceof Error ? err.message : 'Failed to save');
       setSaving(false);
     }
   };
@@ -151,7 +151,7 @@ export default function BuilderClient() {
   if (loading) {
     return (
       <p className="font-mono text-xs text-faint uppercase py-20 text-center">
-        Carregando…
+        Loading…
       </p>
     );
   }
@@ -161,10 +161,10 @@ export default function BuilderClient() {
       <div className="border border-line bg-surface p-12 text-center max-w-md mx-auto mt-10">
         <Icon name="lock" className="text-gold text-4xl mb-4" />
         <h1 className="font-display text-xl text-ink font-bold mb-2">
-          Entre para criar
+          Sign in to create
         </h1>
         <p className="font-mono text-xs text-faint uppercase mb-6">
-          Você precisa de uma conta para montar uma tier list.
+          You need an account to build a tier list.
         </p>
         <button
           type="button"
@@ -172,7 +172,7 @@ export default function BuilderClient() {
           className="inline-flex items-center gap-2 bg-gold text-black font-mono text-xs uppercase tracking-widest font-bold px-5 py-3 hover:brightness-110 transition"
         >
           <Icon name="login" className="text-[16px] leading-none" />
-          Entrar com Google
+          Sign in with Google
         </button>
       </div>
     );
@@ -181,21 +181,21 @@ export default function BuilderClient() {
   return (
     <div>
       <h1 className="font-display text-2xl md:text-4xl font-bold text-ink uppercase tracking-wide mb-6">
-        Nova Tier List
+        New Tier List
       </h1>
 
       {/* Meta */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         <label className="flex flex-col gap-1">
           <span className="font-mono text-[10px] uppercase text-faint tracking-widest">
-            Jogo
+            Game
           </span>
           <select
             value={gameId}
             onChange={(e) => setGameId(e.target.value)}
             className="bg-surface border border-line text-ink px-3 py-2 font-mono text-sm focus:outline-none focus:border-gold"
           >
-            {games.length === 0 && <option value="">— sem jogos —</option>}
+            {games.length === 0 && <option value="">— no games —</option>}
             {games.map((g) => (
               <option key={g.id} value={g.id}>
                 {g.name}
@@ -205,7 +205,7 @@ export default function BuilderClient() {
         </label>
         <label className="flex flex-col gap-1">
           <span className="font-mono text-[10px] uppercase text-faint tracking-widest">
-            Título
+            Title
           </span>
           <input
             value={title}
@@ -216,7 +216,7 @@ export default function BuilderClient() {
         </label>
         <label className="flex flex-col gap-1">
           <span className="font-mono text-[10px] uppercase text-faint tracking-widest">
-            Categoria
+            Category
           </span>
           <input
             value={category}
@@ -231,18 +231,18 @@ export default function BuilderClient() {
         {/* LEFT: available entities */}
         <section className="border border-line bg-surface p-4">
           <h2 className="font-mono text-xs uppercase tracking-widest text-gold mb-3">
-            Entidades disponíveis
+            Available entities
           </h2>
           <p className="font-mono text-[10px] text-faint uppercase mb-4">
-            Clique para adicionar ao tier {selectedTier}
+            Click to add to tier {selectedTier}
           </p>
           {entitiesLoading ? (
             <p className="font-mono text-xs text-faint uppercase">Carregando…</p>
           ) : available.length === 0 ? (
             <p className="font-mono text-xs text-faint uppercase">
               {entities.length === 0
-                ? 'Nenhuma entidade para este jogo.'
-                : 'Todas atribuídas.'}
+                ? 'No entities for this game.'
+                : 'All assigned.'}
             </p>
           ) : (
             <div className="flex flex-wrap gap-2">
@@ -277,7 +277,7 @@ export default function BuilderClient() {
         {/* RIGHT: tier rows */}
         <section className="border border-line bg-surface p-4">
           <h2 className="font-mono text-xs uppercase tracking-widest text-gold mb-3">
-            Tiers — selecione uma linha
+            Tiers — select a row
           </h2>
           <div className="space-y-px bg-line border border-line">
             {TIER_GRADES.map((grade) => {
@@ -305,7 +305,7 @@ export default function BuilderClient() {
                         key={entity.id}
                         type="button"
                         onClick={() => unassign(entity.id)}
-                        title={`Remover ${entity.name}`}
+                        title={`Remove ${entity.name}`}
                         className={`relative w-12 h-12 border-2 ${rarityBorder(
                           entity.rarity
                         )} bg-[#0a0c10] group`}
@@ -347,7 +347,7 @@ export default function BuilderClient() {
           className="inline-flex items-center gap-2 border border-line bg-surface text-ink font-mono text-xs uppercase tracking-widest font-bold px-5 py-3 hover:border-gold hover:text-gold transition disabled:opacity-60"
         >
           <Icon name="save" className="text-[16px] leading-none" />
-          Salvar rascunho
+          Save draft
         </button>
         <button
           type="button"
@@ -356,7 +356,7 @@ export default function BuilderClient() {
           className="inline-flex items-center gap-2 bg-gold text-black font-mono text-xs uppercase tracking-widest font-bold px-5 py-3 hover:brightness-110 transition disabled:opacity-60"
         >
           <Icon name="publish" className="text-[16px] leading-none" />
-          Publicar
+          Publish
         </button>
       </div>
     </div>

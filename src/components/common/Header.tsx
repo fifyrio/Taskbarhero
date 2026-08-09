@@ -6,6 +6,8 @@ import { Link } from '@/i18n/routing';
 // Tier lists, save import, login and the language switcher are hidden until
 // those features actually work — see the P0 launch checklist.
 const NAV_ITEMS = [
+  { label: 'Builds', href: '/builds', icon: '/game/ui/Icon_Guides.png' },
+  { label: 'Tier Lists', href: '/tier-lists', icon: '/game/ui/Icon_Gold.png' },
   { label: 'Database', href: '/database', icon: '/game/ui/Icon_Guides.png' },
 ];
 

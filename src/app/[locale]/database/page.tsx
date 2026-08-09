@@ -15,9 +15,10 @@ export function generateMetadata({
   const baseUrl = SITE_URL;
   const path = locale === 'en' ? '/database' : `/${locale}/database`;
   return {
-    title: 'Database',
+    title: 'TBH Index — Complete Task Bar Hero Database',
     description:
-      'Complete TBH: Task Bar Hero database — heroes, monsters, gear, items, runes, skills, stages and more.',
+      'The complete TBH: Task Bar Hero index and database — searchable, filterable data for every hero, monster, gear, item, rune, skill and stage.',
+    keywords: ['tbh index', 'tbhindex', 'tbh database', 'task bar hero index', 'tbh wiki database'],
     alternates: { canonical: `${baseUrl}${path}` },
   };
 }

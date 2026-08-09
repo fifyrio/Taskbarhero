@@ -13,6 +13,8 @@ import {
   type Row,
 } from '@/lib/database';
 import { getSourcedItemIds } from '@/lib/drops';
+import { getAllClassBuilds } from '@/lib/builds';
+import { getTrendingTierLists } from '@/lib/tier-lists';
 
 // Highest gear grades, best first — used to pick homepage featured gear.
 const TOP_GRADES = ['COSMIC', 'CELESTIAL', 'BEYOND', 'ARCANA', 'IMMORTAL', 'DIVINE'];
@@ -57,9 +59,14 @@ const GROUP_ICON: Record<string, string> = {
   Misc: 'category',
 };
 
-export default function WikiHome({ locale }: { locale: string }) {
+export default async function WikiHome({ locale }: { locale: string }) {
   const manifest = getManifest();
   const groups = getGroupedDatasets();
+  const builds = getAllClassBuilds(locale);
+
+  // Real published UGC tier lists (falls back to a create CTA when empty).
+  const trending = await getTrendingTierLists(6);
+  const tierLists = trending.success ? trending.data ?? [] : [];
 
   const featured = FEATURED_DATASETS.map((n) => getDatasetMeta(n)).filter(
     (m): m is NonNullable<typeof m> => m !== null,
@@ -117,10 +124,11 @@ export default function WikiHome({ locale }: { locale: string }) {
               id="wiki-hero-heading"
               className="font-pixel text-2xl sm:text-4xl text-gold uppercase mb-5 leading-relaxed drop-shadow-[0_3px_0_rgba(0,0,0,0.8)]"
             >
-              TBH Database
+              TBH Wiki
             </h1>
             <p className="font-sans text-sm sm:text-base text-ink/85 leading-relaxed mb-8">
-              Every hero, monster, gear, item, rune, skill and stage in TBH: Task Bar Hero —
+              The community wiki for <strong className="text-ink">TBH: Task Bar Hero</strong> — class
+              builds, S–F tier lists, and every hero, monster, gear, item, rune, skill and stage,
               {' '}
               {manifest.row_count.toLocaleString()} entries across {manifest.dataset_count} datasets.
             </p>
@@ -173,6 +181,80 @@ export default function WikiHome({ locale }: { locale: string }) {
               </Link>
             ))}
           </div>
+        </section>
+
+        {/* Class builds */}
+        {builds.length > 0 && (
+          <section className="mb-12">
+            <SectionHeader title="BUILDS" tag="BY CLASS" />
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+              {builds.map((b) => (
+                <Link
+                  key={b.slug}
+                  href={`/builds/${b.slug}`}
+                  prefetch={false}
+                  className="tbh-lift tbh-frame tbh-frame-hover group p-4 text-center transition-colors"
+                >
+                  <div className="w-12 h-12 mx-auto mb-3 bg-panel border border-line flex items-center justify-center group-hover:border-gold transition-colors overflow-hidden">
+                    {b.profile.icon ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={b.profile.icon} alt="" width={48} height={48} className="w-full h-full object-contain [image-rendering:pixelated]" />
+                    ) : (
+                      <Icon name="swords" className="text-gold text-[24px]" />
+                    )}
+                  </div>
+                  <div className="font-display text-sm font-bold text-ink group-hover:text-gold transition-colors truncate">
+                    {b.profile.name}
+                  </div>
+                  <div className="font-mono text-[9px] uppercase tracking-widest text-faint mt-0.5">
+                    {b.role}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Community tier lists */}
+        <section className="mb-12">
+          <SectionHeader title="TIER LISTS" tag={tierLists.length > 0 ? 'TRENDING' : 'NEW'} />
+          {tierLists.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {tierLists.map((tl) => (
+                <Link
+                  key={tl.id}
+                  href={`/tier-lists/${tl.slug}`}
+                  prefetch={false}
+                  className="tbh-lift tbh-frame tbh-frame-hover group p-4 transition-colors"
+                >
+                  <div className="font-display text-base font-bold text-ink uppercase tracking-wide group-hover:text-gold transition-colors truncate">
+                    {tl.title}
+                  </div>
+                  <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest text-faint mt-2">
+                    <span className="inline-flex items-center gap-1">
+                      <Icon name="thumb_up" className="text-[12px]" /> {tl.upvotes}
+                    </span>
+                    {tl.authorName && <span className="truncate">by {tl.authorName}</span>}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="tbh-frame p-6 text-center">
+              <p className="font-sans text-sm text-dim mb-4 max-w-lg mx-auto">
+                Be the first to rank the best heroes, gear and builds. Publish an S–F tier list the
+                whole community can vote on.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Link href="/tier-lists/new" prefetch={false} className="tbh-btn font-pixel text-[11px] px-8 py-4 uppercase">
+                  Build a tier list
+                </Link>
+                <Link href="/tier-lists" prefetch={false} className="tbh-btn-ghost font-pixel text-[11px] px-8 py-4 uppercase">
+                  Browse all
+                </Link>
+              </div>
+            </div>
+          )}
         </section>
 
         {/* Featured heroes */}

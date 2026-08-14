@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
     } = await supabase.auth.getUser();
     if (!user) {
       return NextResponse.json(
-        { success: false, error: 'Não autenticado' },
+        { success: false, error: 'Not authenticated' },
         { status: 401 }
       );
     }
@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
     const body = (await request.json()) as CreateBody;
     if (!body.gameId || !body.title || !body.slug) {
       return NextResponse.json(
-        { success: false, error: 'gameId, title e slug são obrigatórios' },
+        { success: false, error: 'gameId, title and slug are required' },
         { status: 400 }
       );
     }

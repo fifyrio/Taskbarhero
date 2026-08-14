@@ -1,0 +1,89 @@
+keyword,volume_monthly,kd,lang,cluster,suggested_route,priority
+tbh wiki,274500,22,en,brand,/,P0
+task bar hero,403400,26,en,brand,/,P0
+tbh: task bar hero,90800,18,en,brand,/,P0
+tbh task bar hero,39900,25,en,brand,/,P0
+tbh task bar hero wiki,10500,57,en,brand,/,P0
+tbhwiki,12700,54,en,brand,/,P0
+taskbarhero,17100,25,en,brand,/,P0
+tbh build,18700,,en,builds,/builds,P1
+tbh builds,14600,,en,builds,/builds,P1
+build tbh,4000,,en,builds,/builds,P1
+tbh sorcerer build,15600,,en,builds,/builds/sorcerer,P1
+sorcerer build tbh,4600,,en,builds,/builds/sorcerer,P1
+tbh ranger build,14600,,en,builds,/builds/ranger,P1
+ranger build tbh,4300,,en,builds,/builds/ranger,P1
+tbh solo ranger build,3400,,en,builds,/builds/ranger,P1
+tbh priest build,11700,,en,builds,/builds/priest,P1
+priest build tbh,4000,,en,builds,/builds/priest,P1
+tbh knight build,3800,,en,builds,/builds/knight,P1
+tbh task bar hero skill build for hell act 2-9,5000,,en,builds,/builds/hell-act-2-9,P1
+tbh guide,10800,,en,guides,/guides,P1
+tbh rune tree,7800,,en,entities,/runes,P2
+tbh runes,6700,,en,entities,/runes,P2
+tbh rune,3500,59,en,entities,/runes,P2
+skewer shot tbh,7500,,en,entities,/skills/skewer-shot,P2
+tbh creature,10200,17,en,entities,/monsters,P2
+darksteel ingot tbh,5100,,en,entities,/items/darksteel-ingot,P2
+tbh blue golem,4600,,en,entities,/monsters/blue-golem,P2
+frozen orb tbh,4000,,en,entities,/items/frozen-orb,P2
+tbh explosive bolt,3900,,en,entities,/items/explosive-bolt,P2
+burning skeleton tbh,3800,,en,entities,/monsters/burning-skeleton,P2
+tbh giant fly,3700,,en,entities,/monsters/giant-fly,P2
+fire spirit tbh,3300,,en,entities,/monsters/fire-spirit,P2
+tbh pet,3700,10,en,entities,/pets,P2
+tbh pets,3400,4,en,entities,/pets,P2
+tbh pet farm,3700,,en,tools,/tools/farming,P3
+tbh index,16800,,en,tools,/tools/index,P3
+tbhindex,4600,34,en,tools,/tools/index,P3
+tbh market,8800,36,en,tools,/tools/market,P3
+tbh calculator,5800,72,en,tools,/tools/calculator,P3
+tbh farm,5300,,en,tools,/tools/farming,P3
+tbh farming,4000,,en,tools,/tools/farming,P3
+tbh grades,3800,,en,tools,/tools/grades,P3
+tbh rarity,4500,,en,tier-list,/tools/grades,P3
+tbh best team,4300,,en,tier-list,/tier-lists,P5
+tbh hell 3-7,4900,,en,guides,/guides/hell-3-7,P4
+tbh hell 3-9,4200,,en,guides,/guides/hell-3-9,P4
+tbh torment 3-3,3800,,en,guides,/guides/torment-3-3,P4
+tbh trainer,4800,,en,guides,/guides,P4
+tbh steam,3600,14,en,brand,/,P4
+tbh game,7900,37,en,brand,/,P4
+tbh alchemy or synthesis,3700,,en,guides,/guides/alchemy-vs-synthesis,P4
+how to get pet tbh,2000,,en,faq,/guides/faq,P4
+does all elemental resistance include chaos in tbh,1200,,en,faq,/guides/faq,P4
+how to level up cube tbh,782,,en,faq,/guides/faq,P4
+do soulstones get consumed if i lose tbh,775,,en,faq,/guides/faq,P4
+when does chest drops in tbh,669,,en,faq,/guides/faq,P4
+how to sell item in tbh,654,,en,faq,/guides/faq,P4
+where to get minor emerald in tbh,610,,en,faq,/guides/faq,P4
+how to use decoration material in tbh,609,,en,faq,/guides/faq,P4
+how to remove decoration tbh,561,,en,faq,/guides/faq,P4
+tbh 攻略,50600,,zh,guides,/zh/guides,i18n-3
+tbh 塔斯克巴英雄,12700,60,zh,brand,/zh,i18n-3
+tbh: 塔斯克巴·英雄,9000,39,zh,brand,/zh,i18n-3
+tbh 意思,3300,,zh,faq,/zh/guides/faq,i18n-3
+tbh マーケット,9600,,ja,tools,/ja/tools/market,i18n-1
+tbh 効果範囲,7900,,ja,entities,/ja/skills,i18n-1
+tbh ルーン,6500,,ja,entities,/ja/runes,i18n-1
+tbh 詠唱速度,6300,,ja,entities,/ja/passive-skills,i18n-1
+tbh 周回,5900,,ja,guides,/ja/guides/farming,i18n-1
+tbh 周回 おすすめ,5700,,ja,guides,/ja/guides/farming,i18n-1
+tbh レンジャー,5500,,ja,builds,/ja/builds/ranger,i18n-1
+tbh ソーサラー ビルド,5400,,ja,builds,/ja/builds/sorcerer,i18n-1
+tbh ビルド,5300,,ja,builds,/ja/builds,i18n-1
+tbh ソーサラー,5100,,ja,builds,/ja/builds/sorcerer,i18n-1
+tbh 攻撃速度,4700,,ja,entities,/ja/passive-skills,i18n-1
+tbh カオス耐性,4100,,ja,entities,/ja/passive-skills,i18n-1
+tbh 移動速度,4000,,ja,entities,/ja/passive-skills,i18n-1
+tbh レアリティ,3900,,ja,tools,/ja/tools/grades,i18n-1
+tbh 相場,3900,,ja,tools,/ja/tools/market,i18n-1
+tbh 物理ダメージ,3600,,ja,entities,/ja/passive-skills,i18n-1
+como pasar el boss de la 1-10 en pesadilla tbh,1400,,es,faq,/es/guides/faq,i18n-4
+taskbar hero (ES),170,24,es,brand,/es,i18n-4
+tbh task bar hero (ES),260,26,es,brand,/es,i18n-4
+task bar hero builds (ES),170,25,es,builds,/es/builds,i18n-4
+hero wiki (BR),480,38,pt,brand,/pt,i18n-4
+task bar (BR),480,42,pt,brand,/pt,i18n-4
+bastão das eras (BR),140,30,pt,entities,/pt/gear,i18n-4
+tbh ne demek,3800,,tr,faq,/tr/guides/faq,i18n-5

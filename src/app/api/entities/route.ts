@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
     const gameId = request.nextUrl.searchParams.get('gameId');
     if (!gameId) {
       return NextResponse.json(
-        { success: false, error: 'gameId é obrigatório' },
+        { success: false, error: 'gameId is required' },
         { status: 400 }
       );
     }

@@ -35,7 +35,7 @@ export default function TierListCard({ list }: TierListCardProps) {
 
       <div className="flex items-center justify-between font-mono text-[10px] uppercase text-faint pt-3 border-t border-line/60">
         <span className="text-gold truncate">
-          {list.authorName ? `BY: ${list.authorName}` : 'ANÔNIMO'}
+          {list.authorName ? `BY: ${list.authorName}` : 'ANONYMOUS'}
         </span>
         <span className="flex items-center gap-1 flex-shrink-0">
           <Icon name="forum" className="text-[12px] leading-none" />

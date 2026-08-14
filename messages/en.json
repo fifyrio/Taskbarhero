@@ -167,10 +167,10 @@
   "pages": {
     "home": {
       "seo": {
-        "title": "Taskbar Hero Wiki — Heroes, Items, Gear & Database",
-        "description": "Complete TBH: Task Bar Hero database — every hero, monster, gear, item, rune, skill and stage with full stats, drop sources and recipes.",
-        "ogTitle": "Taskbar Hero Wiki & Database",
-        "ogDescription": "Browse the full TBH: Task Bar Hero database — heroes, gear, items, runes, skills, stages, drop rates and recipes."
+        "title": "TBH Wiki — Task Bar Hero (TBH) Guides, Builds & Tier Lists",
+        "description": "TBH Wiki for Task Bar Hero (TBH): class builds, S–F tier lists, and a full database of heroes, gear, items, runes, skills, monsters and stages with stats, drops and recipes.",
+        "ogTitle": "TBH Wiki — Task Bar Hero Builds, Tier Lists & Database",
+        "ogDescription": "Community TBH Wiki for Task Bar Hero — sorcerer, ranger, priest & knight builds, voteable tier lists, and the complete game database."
       },
       "hero": {
         "title1": "Taskbar Hero",

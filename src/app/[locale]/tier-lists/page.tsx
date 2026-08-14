@@ -17,14 +17,14 @@ export async function generateMetadata({
   const baseUrl = SITE_URL;
   const path = locale === 'en' ? '/tier-lists' : `/${locale}/tier-lists`;
   return {
-    title: 'Tier Lists da Comunidade | Taskbar Hero',
+    title: 'Community Tier Lists | Taskbar Hero',
     description:
-      'Explore, vote e crie tier lists de jogos feitas pela comunidade. Rankings S/A/B/C/D/F com estilo.',
+      'Explore, vote on, and create community-made game tier lists. Stylish S/A/B/C/D/F rankings.',
     alternates: { canonical: `${baseUrl}${path}` },
     openGraph: {
-      title: 'Tier Lists da Comunidade | Taskbar Hero',
+      title: 'Community Tier Lists | Taskbar Hero',
       description:
-        'Explore, vote e crie tier lists de jogos feitas pela comunidade.',
+        'Explore, vote on, and create community-made game tier lists.',
       url: `${baseUrl}${path}`,
       type: 'website',
     },
@@ -58,7 +58,7 @@ export default async function TierListsIndexPage() {
         <header className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-widest text-gold mb-2">
-              {'// DATABASE_DE_RANKINGS'}
+              {'// DATABASE_OF_RANKINGS'}
             </p>
             <h1 className="font-display text-3xl md:text-5xl font-bold text-ink uppercase tracking-wide">
               Tier Lists
@@ -69,7 +69,7 @@ export default async function TierListsIndexPage() {
             className="tbh-lift inline-flex items-center gap-2 bg-gold text-black font-mono text-xs uppercase tracking-widest font-bold px-5 py-3 hover:brightness-110 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
             <Icon name="add" className="text-[16px] leading-none" />
-            Criar tier list
+            Create tier list
           </Link>
         </header>
 
@@ -77,24 +77,24 @@ export default async function TierListsIndexPage() {
           <div className="border border-line bg-surface p-12 text-center">
             <Icon name="leaderboard" className="text-gold text-4xl mb-4" />
             <p className="font-display text-xl text-ink font-bold mb-2">
-              Nenhuma tier list ainda
+              No tier lists yet
             </p>
             <p className="font-mono text-xs text-faint uppercase mb-6">
-              Seja o primeiro a publicar um ranking.
+              Be the first to publish a ranking.
             </p>
             <Link
               href="/tier-lists/new"
               className="inline-flex items-center gap-2 bg-gold text-black font-mono text-xs uppercase tracking-widest font-bold px-5 py-3 hover:brightness-110 transition"
             >
               <Icon name="add" className="text-[16px] leading-none" />
-              Criar a primeira
+              Create the first
             </Link>
           </div>
         ) : (
           <>
             {trending.length > 0 && (
               <section className="mb-14">
-                <SectionHeader title="EM ALTA" tag="TRENDING" live />
+                <SectionHeader title="TRENDING" tag="TRENDING" live />
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   {trending.map((list) => (
                     <TierListCard key={`t-${list.id}`} list={list} />
@@ -105,7 +105,7 @@ export default async function TierListsIndexPage() {
 
             {recent.length > 0 && (
               <section className="mb-14">
-                <SectionHeader title="RECENTES" tag="RECENT" />
+                <SectionHeader title="RECENT" tag="RECENT" />
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   {recent.map((list) => (
                     <TierListCard key={`r-${list.id}`} list={list} />

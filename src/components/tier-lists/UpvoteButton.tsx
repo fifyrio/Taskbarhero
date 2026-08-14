@@ -67,7 +67,7 @@ export default function UpvoteButton({
         <Icon name="thumb_up" className="text-[16px] leading-none" />
         <span>{count}</span>
         <span className="hidden sm:inline">
-          {user ? (voted ? 'Votado' : 'Upvote') : 'Entrar p/ votar'}
+          {user ? (voted ? 'Voted' : 'Upvote') : 'Sign in to vote'}
         </span>
       </button>
       {error && (

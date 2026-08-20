@@ -14,6 +14,8 @@ import {
   type Row,
 } from '@/lib/database';
 import { DATASET_SEO } from '@/lib/dataset-seo';
+import { getUniqueModGuides } from '@/lib/unique-mods';
+import UniqueModsList from '@/components/database/UniqueModsList';
 
 export const dynamic = 'force-dynamic';
 
@@ -103,6 +105,9 @@ export default function DatasetListPage({
           </span>
         </header>
 
+        {dataset === 'unique_mods' ? (
+          <UniqueModsList guides={getUniqueModGuides(locale)} />
+        ) : (
         <div className="tbh-frame overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -158,8 +163,9 @@ export default function DatasetListPage({
             </tbody>
           </table>
         </div>
+        )}
 
-        {totalPages > 1 && (
+        {dataset !== 'unique_mods' && totalPages > 1 && (
           <div className="flex items-center justify-between mt-6 font-mono text-xs uppercase tracking-wider">
             <PageLink dataset={dataset} page={page - 1} disabled={page <= 1} label="← Prev" />
             <span className="text-faint">

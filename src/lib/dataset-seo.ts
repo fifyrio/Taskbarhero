@@ -53,6 +53,18 @@ export const DATASET_SEO: Record<string, DatasetSeo> = {
       'All stages in TBH: Task Bar Hero by act — waves, bosses and level data for Normal, Hell and Torment difficulties.',
     keywords: ['tbh stages', 'tbh levels', 'task bar hero stages', 'tbh act list'],
   },
+  unique_mods: {
+    title: 'TBH Unique Mods — Every Unique Gear Effect & Where to Get It',
+    description:
+      'All 36 unique mods in TBH: Task Bar Hero explained — cooldown reduces, extra projectiles, element changes and class bonuses, with every weapon and armor piece that carries each mod.',
+    keywords: ['tbh unique mods', 'tbh unique mod', 'task bar hero unique mods', 'tbh unique gear effects', 'tbh gear mods'],
+  },
+  passive_skills: {
+    title: 'TBH Passive Skills — Full List with Stats & Values',
+    description:
+      'Every passive skill in TBH: Task Bar Hero — the stat each passive boosts (attack, HP, armor, regen and more), flat vs multiplicative type and per-level values.',
+    keywords: ['tbh passive skills', 'tbh passives', 'task bar hero passive skills', 'tbh passive skill list'],
+  },
   heroes: {
     title: 'TBH Heroes — Task Bar Hero Class List, Stats & Skills',
     description:

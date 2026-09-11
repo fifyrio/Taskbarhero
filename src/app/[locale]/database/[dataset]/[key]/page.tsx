@@ -17,6 +17,8 @@ import {
 import ItemSourcesSection from '@/components/database/ItemSourcesSection';
 import ItemHeader from '@/components/database/ItemHeader';
 import { MonsterAppearances, StageOverview } from '@/components/database/MonsterStageSections';
+import { getUniqueModGuide } from '@/lib/unique-mods';
+import { UniqueModItemChips } from '@/components/database/UniqueModsList';
 
 // Datasets with curated, player-readable detail pages. Only these are
 // candidates for indexing; everything else stays noindex even when
@@ -53,6 +55,18 @@ export function generateMetadata({
         title: `${hero.name} — Skills, Stats & Gear`,
         description: `${hero.name} (${hero.classType}) guide for TBH: Task Bar Hero — ${hero.description} Base stats, all ${hero.actives.length} active skills with per-level values, passive upgrades and usable ${hero.mainWeapon.toLowerCase()}/${hero.subWeapon.toLowerCase()} gear.`,
         alternates: { canonical: `${baseUrl}${path}` },
+      };
+    }
+  }
+
+  if (dataset === 'unique_mods') {
+    const guide = getUniqueModGuide(decodeURIComponent(key), locale);
+    if (guide) {
+      return {
+        title: `${guide.displayName} — TBH Unique Mod`,
+        description: `${guide.effect} Found on ${guide.items.length} gear piece${guide.items.length === 1 ? '' : 's'} in TBH: Task Bar Hero.`,
+        alternates: { canonical: `${baseUrl}${path}` },
+        robots: { index: false, follow: true },
       };
     }
   }
@@ -103,6 +117,67 @@ export default function DatasetDetailPage({
               <span className="text-gold">{hero.name}</span>
             </nav>
             <HeroDetail hero={hero} />
+          </main>
+        </div>
+      );
+    }
+  }
+
+  // Unique mods get a curated page: display name, plain-English effect and the
+  // gear that carries the mod, with the raw params behind a collapsed section.
+  if (dataset === 'unique_mods') {
+    const guide = getUniqueModGuide(decodeURIComponent(key), locale);
+    if (guide) {
+      const rawEntries = meta.columns
+        .filter((c) => isScalar(row[c]) && row[c] !== null && row[c] !== '')
+        .map((c) => [c, row[c]] as const);
+      return (
+        <div className="tbh-root tbh-grain font-display min-h-screen">
+          <div className="tbh-scanline" aria-hidden />
+          <Header />
+          <main className="max-w-[1100px] mx-auto px-4 sm:px-6 py-8">
+            <nav className="font-mono text-[11px] uppercase tracking-widest text-faint mb-4">
+              <Link href="/database" prefetch={false} className="hover:text-gold transition-colors">
+                Database
+              </Link>
+              <span className="mx-2">/</span>
+              <Link href="/database/unique_mods" prefetch={false} className="hover:text-gold transition-colors">
+                Unique Mods
+              </Link>
+              <span className="mx-2">/</span>
+              <span className="text-gold">{guide.displayName}</span>
+            </nav>
+
+            <header className="tbh-frame mb-8 p-6">
+              <p className="font-mono text-[11px] uppercase tracking-widest text-faint mb-1">
+                Unique Mod · #{guide.key} · {guide.modName}
+              </p>
+              <h1 className="font-display text-2xl md:text-4xl font-bold text-ink uppercase tracking-wide mb-3">
+                {guide.displayName}
+              </h1>
+              <p className="font-mono text-sm text-gold">{guide.effect}</p>
+            </header>
+
+            <section className="mb-8">
+              <h2 className="font-mono text-[11px] uppercase tracking-widest text-faint mb-3">
+                Found on {guide.items.length} gear piece{guide.items.length === 1 ? '' : 's'}
+              </h2>
+              <UniqueModItemChips items={guide.items} />
+            </section>
+
+            <details className="tbh-frame">
+              <summary className="cursor-pointer px-4 py-2.5 font-mono text-xs uppercase tracking-wider text-faint hover:text-gold">
+                Raw game data
+              </summary>
+              <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line border-t border-line">
+                {rawEntries.map(([c, v]) => (
+                  <div key={c} className="bg-surface px-3 py-2">
+                    <dt className="font-mono text-[10px] uppercase tracking-wider text-faint truncate">{c}</dt>
+                    <dd className="font-mono text-sm truncate text-ink">{String(v)}</dd>
+                  </div>
+                ))}
+              </dl>
+            </details>
           </main>
         </div>
       );

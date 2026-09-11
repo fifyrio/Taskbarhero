@@ -4,6 +4,7 @@ import { AuthProvider } from '@/contexts/AuthContext';
 import AppToaster from '@/components/common/AppToaster';
 import CookieConsent from '@/components/common/CookieConsent';
 import { Analytics } from '@vercel/analytics/next';
+import GoogleAnalytics from '@/components/common/GoogleAnalytics';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -64,6 +65,7 @@ export default async function RootLayout({
           </AuthProvider>
           <Analytics />
           <SpeedInsights />
+          <GoogleAnalytics />
         </NextIntlClientProvider>
       </body>
     </html>

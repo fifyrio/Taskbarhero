@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Link } from '@/i18n/routing';
+import AppDownloadBanner from './AppDownloadBanner';
 
 // Tier lists, save import, login and the language switcher are hidden until
 // those features actually work — see the P0 launch checklist.
@@ -16,6 +17,7 @@ export default function Header() {
 
   return (
     <header className="tbh-taskbar sticky top-0 z-50">
+      <AppDownloadBanner />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-14">
           {/* Start button */}
